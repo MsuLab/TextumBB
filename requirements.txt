@@ -1,0 +1,3 @@
+# Requirements 
+
+Django==1.5.1
