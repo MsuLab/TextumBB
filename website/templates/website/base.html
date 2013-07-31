@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+  </head>
+  <body>
+  	<div class="container">
+		<h1>Hello, world!</h1>	
+	</div>
+    
+
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="{% static 'website/js/jquery/jquery.min.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+
+  </body>
+</html>

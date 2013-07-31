@@ -4,10 +4,17 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
+
+
 urlpatterns = patterns('',
+
     # Examples:
     # url(r'^$', 'textum.views.home', name='home'),
     # url(r'^textum/', include('textum.foo.urls')),
+    url(r'^p_g', include('pagination_recognition.urls', namespace="p_g")),
+
+    url(r'^', include('website.urls', namespace="website")),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
