@@ -17,7 +17,11 @@
 {# Content Block #}
 {% block content_block %}
 <div class="container">
-    <h1>Главная страница!</h1>  
+    <div class="jumbotron">
+        <h1>Главная страница</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-large btn-success" href="{% url 'website:sign_in' %}">Войти</a></p>
+	</div>	
 </div>
 {% endblock %}
 
