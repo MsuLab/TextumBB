@@ -1,23 +1,52 @@
 {% load staticfiles %}
+{% load url from future %}
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bootstrap 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-  </head>
-  <body>
-  	<div class="container">
-		<h1>Hello, world!</h1>	
-	</div>
+    <head>
+        <title> {% block title_block %}{% endblock title_block %} </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+        {% block css_block %}
+            
+        {% endblock css_block %}
+    </head>
+<body>
+    {% block navbar_block %}
+    <div class="navbar navbar-inverse ">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'website:home' %}">Текстолог</a>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'website:home' %}">Главная</a></li>
+                <li class="disabled"><a href="#">Textum</a></li>
+                <li><a href="{% url 'website:docs' %}">Документация</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li class="active"><a href="{% url 'website:sign_in' %}">Войти</a></li>
+                <li><a href="#">Зарегистрироваться</a></li>
+            </ul>
+            <!-- After Log in -->
+            <!-- <p class="navbar-text pull-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p> -->
+        </div>
+    </div>
+    {% endblock navbar_block %}
+
+
+    {% block content_block %}
+        <div class="container">
+            <h1>Hello, world!</h1>  
+        </div>
+    {% endblock content_block %}
+
     
 
     <!-- JavaScript plugins (requires jQuery) -->
     <script src="{% static 'website/js/jquery/jquery.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
-
-  </body>
+    {% block js_block %}
+        
+    {% endblock js_block %}
+</body>
 </html>
