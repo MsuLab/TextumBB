@@ -3,3 +3,27 @@
 {% load url from future %}
 
 
+{# Title Block #}
+{% block title_block %} Textum | Textum {% endblock %}
+
+
+
+{# CSS Block #}
+{% block css_block %}
+<link href="{% static 'textum/css/style.css' %}" rel="stylesheet" >
+{% endblock %}
+
+
+
+{# Content Block #}
+{% block content_block %}
+<div class="container">
+	<h1>Textum</h1>
+</div>
+{% endblock %}
+
+
+{# JavaScript Block #}
+{% block js_block %}
+<script data-main="{% static 'textum/js/main.js' %}" src="{% static 'textum/js/vendor/requirejs/require.js' %}"></script>
+{% endblock %}

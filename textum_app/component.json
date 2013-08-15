@@ -1,0 +1,11 @@
+{
+	"name": "Textum JS Libs",
+	"version": "1.0.0",
+	"dependencies": {
+		"jquery": null,
+		"backbone-amd": null,
+		"underscore-amd": null,
+		"requirejs": null,
+		"requirejs-text": null
+	}
+}
