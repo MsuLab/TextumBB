@@ -1,5 +1,10 @@
 # Django settings for textum project.
 
+import os
+
+PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+COMMON_TEMPLATES_PATH = os.path.join(PROJECT_PATH, 'templates')
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -111,6 +116,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    COMMON_TEMPLATES_PATH,
 )
 
 INSTALLED_APPS = (
@@ -126,6 +132,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'website',
     'pagination_recognition',
+    'textum_app',
 )
 
 # A sample logging configuration. The only tangible logging

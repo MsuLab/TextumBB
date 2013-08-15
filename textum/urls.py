@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     # url(r'^textum/', include('textum.foo.urls')),
     url(r'^', include('website.urls', namespace="website")),
     url(r'^p_g', include('pagination_recognition.urls', namespace="p_g")),
+    url(r'^app', include('textum_app.urls', namespace="textum")),
 
     
 
