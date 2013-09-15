@@ -11,6 +11,28 @@
 {# CSS Block #}
 {% block css_block %}
 <link href="{% static 'textum/css/style.css' %}" rel="stylesheet" >
+
+<style>
+	.textSide {
+		background-color: #cdbfe3;
+	}
+	.gallerySide {
+		background-color: #563d7c;
+	}
+
+	.gallerySide, .textSide {
+		/*padding: 20px;*/
+		/*border: 2px solid black;*/
+		width: 50%;
+		position: relative;
+		min-height: 1px;
+		/*padding-right: 15px;*/
+		/*padding-left: 15px;*/
+		float: left;
+		
+	}
+
+</style>
 {% endblock %}
 
 
@@ -18,12 +40,75 @@
 {# Content Block #}
 {% block content_block %}
 <div class="container">
-	<h1>Textum</h1>
+	<div class="row">
+		<h1>Textum</h1>
+	</div>
+	
+	<div class="row">
+		<div class="textSide">
+			<h1>Text Side</h1>
+		</div>
+		<div class="gallerySide">
+			<h1>Gallery Side</h1>
+			<form>
+		    	<input id="imageInput" type="file" name="myImage" onchange="readURL(this);"  />
+			</form>
+			<img id="prevImage" style="display:none;" />
+		</div>
+	</div>
+
+	
+	
+		
+	</div>
+	
 </div>
 {% endblock %}
 
 
 {# JavaScript Block #}
 {% block js_block %}
+
+<script>
+	// var inputElement = document.getElementById("imageInput");
+	// inputElement.addEventListener("change", handleFiles, false);
+	// function handleFiles(files) {
+	//   for (var i = 0; i < files.length; i++) {
+	//     var file = files[i];
+	//     var imageType = /image.*/;
+	    
+	//     if (!file.type.match(imageType)) {
+	//       continue;
+	//     }
+	    
+	//     var img = document.createElement("img");
+	//     img.classList.add("obj");
+	//     img.file = file;
+	//     preview.appendChild(img);
+	    
+	//     var reader = new FileReader();
+	//     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+	//     reader.readAsDataURL(file);
+	//   }
+	// }
+	var reader = new FileReader(); 
+	reader.onload = function(e) {
+		console.log(document.getElementById('prevImage'));
+		document.getElementById('prevImage').src = e.target.result; 
+		document.getElementById('prevImage').style.display = 'block';
+	  // document.images[0].src  = e.target.result; 
+	};
+
+	function readURL(input){ 
+
+	   if(input.files && input.files[0]){
+	      reader.readAsDataURL(input.files[0]);
+
+	   }
+	   else {
+	     document.images[0].src = input.value || "No file selected";
+	   }
+	}
+</script>
 <script data-main="{% static 'textum/js/app/main.js' %}" src="{% static 'textum/js/vendor/requirejs/require.js' %}"></script>
 {% endblock %}
