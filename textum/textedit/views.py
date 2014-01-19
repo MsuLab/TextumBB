@@ -1,12 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-
 from django.shortcuts import render
-
 from django.core.urlresolvers import reverse
 
 
-class Textum(generic.View):
+class TextEdit(generic.View):
+    """ TextEdit main view """
+    
     template_name = 'textum/textum.html'
 
     def get(self, request, *args, **kwargs):

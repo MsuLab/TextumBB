@@ -1,26 +1,23 @@
-from django.conf.urls import patterns, include, url
+# ROOT_URLCONF main textum urls router.
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
 
+from django.conf.urls import patterns, url, include
 
 
 urlpatterns = patterns('',
+    
+    # Website urls:
+    url(r'^',       include('textum.website.urls',   namespace="website")),
 
-    # Examples:
+    # Pagination detection urls:
+    url(r'^paginator/', include('textum.paginator.urls', namespace="paginator")),
+
+    # textedit(Text Editor) app urls:
+    url(r'^textedit/',  include('textum.textedit.urls',  namespace="textedit")),
+
+)
+
+
+# Examples:
     # url(r'^$', 'textum.views.home', name='home'),
     # url(r'^textum/', include('textum.foo.urls')),
-    url(r'^', include('website.urls', namespace="website")),
-    url(r'^p_g', include('pagination_recognition.urls', namespace="p_g")),
-    url(r'^app', include('textum_app.urls', namespace="textum")),
-
-    
-
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-)

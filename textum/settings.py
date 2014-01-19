@@ -2,14 +2,14 @@
 
 import os
 
+
 PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
-COMMON_TEMPLATES_PATH = os.path.join(PROJECT_PATH, 'templates')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Kopin Boris', 'kopbob@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -112,6 +112,9 @@ ROOT_URLCONF = 'textum.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'textum.wsgi.application'
 
+
+COMMON_TEMPLATES_PATH = os.path.join(PROJECT_PATH, 'templates')
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -130,9 +133,11 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'website',
-    'pagination_recognition',
-    'textum_app',
+
+    # textum apps
+    'textum.website',
+    'textum.paginator',
+    'textum.textedit',
 )
 
 # A sample logging configuration. The only tangible logging
