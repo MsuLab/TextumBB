@@ -1,16 +1,20 @@
-TextumFrontEnd
+Textum
+==============
+Web-app for working with handwritten texts.
+
+
+
+Requirements 
 ==============
 
-Repository for Textum app front-end
+Django==1.5.1
 
 
-Button Builders
-http://bootsnipp.com/buttons
-http://www.plugolabs.com/twitter-bootstrap-button-generator/
 
-CSS Framework 
-http://getbootstrap.com/css/
+How to run
+==============
 
-
-Scroll-Pane
-http://jscrollpane.kelvinluck.com/
+execute from root of project:
+			$ ./.bin/buildenv.sh
+			$ . ../.textumEnv/bin/activate
+(.textumEnv)$ python manage.py runserver
