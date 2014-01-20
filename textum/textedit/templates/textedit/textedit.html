@@ -1,0 +1,137 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+{% load url from future %}
+
+
+{# Title Block #}
+{% block title_block %} Textedit | Textum {% endblock %}
+
+
+
+{# CSS Block #}
+{% block css_block %}
+	<!-- bootstrap3-wysihtml5-bower -->
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
+
+	<!-- jscrollpane -->
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jscrollpane/style/jquery.jscrollpane.css' %}">
+
+	<!-- textedit -->
+	<link rel="stylesheet" href="{% static 'textedit/css/textedit.css' %}">
+{% endblock %}
+
+
+
+{# Content Block #}
+{% block content_block %}
+    <div class="row mainView">
+        <div class="col-lg-6 leftView">
+            <div class="jumbotron">
+                <h3>Текст</h3>
+                <hr>
+                <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6 rightView">
+            <div class="jumbotron">
+
+                <h3>Рукопись</h3>
+                <hr />
+                <nav class="galleryMenu">
+                    <ul>
+                        
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-th-large"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" class="btn btn-sm btn-success">
+                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            </a>
+                        </li>
+                    </ul> 
+
+                </nav> <!-- galleryMenu end -->
+                <div class="photoGallery">
+                    <ul class="photoGrid">
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            
+                    </ul>
+                </div> <!-- photoGallery end -->
+                <div class="pages">
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{# JavaScript Block #}
+{% block js_block %}
+	<!-- underscore -->
+	<script src="{% static 'textedit/js/bower_components/underscore/underscore-min.js' %}"></script>
+	<!-- handlebars -->
+	<script src="{% static 'textedit/js/bower_components/handlebars/handlebars.js' %}"></script>
+	<!-- wysihtml5 -->
+	<script src="{% static 'textedit/js/bower_components/wysihtml5/dist/wysihtml5-0.3.0.min.js' %}"></script>
+	<!-- bootstrap3-wysihtml5-bower -->
+	<script src="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.js' %}"></script>
+	<!-- jquery-mousewheel -->
+	<script src="{% static 'textedit/js/bower_components/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
+	<!-- jscrollpane -->
+	<script src="{% static 'textedit/js/bower_components/jscrollpane/script/jquery.jscrollpane.js' %}"></script>
+
+	<!-- main -->
+	<script src="{% static 'textedit/js/main.js' %}"></script>
+{% endblock %}

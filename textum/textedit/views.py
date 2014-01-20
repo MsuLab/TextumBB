@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 class TextEdit(generic.View):
     """ TextEdit main view """
     
-    template_name = 'textum/textum.html'
+    template_name = 'textedit/textedit.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
