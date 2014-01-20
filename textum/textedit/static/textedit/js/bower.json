@@ -12,12 +12,14 @@
   "dependencies": {
     "jquery": "v2.0.3",
     "bootstrap": "v3.0.2",
-    "backbone": "v1.1.0",
-    "underscore": "v1.5.2",
+    "backbone-amd": "v1.1.0",
+    "underscore-amd": "v1.5.2",
     "jscrollpane": "2.0.14",
+    "jquery.jscrollpane": "v2.0.14",
     "bootstrap3-wysihtml5-bower": "v0.2.2",
     "jquery-mousewheel": "3.1.6",
-    "holderjs":"v2.3.0"
+    "holderjs": "v2.3.0",
+    "requirejs": "2.1.9"
   },
   "private": true,
   "homepage": "https://github.com/KopBob/TextumFrontEnd",

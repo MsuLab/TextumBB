@@ -76,10 +76,12 @@
         </footer>
     </div>
 
-    <!-- jquery -->
-    <script src="{% static 'website/bower_components/jquery/jquery.js' %}"></script>
-    <!-- bootstrap -->
-    <script src="{% static 'website/bower_components/bootstrap/dist/js/bootstrap.js' %}"></script>
+    {% block main_js_block %}
+        <!-- jquery -->
+        <script src="{% static 'website/bower_components/jquery/jquery.js' %}"></script>
+        <!-- bootstrap -->
+        <script src="{% static 'website/bower_components/bootstrap/dist/js/bootstrap.js' %}"></script>
+    {% endblock main_js_block %}
 
     {% block js_block %}
     {% endblock js_block %}

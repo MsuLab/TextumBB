@@ -116,22 +116,15 @@
     </div>
 {% endblock %}
 
+{% block main_js_block %}
+{% endblock %}
 
 {# JavaScript Block #}
 {% block js_block %}
-	<!-- underscore -->
-	<script src="{% static 'textedit/js/bower_components/underscore/underscore-min.js' %}"></script>
-	<!-- handlebars -->
-	<script src="{% static 'textedit/js/bower_components/handlebars/handlebars.js' %}"></script>
-	<!-- wysihtml5 -->
-	<script src="{% static 'textedit/js/bower_components/wysihtml5/dist/wysihtml5-0.3.0.min.js' %}"></script>
-	<!-- bootstrap3-wysihtml5-bower -->
-	<script src="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.js' %}"></script>
-	<!-- jquery-mousewheel -->
-	<script src="{% static 'textedit/js/bower_components/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
-	<!-- jscrollpane -->
-	<script src="{% static 'textedit/js/bower_components/jscrollpane/script/jquery.jscrollpane.js' %}"></script>
 
 	<!-- main -->
-	<script src="{% static 'textedit/js/main.js' %}"></script>
+    <script data-main="{% static 'textedit/js/main.js' %}" 
+            src="{% static 'textedit/js/bower_components/requirejs/require.js' %}">
+    </script>
+    
 {% endblock %}
