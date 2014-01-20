@@ -16,7 +16,8 @@
     "underscore": "v1.5.2",
     "jscrollpane": "2.0.14",
     "bootstrap3-wysihtml5-bower": "v0.2.2",
-    "jquery-mousewheel": "3.1.6"
+    "jquery-mousewheel": "3.1.6",
+    "holderjs":"v2.3.0"
   },
   "private": true,
   "homepage": "https://github.com/KopBob/TextumFrontEnd",
