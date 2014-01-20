@@ -4,17 +4,16 @@ Web-app for working with handwritten texts.
 
 
 
-Requirements 
-==============
+### Requirements 
 
 Django==1.5.1
 
 
 
-How to run
-==============
+### How to run
 
 execute from root of project:
-			$ ./.bin/buildenv.sh
-			$ . ../.textumEnv/bin/activate
-(.textumEnv)$ python manage.py runserver
+
+	./.bin/buildenv.sh
+	. ../.textumEnv/bin/activate
+	python manage.py runserver
