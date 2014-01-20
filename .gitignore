@@ -1,6 +1,13 @@
 .DS_Store
 
-
-# Python
-
+bin
 *.py[cod]
+*.so
+*.egg
+*.egg-info
+pip-log.txt
+*.sqlite
+*.log
+*.pot
+local_settings.py
+.idea
