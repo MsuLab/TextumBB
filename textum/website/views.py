@@ -24,7 +24,7 @@ def index(request):
 class SignIn(generic.View):
     """ Sign In view """
 
-    template_name = 'website/sign_in.html'
+    template_name = 'website/log_in.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)

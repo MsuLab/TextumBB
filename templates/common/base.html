@@ -1,53 +1,93 @@
 {% load staticfiles %}
 {% load url from future %}
 
+{# {% static 'website/' %} #}
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> {% block title_block %}{% endblock title_block %} </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap -->
-        <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-        {% block css_block %}
-            
-        {% endblock css_block %}
-    </head>
-<body data-target="#navparent" data-spy="scroll">
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title_block %}Textum | Base{% endblock title_block %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'website/bower_components/bootstrap/dist/css/bootstrap.css' %}">
+
+    <!-- Common css -->
+    <link rel="stylesheet" href="{% static 'website/css/common.css' %}">
+
+    <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+    <![endif]-->
+
+    {% block css_block %}
+    {% endblock css_block %}
+</head>
+
+<body>
+    <!-- Nav -->
     {% block navbar_block %}
-    <div class="navbar navbar-inverse ">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'website:home' %}">Текстолог</a>
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'website:home' %}">Главная</a></li>
-                {# <li class="disabled"><a href="#">Textum</a></li> #}
-                <li class="active"><a href="{% url 'textedit:main' %}">Textum</a></li>
-                <li><a href="{% url 'website:docs' %}">Документация</a></li>
-            </ul>
-            <ul class="nav navbar-nav pull-right">
-                <li class="active"><a href="{% url 'website:sign_in' %}">Войти</a></li>
-                <li><a href="#">Зарегистрироваться</a></li>
-            </ul>
-            <!-- After Log in -->
-            <!-- <p class="navbar-text pull-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p> -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'website:home' %}"><b>Текстолог</b></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="{% url 'website:home' %}">Главная</a></li>
+                    <li class="active"><a href="{% url 'textedit:main' %}">Textum</a></li>
+                    <li><a href="{% url 'website:docs' %}">Документация</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Выпадающий <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Действие</a></li>
+                            <li><a href="#">Другое действие</a></li>
+                            <li><a href="#">Что-то другое</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Мини заголовок</li>
+                            <li><a href="#">Ссылка</a></li>
+                            <li><a href="#">Еще одна</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Right Part -->
+                <div class="pull-right">
+                    <a href="{% url 'website:log_in' %}" class="btn btn-default navbar-btn">Войти</a>
+                    <a href="{% url 'website:log_in' %}" class="btn btn-info navbar-btn">Зарегистрироваться</a>
+                </div>
+            </div><!--/.navbar-collapse -->
         </div>
     </div>
     {% endblock navbar_block %}
 
 
     {% block content_block %}
-        <div class="container">
-            <h1>Hello, world!</h1>  
-        </div>
     {% endblock content_block %}
 
-    
+    <div class="container">
+        <hr>
+        <footer>
+            <p class="pull-right">&copy; Kopin Boris 2013-2014</p>
+        </footer>
+    </div>
 
-    <!-- JavaScript plugins (requires jQuery) -->
-    <script src="{% static 'website/js/jquery/jquery.min.js' %}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+    <!-- jquery -->
+    <script src="{% static 'website/bower_components/jquery/jquery.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'website/bower_components/bootstrap/dist/js/bootstrap.js' %}"></script>
+
     {% block js_block %}
-        
     {% endblock js_block %}
+
 </body>
 </html>

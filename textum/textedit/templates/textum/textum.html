@@ -4,111 +4,134 @@
 
 
 {# Title Block #}
-{% block title_block %} Textum | Textum {% endblock %}
+{% block title_block %} Textedit | Textum {% endblock %}
 
 
 
 {# CSS Block #}
 {% block css_block %}
-<link href="{% static 'textum/css/style.css' %}" rel="stylesheet" >
+	<!-- bootstrap3-wysihtml5-bower -->
+	<link rel="stylesheet" href="{% static 'website/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
 
-<style>
-	.textSide {
-		background-color: #cdbfe3;
-	}
-	.gallerySide {
-		background-color: #563d7c;
-	}
+	<!-- jscrollpane -->
+	<link rel="stylesheet" href="{% static 'website/bower_components/jscrollpane/style/jquery.jscrollpane.css' %}">
 
-	.gallerySide, .textSide {
-		/*padding: 20px;*/
-		/*border: 2px solid black;*/
-		width: 50%;
-		position: relative;
-		min-height: 1px;
-		/*padding-right: 15px;*/
-		/*padding-left: 15px;*/
-		float: left;
-		
-	}
-
-</style>
+	<!-- textum -->
+	<link rel="stylesheet" href="{% static 'website/css/pages/textum.css' %}">
 {% endblock %}
 
 
 
 {# Content Block #}
 {% block content_block %}
-<div class="container">
-	<div class="row">
-		<h1>Textum</h1>
-	</div>
-	
-	<div class="row">
-		<div class="textSide">
-			<h1>Text Side</h1>
-		</div>
-		<div class="gallerySide">
-			<h1>Gallery Side</h1>
-			<form>
-		    	<input id="imageInput" type="file" name="myImage" onchange="readURL(this);"  />
-			</form>
-			<img id="prevImage" style="display:none;" />
-		</div>
-	</div>
+    <div class="row mainView">
+        <div class="col-lg-6 leftView">
+            <div class="jumbotron">
+                <h3>Текст</h3>
+                <hr>
+                <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6 rightView">
+            <div class="jumbotron">
 
-	
-	
-		
-	</div>
-	
-</div>
+                <h3>Рукопись</h3>
+                <hr />
+                <nav class="galleryMenu">
+                    <ul>
+                        
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-th-large"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" class="btn btn-sm btn-success">
+                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            </a>
+                        </li>
+                    </ul> 
+
+                </nav> <!-- galleryMenu end -->
+                <div class="photoGallery">
+                    <ul class="photoGrid">
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'website/img/test.JPG' %}" alt="Рукопись"></li>
+                            
+                    </ul>
+                </div> <!-- photoGallery end -->
+                <div class="pages">
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 
 {# JavaScript Block #}
 {% block js_block %}
+	<!-- underscore -->
+	<script src="{% static 'website/bower_components/underscore/underscore-min.js' %}"></script>
+	<!-- handlebars -->
+	<script src="{% static 'website/bower_components/handlebars/handlebars.js' %}"></script>
+	<!-- wysihtml5 -->
+	<script src="{% static 'website/bower_components/wysihtml5/dist/wysihtml5-0.3.0.min.js' %}"></script>
+	<!-- bootstrap3-wysihtml5-bower -->
+	<script src="{% static 'website/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.js' %}"></script>
+	<!-- jquery-mousewheel -->
+	<script src="{% static 'website/bower_components/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
+	<!-- jscrollpane -->
+	<script src="{% static 'website/bower_components/jscrollpane/script/jquery.jscrollpane.js' %}"></script>
 
-<script>
-	// var inputElement = document.getElementById("imageInput");
-	// inputElement.addEventListener("change", handleFiles, false);
-	// function handleFiles(files) {
-	//   for (var i = 0; i < files.length; i++) {
-	//     var file = files[i];
-	//     var imageType = /image.*/;
-	    
-	//     if (!file.type.match(imageType)) {
-	//       continue;
-	//     }
-	    
-	//     var img = document.createElement("img");
-	//     img.classList.add("obj");
-	//     img.file = file;
-	//     preview.appendChild(img);
-	    
-	//     var reader = new FileReader();
-	//     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-	//     reader.readAsDataURL(file);
-	//   }
-	// }
-	var reader = new FileReader(); 
-	reader.onload = function(e) {
-		console.log(document.getElementById('prevImage'));
-		document.getElementById('prevImage').src = e.target.result; 
-		document.getElementById('prevImage').style.display = 'block';
-	  // document.images[0].src  = e.target.result; 
-	};
-
-	function readURL(input){ 
-
-	   if(input.files && input.files[0]){
-	      reader.readAsDataURL(input.files[0]);
-
-	   }
-	   else {
-	     document.images[0].src = input.value || "No file selected";
-	   }
-	}
-</script>
-<script data-main="{% static 'textum/js/app/main.js' %}" src="{% static 'textum/js/vendor/requirejs/require.js' %}"></script>
+	<!-- main -->
+	<script src="{% static 'website/js/main.js' %}"></script>
 {% endblock %}

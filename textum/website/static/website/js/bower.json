@@ -1,0 +1,27 @@
+{
+  "name": "textum",
+  "version": "0.0.1",
+  "main": "main.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "v2.0.3",
+    "bootstrap": "v3.0.2",
+    "backbone": "v1.1.0",
+    "underscore": "v1.5.2",
+    "jscrollpane": "2.0.14",
+    "bootstrap3-wysihtml5-bower": "v0.2.2",
+    "jquery-mousewheel": "3.1.6"
+  },
+  "private": true,
+  "homepage": "https://github.com/KopBob/TextumFrontEnd",
+  "authors": [
+    "Boris Kopin <kopbob@gmail.com>"
+  ],
+  "license": "MIT"
+}

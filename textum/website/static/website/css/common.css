@@ -1,0 +1,21 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+    padding-top: 70px;
+    padding-bottom: 0px;
+    overflow: hidden; /* Disable elastic effect */
+}
+
+footer p{
+	margin: 0 0 0px;
+}
+
+
+
+
+
+
