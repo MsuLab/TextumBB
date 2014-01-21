@@ -1,0 +1,106 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+{% load url from future %}
+
+
+{# Title Block #}
+{% block title_block %} Textedit | Textum {% endblock %}
+
+
+
+{# CSS Block #}
+{% block css_block %}
+	<!-- bootstrap3-wysihtml5-bower -->
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
+
+	<!-- jscrollpane -->
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jscrollpane/style/jquery.jscrollpane.css' %}">
+
+	<!-- textedit -->
+	<link rel="stylesheet" href="{% static 'textedit/css/textedit.css' %}">
+{% endblock %}
+
+
+
+{# Content Block #}
+{% block content_block %}
+    <div class="row mainView">
+        <div class="col-lg-6 leftView">
+            <div class="jumbotron">
+                <h3>Текст</h3>
+                <hr>
+                <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6 rightView">
+            <div class="jumbotron">
+
+                <h3>Рукопись</h3>
+                <hr />
+                <nav class="galleryMenu">
+                    <ul>
+
+                        <li>
+                            <a href="{% url 'textedit:main' %}" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-stop"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-warning">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-success">
+                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- galleryMenu end -->
+                <div class="photoGallery">
+                    <img class="fullImage" src="{% static 'textedit/img/test.JPG' %}" alt="">
+                </div>
+                <!-- photoGallery end -->
+                <div class="pages">
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a>
+                        </li>
+                        <li><a href="#">1</a>
+                        </li>
+                        <li><a href="#">2</a>
+                        </li>
+                        <li><a href="#">3</a>
+                        </li>
+                        <li><a href="#">4</a>
+                        </li>
+                        <li><a href="#">5</a>
+                        </li>
+                        <li><a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>    
+    </div>
+{% endblock %}
+
+{% block main_js_block %}
+{% endblock %}
+
+{# JavaScript Block #}
+{% block js_block %}
+
+	<!-- main -->
+    <script data-main="{% static 'textedit/js/main.js' %}" 
+            src="{% static 'textedit/js/bower_components/requirejs/require.js' %}">
+    </script>
+    
+{% endblock %}

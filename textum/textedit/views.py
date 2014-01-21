@@ -14,3 +14,7 @@ class TextEdit(generic.View):
 
     def post(self, request, *args, **kwargs):
         return HttpResponse("post")
+
+
+def fullView(request):
+	return render(request, 'textedit/fullView.html')
