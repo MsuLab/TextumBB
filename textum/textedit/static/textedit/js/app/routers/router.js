@@ -1,8 +1,8 @@
 /*global define*/
 define([
-    'jquery', 'backbone', 'views/editor', 'views/gallery',
+    'jquery', 'backbone', 'views/app',
     'bootstrap' // Init Bootstrap js lib
-], function($, Backbone, Editor, Gallery) {
+], function($, Backbone, AppView) {
     'use strict';
 
 
@@ -25,9 +25,9 @@ define([
 
         setDefault: function() {
             console.log('--> Welcome to Textum.');
+
+            new AppView;
             
-            new Editor;
-            new Gallery;
         },
 
         getPost: function(id) {

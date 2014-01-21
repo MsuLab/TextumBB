@@ -6,6 +6,7 @@ require.config({
         'jquery': '../bower_components/jquery/jquery.min',
         'underscore': '../bower_components/underscore-amd/underscore-min',
         'backbone': '../bower_components/backbone-amd/backbone-min',
+        'backboneLocalstorage': '../bower_components/backbone.localStorage/backbone.localStorage',
         'text': '../bower_components/requirejs-text/text',
 
         // jScrollPane

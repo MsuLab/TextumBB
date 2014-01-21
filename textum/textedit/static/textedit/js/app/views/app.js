@@ -1,13 +1,18 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'views/editor', 'views/gallery'],
+    function(Backbone, Editor, Gallery) {
 
-    var App = Backbone.View.extend({
-    	el: ".mainView",
+        var AppView = Backbone.View.extend({
+            el: ".mainView",
 
-        initialize: function() {
-            console.log('Wahoo!');
-        }
+            initialize: function() {
+                console.log('new: AppView is created.');
+
+
+                this.editor = new Editor;
+                this.gallery = new Gallery();
+            }
+        });
+
+        return AppView;
+
     });
-
-    return App;
-
-});
