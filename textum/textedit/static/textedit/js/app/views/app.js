@@ -1,12 +1,13 @@
-
 define(['backbone'], function(Backbone) {
 
-  var App = Backbone.View.extend({
-    initialize: function() {
-      console.log( 'Wahoo!' );
-    }
-  });
+    var App = Backbone.View.extend({
+    	el: ".mainView",
 
-  return App;
-  
+        initialize: function() {
+            console.log('Wahoo!');
+        }
+    });
+
+    return App;
+
 });
