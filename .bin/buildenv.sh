@@ -14,9 +14,9 @@ log "Building virtual enviroment..."
 
 if [ ! -d ".$envName" ]; then
 	log "Runing vertualenv command..."
-	virtualenv ./../.$envName
+	virtualenv ./.$envName
 fi
 
 log "Installing dependencies..."
-./../.$envName/bin/pip install --upgrade distribute 
-./../.$envName/bin/pip install --upgrade -r ./requirements.txt
+./.$envName/bin/pip install --upgrade distribute 
+./.$envName/bin/pip install --upgrade -r ./requirements.txt
