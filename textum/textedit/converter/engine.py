@@ -12,6 +12,7 @@ import unoconv.unoconv as unoconv
 def convert(typ, filename):
     """
     Converts $filename into $typ using libreoffice API.
+    unoconv github: http://dag.wiee.rs/home-made/unoconv/
     Returns converted file name.
     """
 

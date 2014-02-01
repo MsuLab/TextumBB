@@ -1,0 +1,3 @@
+[submodule "textum/textedit/webodf"]
+	path = textum/textedit/webodf
+	url = https://github.com/KopBob/WebODF
