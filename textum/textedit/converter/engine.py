@@ -61,3 +61,5 @@ def get_html(filename):
     converted_file = convert("html", filename)
 
     return prepare_html(converted_file)
+
+print get_html("testdoc.odt")

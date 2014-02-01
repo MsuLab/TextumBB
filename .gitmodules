@@ -1,3 +1,6 @@
 [submodule "textum/textedit/webodf"]
 	path = textum/textedit/webodf
 	url = https://github.com/KopBob/WebODF
+[submodule "textum/textedit/converter/unoconv"]
+	path = textum/textedit/converter/unoconv
+	url = https://github.com/KopBob/unoconv
