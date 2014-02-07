@@ -21,7 +21,8 @@
     "holderjs": "v2.3.0",
     "requirejs": "2.1.9",
     "requirejs-text": "2.0.9",
-    "backbone.localStorage": "v1.1.7"
+    "backbone.localStorage": "v1.1.7",
+	"webodf": "master"
   },
   "private": true,
   "homepage": "https://github.com/KopBob/TextumFrontEnd",

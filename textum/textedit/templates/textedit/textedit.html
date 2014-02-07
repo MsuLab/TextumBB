@@ -29,7 +29,14 @@
             <div class="jumbotron">
                 <h3>Текст</h3>
                 <hr>
-                <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+                {% if is_odf %}
+                    <div style="height: 634px; overflow: auto;" id="webodf-wrapper">
+                        <div id="webodf-textarea"></div>
+                    </div>
+                {% else %}
+                    <textarea id="wysihtml5-textarea" placeholder="Введите текст ..."></textarea>
+                {% endif %}
+                
             </div>
         </div>
         <div class="col-lg-6 rightView">
