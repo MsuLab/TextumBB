@@ -36,9 +36,9 @@ def upload(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             save_file(request.FILES['file'])
-            #return HttpResponseRedirect('upload')
-            form = UploadFileForm()
-            return HttpResponse(json.dumps({'form': form}))
+            return HttpResponseRedirect('upload')
+            #form = UploadFileForm()
+            #return HttpResponse(json.dumps({'form': form}))
     else:
         form = UploadFileForm() # An unbound form
         
