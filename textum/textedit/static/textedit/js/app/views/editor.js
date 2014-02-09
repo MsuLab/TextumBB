@@ -22,8 +22,8 @@ define(['backbone',
         },
         uploadFile: function() {
         		console.log("Upload Button");
-        		
-        		$('#upload').submit(function(){ //!!!!!!!!!!!!!!!!!!!!!!!!
+        		//The following function was found on StackOverflow
+        		$('#upload').submit(function() {
         			var formData = new FormData($('#upload')[0]);
                $.ajax({
         				url: $('#upload').attr('action'),  //Server script to process data
@@ -33,18 +33,21 @@ define(['backbone',
             			/*if(myXhr.upload){ // Check if upload property exists
             	   		myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
             			}*/
-            		return myXhr;
-        			},
-        			//Ajax events
-        			//beforeSend: beforeSendHandler,
-        			//success: completeHandler,
-        			//error: errorHandler,
-        			// Form data
-        			data: formData,
-        			//Options to tell jQuery not to process data or worry about content-type.
-        			cache: false,
-        			contentType: false,
-        			processData: false
+            			return myXhr;
+        				},
+        				//Ajax events
+        				//beforeSend: beforeSendHandler,
+        				//http://stackoverflow.com/questions/11647715/how-to-submit-form-without-refreshing-page-using-django-ajax-jquery
+        				success: function (data) {
+        					$('#msg').html(data.message);
+        				},
+        				//error: errorHandler,
+        				// Form data
+        				data: formData,
+        				//Options to tell jQuery not to process data or worry about content-type.
+        				cache: false,
+        				contentType: false,
+        				processData: false
     				});
         			//$.post(this.$upload_form.attr('action'), this.$upload_form.serialize());
         		})

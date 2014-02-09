@@ -31,15 +31,15 @@
             		<div class="col-xs-8">
                	<h3 id="headerForTexteditor">Текст</h3>
                	</div>
-               	<div id="DIVFORM" class="col-xs-4">
+               	<div class="col-xs-4">
                		<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" style="display: none;"> {% csrf_token %} <!-- !!! -->
-               			{{ form.as_p }} <!-- ПЕРЕДЕЛАТЬ КАК МОЖНО СКОРЕЕ
-               			И НЕ ЗАБЫТЬ ПЕРЕПИСАТЬ URLS.PY ИЛИ VIEWS.PY НА ПРЕДМЕТ НОВОЙ ФУНКЦИИ-->
+               			{{ form.as_p }}
                 			<!--<input type="submit" name="upl" />-->
                 		</form>
 							<a class="btn btn-success btn-large" id="uploadButton">
                 			<span class="glyphicon glyphicon-upload"></span> Загрузить файл
                 		</a>
+                		<div id="msg"></div>
                	</div>
                </div>
                <hr>
