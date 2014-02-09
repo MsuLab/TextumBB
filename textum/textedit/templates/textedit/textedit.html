@@ -32,7 +32,7 @@
                	<h3 id="headerForTexteditor">Текст</h3>
                	</div>
                	<div id="DIVFORM" class="col-xs-4">
-               		<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" > {% csrf_token %} <!-- !!! -->
+               		<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" style="display: none;"> {% csrf_token %} <!-- !!! -->
                			{{ form.as_p }} <!-- ПЕРЕДЕЛАТЬ КАК МОЖНО СКОРЕЕ
                			И НЕ ЗАБЫТЬ ПЕРЕПИСАТЬ URLS.PY ИЛИ VIEWS.PY НА ПРЕДМЕТ НОВОЙ ФУНКЦИИ-->
                 			<!--<input type="submit" name="upl" />-->
