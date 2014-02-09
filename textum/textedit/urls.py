@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^$', views.TextEdit.as_view(), name='main'),
     url(r'^fullView$', views.fullView, name='fullView'),
-    
+    #url(r'^upload$', views.upload, name='upload'),
+    url(r'^upload$', views.upload, name='upload'),
 )

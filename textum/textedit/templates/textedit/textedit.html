@@ -27,9 +27,24 @@
     <div class="row mainView">
         <div class="col-lg-6 leftView">
             <div class="jumbotron">
-                <h3>Текст</h3>
-                <hr>
-                <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+            	<div class="row">
+            		<div class="col-xs-8">
+               	<h3 id="headerForTexteditor">Текст</h3>
+               	</div>
+               	<div id="DIVFORM" class="col-xs-4">
+               		<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" > {% csrf_token %} <!-- !!! -->
+               			{{ form.as_p }} <!-- ПЕРЕДЕЛАТЬ КАК МОЖНО СКОРЕЕ
+               			И НЕ ЗАБЫТЬ ПЕРЕПИСАТЬ URLS.PY ИЛИ VIEWS.PY НА ПРЕДМЕТ НОВОЙ ФУНКЦИИ-->
+                			<!--<input type="submit" name="upl" />-->
+                		</form>
+							<a class="btn btn-success btn-large" id="uploadButton">
+                			<span class="glyphicon glyphicon-upload"></span> Загрузить файл
+                		</a>
+               	</div>
+               </div>
+               <hr>
+               <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+               <!-- ToDo: add to fullView.html -->
             </div>
         </div>
         <div class="col-lg-6 rightView">
@@ -61,42 +76,42 @@
                 </nav> <!-- galleryMenu end -->
                 <div class="photoGallery">
                     <ul class="photoGrid">
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
                             
                     </ul>
                 </div> <!-- photoGallery end -->

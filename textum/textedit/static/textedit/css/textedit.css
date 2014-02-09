@@ -25,10 +25,27 @@
 
 
 /* Text View */
+#headerForTexteditor {
+	margin-left: 10px;
+}
+
+#uploadButton {
+	float: right;
+	margin-bottom: 5px;
+	margin-right: 10px;
+}
+
 #some-textarea {
   width: 100%;
   height: 580px;
 }
+
+/*.textEditorUpload li {
+	display: inline;
+	list-style: none;
+	float: left;
+	position: relative;
+}*/
 
 /* Photo Gallery */
 
