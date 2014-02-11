@@ -35,6 +35,31 @@
 	margin-right: 10px;
 }
 
+.hidden {
+	display: none;
+}
+
+#opaco {
+   background-color: #000000;
+   left: 0;
+   opacity: 0;  /* general CSS3 */
+   position: absolute;
+   top: 0;
+   width: 100%;
+   z-index: 10000; /* затемнить кнопки и панель Bootstrap */
+}
+
+#popup {
+   background-color: #FFFFFF;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   min-height: 400px;
+   min-width: 600px;
+   z-index: 10001;
+   border: 10px solid #6EBD6E;
+}
+
 #some-textarea {
   width: 100%;
   height: 580px;

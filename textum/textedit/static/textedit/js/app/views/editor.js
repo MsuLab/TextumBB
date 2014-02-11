@@ -7,7 +7,8 @@ define(['backbone',
         el: '.leftView',
         
         events: {
-        			  'click #uploadButton':			'uploadFile',
+                 'click #uploadButton':			'uploadFile',
+                 //'click #opaco':						'removePopup'
         },
 
         initialize: function() {
@@ -21,42 +22,34 @@ define(['backbone',
             this.$select_file = this.$('#id_file');
         },
         uploadFile: function() {
-        		console.log("Upload Button");
-        		//The following function was found on StackOverflow
-        		$('#upload').submit(function() {
-        			var formData = new FormData($('#upload')[0]);
-               $.ajax({
-        				url: $('#upload').attr('action'),  //Server script to process data
-                  type: 'POST',
-        				xhr: function() {  // Custom XMLHttpRequest
-         		   	var myXhr = $.ajaxSettings.xhr();
-            			/*if(myXhr.upload){ // Check if upload property exists
-            	   		myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
-            			}*/
-            			return myXhr;
-        				},
-        				//Ajax events
-        				//beforeSend: beforeSendHandler,
-        				//http://stackoverflow.com/questions/11647715/how-to-submit-form-without-refreshing-page-using-django-ajax-jquery
-        				success: function (data) {
-        					$('#msg').html(data.message);
-        				},
-        				//error: errorHandler,
-        				// Form data
-        				data: formData,
-        				//Options to tell jQuery not to process data or worry about content-type.
-        				cache: false,
-        				contentType: false,
-        				processData: false
-    				});
-        			//$.post(this.$upload_form.attr('action'), this.$upload_form.serialize());
-        		})
-        		
-        		this.$select_file.change(function() {
-        			$('#upload').submit();
-        		});
-        		this.$select_file.click();
-        		//this.$upload_form.submit();
+        	  	$.fn.alignCenter = function() {
+   			//get margin left
+   				var marginLeft = - $(this).width()/2 + 'px';
+   			//get margin top
+   				var marginTop = - $(this).height()/2 + 'px';
+   			//return updated element
+   				return $(this).css({'margin-left':marginLeft, 'margin-top':marginTop});
+  				};
+				function closePopup() {
+				  	$('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
+				  	$('#popup').toggleClass('hidden');
+					return false;
+				}
+	        	function showPopup(popup_type) {
+				   $('#opaco').height($(document).height()).toggleClass('hidden').fadeTo('slow', 0.7)
+				   .click(function() {closePopup();});
+	           	$('#popup').html($('#popup' + popup_type).html()).toggleClass('hidden').alignCenter();
+	         	return false;
+	        	}
+            console.log("Upload Button");
+            console.log($('#opaco').attr('class'));
+   				
+            showPopup('UploadFile');
+            //$('#opaco').click(function(){
+            	//closePopup();
+            //});
+            console.log($('#opaco').attr('class'));
+           	return false;
         }
     });
 

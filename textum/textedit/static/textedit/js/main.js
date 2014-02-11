@@ -17,7 +17,8 @@ require.config({
         'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
         'handlebars': '../bower_components/handlebars/handlebars',
         'wysihtml5': '../bower_components/wysihtml5/dist/wysihtml5-0.3.0.min',
-        'editor': '../bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min'
+        'editor': '../bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min',
+        'upload': '../bower_components/jquery-file-upload/js/jquery.fileupload-ui'
     },
     // Shim declaration
     'shim': {
@@ -40,7 +41,7 @@ require.config({
             'exports': 'wysihtml5'
         },
         'editor': {
-            'deps': ['wysihtml5', 'handlebars', 'jquery', 'bootstrap'],
+            'deps': ['wysihtml5', 'handlebars', 'jquery', 'bootstrap' /*, 'upload'*/],
             'exports': 'editor'
         }
     }

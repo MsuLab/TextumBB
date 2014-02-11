@@ -14,8 +14,12 @@
 	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
 
 	<!-- jscrollpane -->
-	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jscrollpane/style/jquery.jscrollpane.css' %}">
-
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jquery.jscrollpane/jquery.jscrollpane.css' %}">
+	
+	<!-- jquery-file-upload -->
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jquery-file-upload/css/jquery.fileupload.css' %}">
+	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jquery-file-upload/css/jquery.fileupload-ui.css' %}">
+	
 	<!-- textedit -->
 	<link rel="stylesheet" href="{% static 'textedit/css/textedit.css' %}">
 {% endblock %}
@@ -24,111 +28,122 @@
 
 {# Content Block #}
 {% block content_block %}
-    <div class="row mainView">
-        <div class="col-lg-6 leftView">
-            <div class="jumbotron">
-            	<div class="row">
-            		<div class="col-xs-8">
-               	<h3 id="headerForTexteditor">Текст</h3>
-               	</div>
-               	<div class="col-xs-4">
-               		<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" style="display: none;"> {% csrf_token %} <!-- !!! -->
-               			{{ form.as_p }}
-                			<!--<input type="submit" name="upl" />-->
-                		</form>
-							<a class="btn btn-success btn-large" id="uploadButton">
-                			<span class="glyphicon glyphicon-upload"></span> Загрузить файл
-                		</a>
-                		<div id="msg"></div>
-               	</div>
-               </div>
-               <hr>
-               <textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
-               <!-- ToDo: add to fullView.html -->
-            </div>
-        </div>
-        <div class="col-lg-6 rightView">
-            <div class="jumbotron">
+	
+    <div id="popup" class="hidden"></div>
+	 <div id="opaco" class="hidden"></div>
+    
+	<!--<div class="user-actions">
+		<p class="bug"><a href="#" onCLick="showPopup('bug'); return false;">Сообщите об ошибке на сайте!</a></p>
+	</div>-->
+	
+	<div id="popupUploadFile" class="hidden">
+		<p>Test!</p>
+	</div>
+	<div class="row mainView">
+		<div class="col-lg-6 leftView">
+			<div class="jumbotron">
+				<div class="row">
+				<div class="col-xs-8">
+					<h3 id="headerForTexteditor">Текст</h3>
+				</div>
+				<div class="col-xs-4">
+					<!--<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" style="display: none;"> {% csrf_token %} 
+						{{ form.as_p }}
+                			
+						</form>-->
+						<a href="#" class="btn btn-success btn-large" id="uploadButton">
+							<span class="glyphicon glyphicon-upload"></span> Загрузить файл
+						</a>
+						
+				</div>
+			</div>
+			<hr>
+			<textarea id="some-textarea" placeholder="Введите текст ..."></textarea>
+			<!-- ToDo: add to fullView.html -->
+			</div>
+		</div>
+		<div class="col-lg-6 rightView">
+			<div class="jumbotron">
 
-                <h3>Рукопись</h3>
-                <hr />
-                <nav class="galleryMenu">
-                    <ul>
+				<h3>Рукопись</h3>
+				<hr />
+				<nav class="galleryMenu">
+					<ul>
                         
-                        <li>
-                            <a href="{% url 'textedit:fullView' %}" class="btn btn-sm btn-info">
-                                <span class="glyphicon glyphicon-th-large"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-sm btn-info">
-                                <span class="glyphicon glyphicon-fullscreen"></span>
-                            </a>
-                        </li>
+						<li>
+							<a href="{% url 'textedit:fullView' %}" class="btn btn-sm btn-info">
+								<span class="glyphicon glyphicon-th-large"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="btn btn-sm btn-info">
+								<span class="glyphicon glyphicon-fullscreen"></span>
+							</a>
+						</li>
                         
-                        <li>
-                            <a href="#" class="btn btn-sm btn-success addImage">
-                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
-                            </a>
-                        </li>
-                    </ul> 
+						<li>
+							<a href="#" class="btn btn-sm btn-success addImage">
+								<span class="glyphicon glyphicon-plus glyphicon-white"></span>
+							</a>
+						</li>
+					</ul> 
 
-                </nav> <!-- galleryMenu end -->
-                <div class="photoGallery">
-                    <ul class="photoGrid">
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+				</nav> <!-- galleryMenu end -->
+				<div class="photoGallery">
+					<ul class="photoGrid">
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
+							<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Ð ÑÐºÐ¾Ð¿Ð¸ÑÑ"></li>
                             
-                    </ul>
-                </div> <!-- photoGallery end -->
-                <div class="pages">
-                    <ul class="pagination">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+					</ul>
+				</div> <!-- photoGallery end -->
+				<div class="pages">
+					<ul class="pagination">
+						<li><a href="#">&laquo;</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 {% block main_js_block %}
@@ -138,8 +153,8 @@
 {% block js_block %}
 
 	<!-- main -->
-    <script data-main="{% static 'textedit/js/main.js' %}" 
-            src="{% static 'textedit/js/bower_components/requirejs/require.js' %}">
-    </script>
+	<script data-main="{% static 'textedit/js/main.js' %}" 
+			src="{% static 'textedit/js/bower_components/requirejs/require.js' %}">
+	</script>
     
 {% endblock %}
