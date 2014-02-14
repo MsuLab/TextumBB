@@ -16,9 +16,6 @@ from django.utils import simplejson
 import mimetypes
 import re
 
-""" class UploadFileForm(forms.Form):
-    file = forms.FileField() """
-
 
 class TextEdit(generic.View):
     """ TextEdit main view """
@@ -34,26 +31,6 @@ class TextEdit(generic.View):
 
 def fullView(request):
 	return render(request, 'textedit/fullView.html')
-
-""" def save_file(f):
-    destination = open('111.jpg', 'wb+')
-    for chunk in f.chunks():
-        destination.write(chunk)
-    destination.close()
-
-def upload(request):
-    if request.method == 'POST': # If the form has been submitted...
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            save_file(request.FILES['file'])
-            return HttpResponseRedirect('upload')
-    else:
-        form = UploadFileForm() # An unbound form
-        
-    return render_to_response('textedit/textedit.html', {
-        'form': form,
-    },
-    context_instance=RequestContext(request)) """
     
 def order_name(name):
     """order_name -- Limit a text to 20 chars length, if necessary strips the
@@ -79,20 +56,14 @@ def serialize(instance, file_attr='file'):
     return {
         'url': obj.url,
         'name': order_name(obj.name),
-        'type': mimetypes.guess_type(obj.path)[0] or 'image/png',
+        'type': mimetypes.guess_type(obj.path)[0] or 'application/rtf',
         'thumbnailUrl': obj.url,
         'size': obj.size,
-        #'deleteUrl': reverse('upload-delete', args=[instance.pk]),
-        'deleteType': 'DELETE',
     }
-
-
-
 
 MIMEANY = '*/*'
 MIMEJSON = 'application/json'
 MIMETEXT = 'text/plain'
-
 
 def response_mimetype(request):
     """response_mimetype -- Return a proper response mimetype, accordingly to
@@ -139,20 +110,4 @@ class RTFCreateView(CreateView):
     def form_invalid(self, form):
         data = json.dumps(form.errors)
         return HttpResponse(content=data, status=400, content_type='application/json')
-
-
-
-class RTFDeleteView(DeleteView):
-    model = RTFFile
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
-        response = JSONResponse(True, mimetype=response_mimetype(request))
-        response['Content-Disposition'] = 'inline; filename=files.json'
-        return response
-
-
-#def index(request):
-#	return render(request, 'manager/index.html')
-
+        

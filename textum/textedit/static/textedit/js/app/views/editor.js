@@ -45,13 +45,13 @@ define(['backbone',
 	         		context: $('#upload')[0],
 	         		add: function(e, data) {
 	         			console.log("File added");
-                		data.context = $('<button/>').text('Upload ' + data.files[0].name)
+                		/*data.context = $('<button/>').text('Upload ' + data.files[0].name)
                     .appendTo(document.body)
                     .click(function() {
                         data.context = $('<p/>').text('Uploading...').replaceAll($(this));
                         data.submit();
-                    	});
-	         			//data.submit();
+                    	});*/
+	         			data.submit();
 	         			//return false;
 	         		},
 	         		done: function(e, data) {
