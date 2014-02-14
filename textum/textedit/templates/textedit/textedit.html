@@ -36,13 +36,11 @@
 		<p>Test!</p>
 		<form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
 		{% csrf_token %}
-                <!--<span class="btn btn-success fileinput-button">
+                <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
-                    <input type="file" name="files[]">
-                </span>-->
-                <input type="file" name="file">
-                <!--<input type="submit"/>-->
+                    <input type="file" name="file">
+                </span>
 		</form>
 	</div>
 	<div class="row mainView">
