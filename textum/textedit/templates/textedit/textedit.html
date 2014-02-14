@@ -33,12 +33,11 @@
 	 <div id="opaco" class="hidden"></div>
 	
 	<div id="popupUploadFile" class="hidden">
-		<p>Test!</p>
 		<form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
 		{% csrf_token %}
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
-                    <span>Add files...</span>
+                    <span>Добавить файл</span>
                     <input type="file" name="file">
                 </span>
 		</form>
@@ -51,10 +50,6 @@
 					<h3 id="headerForTexteditor">Текст</h3>
 				</div>
 				<div class="col-xs-4">
-					<!--<form enctype="multipart/form-data" id="upload" method="post" action="{% url 'textedit:upload' %}" style="display: none;"> {% csrf_token %} 
-						{{ form.as_p }}
-                			
-						</form>-->
 						<a href="#" class="btn btn-success btn-large" id="uploadButton">
 							<span class="glyphicon glyphicon-upload"></span> Загрузить файл
 						</a>
