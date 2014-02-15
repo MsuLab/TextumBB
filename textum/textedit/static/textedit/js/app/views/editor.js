@@ -45,25 +45,28 @@ define(['backbone',
 	         		context: $('#upload')[0],
 	         		add: function(e, data) {
 	         			console.log("File added");
-                		/*data.context = $('<button/>').text('Upload ' + data.files[0].name)
-                    .appendTo(document.body)
-                    .click(function() {
-                        data.context = $('<p/>').text('Uploading...').replaceAll($(this));
-                        data.submit();
-                    	});*/
-	         			data.submit();
-	         			//return false;
+	         			var jqXHR = data.submit()
+	         			.error(function (jqXHR, textStatus, errorThrown) {
+	         				if (errorThrown === 'abort') {
+	         					alert('Загрузка прервана');
+	         				}
+	         			});
+			         	$('#upload-cancel').click(function(e) {
+			           		jqXHR.abort();
+			           	});
+			           	
 	         		},
 	         		done: function(e, data) {
 	         			console.log("File uploaded");
-	         			//return false;
+	         			closePopup();
 	         		}
 	         	});
 	         	return false;
 	        	}
             console.log("Upload Button");
-   				
+   			$('#upload-quit').click(function() {closePopup();});
             showPopup('UploadFile');
+            
             
         }
     });

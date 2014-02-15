@@ -35,11 +35,25 @@
 	<div id="popupUploadFile" class="hidden">
 		<form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
 		{% csrf_token %}
+			<div class="row" id="popupButtons">
+				<div class="col-xs-6">
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Добавить файл</span>
                     <input type="file" name="file">
                 </span>
+            </div>
+            <div class="col-xs-6">
+                <span class="btn btn-warning fileinput-button" id="upload-cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Отменить загрузку</span>
+                </span>
+            </div>
+        	</div>
+         <span class="btn btn-warning fileinput-button" id="upload-quit">
+            <i class="glyphicon glyphicon-remove"></i>
+            <span>Отмена</span>
+         </span>
 		</form>
 	</div>
 	<div class="row mainView">

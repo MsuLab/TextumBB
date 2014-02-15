@@ -21,9 +21,6 @@
   border-radius:8px;
 } 
 
-
-
-
 /* Text View */
 #headerForTexteditor {
 	margin-left: 10px;
@@ -58,6 +55,20 @@
    min-width: 300px;
    z-index: 10001;
    border: 10px solid #6EBD6E;
+}
+
+#popupButtons {
+	margin: 15px 7px 0;
+}
+
+#upload-cancel {
+	float: right;
+}
+
+#upload-quit {
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
 }
 
 #some-textarea {
