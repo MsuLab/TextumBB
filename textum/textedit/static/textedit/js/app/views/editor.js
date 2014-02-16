@@ -26,8 +26,8 @@ define(['backbone',
 
             } else if(this.$webodf_element.length) {
                 console.log('Loading webodf ...');
-                odfcanvas = new odf.OdfCanvas(this.$webodf_element[0]);
-                odfcanvas.load("/static/textedit/docs/testdoc.odt");
+                this.$odfcanvas = new odf.OdfCanvas(this.$webodf_element[0]);
+                this.$odfcanvas.load("/static/textedit/docs/testdoc.odt");
 
             } else {
                 console.log("No Text Editor.")
@@ -96,9 +96,11 @@ define(['backbone',
             $('#popup').toggleClass('hidden');
             $('#upload').fileupload('destroy');
         },
-
         updateTextFile: function(file_data) {
             console.log(file_data);
+            if (this.$webodf_element.length) {
+                this.$odfcanvas.load(file_data.url);
+            }
         }
     });
 
