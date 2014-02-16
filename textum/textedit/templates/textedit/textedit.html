@@ -10,24 +10,67 @@
 
 {# CSS Block #}
 {% block css_block %}
-	<!-- bootstrap3-wysihtml5-bower -->
-	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
+    <!-- bootstrap3-wysihtml5-bower -->
+    <link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
 
-	<!-- jscrollpane -->
-	<link rel="stylesheet" href="{% static 'textedit/js/bower_components/jscrollpane/style/jquery.jscrollpane.css' %}">
+    <!-- jscrollpane -->
+    <link rel="stylesheet" href="{% static 'textedit/js/bower_components/jscrollpane/style/jquery.jscrollpane.css' %}">
 
-	<!-- textedit -->
-	<link rel="stylesheet" href="{% static 'textedit/css/textedit.css' %}">
+    <!-- jquery-file-upload -->
+    <link rel="stylesheet" href="{% static 'textedit/js/bower_components/jquery-file-upload/css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="{% static 'textedit/js/bower_components/jquery-file-upload/css/jquery.fileupload-ui.css' %}">
+
+
+    <!-- textedit -->
+    <link rel="stylesheet" href="{% static 'textedit/css/textedit.css' %}">
 {% endblock %}
 
 
 
 {# Content Block #}
 {% block content_block %}
+
+    <div id="popup" class="hidden"></div>
+    <div id="opaco" class="hidden"></div>
+
+    <div id="popupUploadFile" class="hidden">
+        <form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
+            {% csrf_token %}
+            <div class="row" id="popupButtons">
+                <div class="col-xs-6">
+                    <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Добавить файл</span>
+                        <input type="file" name="file">
+                    </span>
+                </div>
+                <div class="col-xs-6">
+                    <span class="btn btn-warning fileinput-button" id="upload-cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Отменить загрузку</span>
+                    </span>
+                </div>
+            </div>
+            <span class="btn btn-warning fileinput-button" id="upload-quit">
+                <i class="glyphicon glyphicon-remove"></i>
+                <span>Отмена</span>
+            </span>
+        </form>
+    </div>
+
     <div class="row mainView">
         <div class="col-lg-6 leftView">
             <div class="jumbotron">
-                <h3>Текст</h3>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h3 id="headerForTexteditor">Текст</h3>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="#" class="btn btn-success btn-large" id="uploadButton">
+                            <span class="glyphicon glyphicon-upload"></span> Загрузить файл
+                        </a>
+                    </div>
+                </div>
                 <hr>
                 {% if is_odf %}
                     <div style="height: 634px; overflow: auto;" id="webodf-wrapper">
@@ -129,7 +172,7 @@
 {# JavaScript Block #}
 {% block js_block %}
 
-	<!-- main -->
+    <!-- main -->
     <script data-main="{% static 'textedit/js/main.js' %}" 
             src="{% static 'textedit/js/bower_components/requirejs/require.js' %}">
     </script>

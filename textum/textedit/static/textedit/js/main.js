@@ -18,7 +18,10 @@ require.config({
         'handlebars': '../bower_components/handlebars/handlebars',
         'wysihtml5': '../bower_components/wysihtml5/dist/wysihtml5-0.3.0.min',
         'editor': '../bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min',
-        'webodf': '../tmp/webodf'
+        'webodf': '../tmp/webodf',
+        'jquery.ui.widget': '../bower_components/jquery-file-upload/js/vendor/jquery.ui.widget',
+        'jquery.iframe-transport': '../bower_components/jquery-file-upload/js/jquery.iframe-transport',
+        'fileupload': '../bower_components/jquery-file-upload/js/jquery.fileupload'
     },
     // Shim declaration
     'shim': {

@@ -21,10 +21,56 @@
   border-radius:8px;
 } 
 
-
-
-
 /* Text View */
+#headerForTexteditor {
+	margin-left: 10px;
+}
+
+#uploadButton {
+	float: right;
+	margin-bottom: 5px;
+	margin-right: 10px;
+}
+
+.hidden {
+	display: none;
+}
+
+#opaco {
+   background-color: #000000;
+   left: 0;
+   opacity: 0;  /* general CSS3 */
+   position: absolute;
+   top: 0;
+   width: 100%;
+   z-index: 10000; /* затемнить кнопки и панель Bootstrap */
+}
+
+#popup {
+   background-color: #FFFFFF;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   min-height: 200px;
+   min-width: 300px;
+   z-index: 10001;
+   border: 10px solid #6EBD6E;
+}
+
+#popupButtons {
+	margin: 15px 7px 0;
+}
+
+#upload-cancel {
+	float: right;
+}
+
+#upload-quit {
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+}
+
 #some-textarea {
   width: 100%;
   height: 580px;
