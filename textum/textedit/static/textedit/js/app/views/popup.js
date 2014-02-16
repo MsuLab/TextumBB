@@ -27,7 +27,7 @@ define(['backbone',
                     'margin-top': marginTop
                 });
             };
-
+            
             $('#opaco').height($(document).height()).toggleClass('hidden').fadeTo('slow', 0.7)
                 .click(function() {
                     self.closePopup();
