@@ -22,6 +22,7 @@
     "requirejs": "2.1.9",
     "requirejs-text": "2.0.9",
     "backbone.localStorage": "v1.1.7",
+    "webodf": "master",
     "jquery-file-upload": "9.5.4"
   },
   "private": true,

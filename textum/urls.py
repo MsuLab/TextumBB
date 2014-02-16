@@ -1,6 +1,7 @@
 # ROOT_URLCONF main textum urls router.
 
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.conf.urls import patterns, url, include
 
 
@@ -15,7 +16,7 @@ urlpatterns = patterns('',
     # textedit(Text Editor) app urls:
     url(r'^textedit/',  include('textum.textedit.urls',  namespace="textedit")),
 
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 # Examples:
