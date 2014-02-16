@@ -41,24 +41,29 @@ define(['backbone',
         uploadFile: function() {
             var self = this;
             self.popup.showPopup('UploadFile');
-
             $('#upload').fileupload({
                 dataType: 'json',
                 context: $('#upload')[0],
                 add: function (e, data) {
                     console.log("File added");
-                    var jqXHR = data.submit();
-                    jqXHR.error(function(jqXHR, textStatus, errorThrown) {
-                        if (errorThrown === 'abort') {
-                            alert('Загрузка прервана');
-                        }
-                    });
-                    jqXHR.success(function (result, textStatus, jqXHR) {
-                        self.updateTextFile(result.files[0]);
-                    });
-                    $('#upload-cancel').click(function (e) {
-                        jqXHR.abort();
-                    });
+                    if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
+                        console.log("nope");
+                        alert('Неверный формат файла.');
+                    } 
+                    else {
+                        var jqXHR = data.submit();
+                        jqXHR.error(function(jqXHR, textStatus, errorThrown) {
+                            if (errorThrown === 'abort') {
+                                alert('Загрузка прервана!');
+                            }
+                        });
+                        jqXHR.success(function (result, textStatus, jqXHR) {
+                            self.updateTextFile(result.files[0]);
+                        });
+                        $('#upload-cancel').click(function (e) {
+                            jqXHR.abort();
+                        });
+                    }
                 },
                 done: function(e, data) {
                     console.log("File uploaded");
