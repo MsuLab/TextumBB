@@ -17,7 +17,8 @@ define(['backbone', 'collections/timages',
             this.$photo_gallery = this.$('.photoGallery');
             this.$photo_gallery.jScrollPane({
                 autoReinitialise: true,
-                hideFocus: true
+                hideFocus: true,
+                mouseWheelSpeed: 50
             });
 
         },
