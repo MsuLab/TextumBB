@@ -28,7 +28,7 @@ define(['backbone',
             } else if(this.$webodf_element.length) {
                 console.log('Loading webodf ...');
                 this.$odfcanvas = new odf.OdfCanvas(this.$webodf_element[0]);
-                this.$odfcanvas.load("/static/textedit/docs/testdoc.odt");
+                // this.$odfcanvas.load("/static/textedit/docs/testdoc.odt");
 
             } else {
                 console.log("No Text Editor.")

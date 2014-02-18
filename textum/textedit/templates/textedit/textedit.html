@@ -75,7 +75,9 @@
                 <hr>
                 {% if is_odf %}
                     <div style="height: 634px; overflow: auto;" id="webodf-wrapper">
-                        <div id="webodf-textarea"></div>
+                        <div id="webodf-textarea">
+                            <p>Нет текстового файла. Нажмите кнопку <b>"Загрузить файл"</b>.</p>
+                        </div>
                     </div>
                 {% else %}
                     <textarea id="wysihtml5-textarea" placeholder="Введите текст ..."></textarea>
