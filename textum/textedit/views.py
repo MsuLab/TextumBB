@@ -5,7 +5,7 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django import forms
-from .models import RTFFile
+from .models import RTFFile, TImage
 
 from django.views.generic import CreateView, DeleteView, ListView
 
@@ -116,3 +116,20 @@ class RTFCreateView(CreateView):
         data = json.dumps(form.errors)
         return HttpResponse(content=data, status=400, content_type='application/json')
         
+
+class TImageCreateView(CreateView):
+    model = TImage
+
+    def form_valid(self, form):
+        self.object = form.save()
+        files = [serialize(self.object)]
+        data = {'files': files}
+        response = JSONResponse(data, mimetype=response_mimetype(self.request))
+        response['Content-Disposition'] = 'inline; filename=files.json'
+        return response
+
+    def form_invalid(self, form):
+        data = json.dumps(form.errors)
+        return HttpResponse(content=data, status=400, content_type='application/json')
+
+
