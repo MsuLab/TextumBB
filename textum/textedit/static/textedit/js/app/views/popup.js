@@ -12,11 +12,11 @@ define(['backbone',
             'click #uploadButton': 'uploadFile',
         },
 
-        initialize: function(options) {
+        initialize: function() {
             //console.log('new: Editor is created.');
             var self = this;
             this.$upload_button = this.$('#uploadButton');
-            this.parent = options.parent;
+            //this.parent = options.parent;
         },
 
         showPopup: function(popup_type) {
@@ -71,7 +71,7 @@ define(['backbone',
                             }
                         });
                         jqXHR.success(function (result, textStatus, jqXHR) {
-                            self.parent.updateTextFile(result.files[0]);
+                            Backbone.trigger('upload-event', result.files[0]);
                         });
                         $('#upload-cancel').click(function (e) {
                             jqXHR.abort();

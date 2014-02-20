@@ -31,7 +31,10 @@ define(['backbone',
             }
 
             this.$upload_button = this.$('#uploadButton');
-            this.popup = new Popup({parent:this});
+            this.listenTo(Backbone, 'upload-event', function (data) {
+            	this.updateTextFile(data);
+            }, this);
+            this.popup = new Popup;
         },
 
         updateTextFile: function(file_data) {
