@@ -27,7 +27,7 @@ define(['backbone',
         },
         openPopup: function() {
             if (this.popup == undefined) {
-                this.popup = new Popup();
+                this.popup = new Popup({type:'UploadFile'});
             } else {
                 this.popup.show('UploadFile');
             }

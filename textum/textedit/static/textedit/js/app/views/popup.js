@@ -10,10 +10,10 @@ define(['backbone',
             'click #upload-quit': 'closePopup'
         },
 
-        initialize: function() {
+        initialize: function(options) {
             console.log('new: Pop is created.');
-
-            this.show('UploadFile');
+            console.log(options.type);
+            this.show(options.type);
         },
 
         closePopup: function() {
@@ -48,13 +48,17 @@ define(['backbone',
                 .html($('#popup' + popup_type).html())
                 .toggleClass('hidden')
                 .alignCenter();
-
-            self.initFileupload();
+            if(popup_type === 'UploadFile') {
+                self.initFileupload();
+            }
+            if(popup_type === 'UploadImg') {
+                self.initImgupload();
+            }
         },
 
         initFileupload: function() {
             var self = this;
-
+            console.log($('#popupUploadFile form').attr('action'));
             $('#upload').fileupload({
                 dataType: 'json',
                 context: $('#upload')[0],
@@ -90,6 +94,43 @@ define(['backbone',
             });
         },
 
+        initImgupload: function () {
+            console.log('Image pop-up!');
+            var self = this;
+            $('#upload').fileupload({
+                dataType: 'json',
+                context: $('#upload')[0],
+
+                add: function(e, data) {
+                    console.log("File added.");
+                    data.context
+                    /*if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
+                        alert('Неверный формат файла.');
+                    } else {*/
+                        var jqXHR = data.submit();
+
+                        jqXHR.error(function(jqXHR, textStatus, errorThrown) {
+                            if (errorThrown === 'abort') {
+                                alert('Загрузка прервана!');
+                            }
+                        });
+
+                        //jqXHR.success(function(result, textStatus, jqXHR) {
+                            //Backbone.trigger('uploadTextFile', result.files[0]);
+                        //});
+
+                        $('#upload-cancel').click(function(e) {
+                            jqXHR.abort();
+                        });
+                    //}
+                },
+
+                done: function(e, data) {
+                    console.log("File uploaded.");
+                    self.closePopup();
+                }
+            });
+        }
 
     });
 
