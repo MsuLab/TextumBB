@@ -1,44 +1,42 @@
 define(['backbone',
     'views/popup',
-    // 'editor', // Init wysihtml5 editor
-    'webodf', // Init webodf editor
-    // 'jquery.ui.widget',
-    // 'jquery.iframe-transport',
-    // 'fileupload'
+    'webodf', // Init webodf viewer
 ], function(Backbone, Popup) {
 
     var Editor = Backbone.View.extend({
 
         el: '.leftView',
 
+        events: {
+            'click #uploadButton': 'openPopup',
+        },
+
         initialize: function() {
             console.log('new: Editor is created.');
 
-            this.$text_area = this.$('#wysihtml5-textarea');
             this.$webodf_element = this.$('#webodf-textarea');
 
-            if (this.$text_area.length) {
-                console.log('Loading wysihtml5 ...');
-                this.$text_area.wysihtml5();
-
-            } else if (this.$webodf_element.length) {
+            if (this.$webodf_element.length) {
                 console.log('Loading webodf ...');
+                // Init WebOdf Canvas
                 this.$odfcanvas = new odf.OdfCanvas(this.$webodf_element[0]);
-                this.$odfcanvas.load("/static/textedit/docs/testdoc.odt");
-
             } else {
-                console.log("No Text Editor.")
+                console.log("No Text Editor specified.")
+            }  
+            
+        },
+        openPopup: function() {
+            if (this.popup == undefined) {
+                this.popup = new Popup();
+            } else {
+                this.popup.show('UploadFile');
             }
 
-            this.$upload_button = this.$('#uploadButton');
-            this.listenTo(Backbone, 'upload-event', function(data) {
+            this.listenTo(Backbone, 'uploadTextFile', function(data) {
                 this.updateTextFile(data);
             }, this);
-            this.popup = new Popup();
         },
-
         updateTextFile: function(file_data) {
-            console.log(file_data);
             if (this.$webodf_element.length) {
                 this.$odfcanvas.load(file_data.url);
             }

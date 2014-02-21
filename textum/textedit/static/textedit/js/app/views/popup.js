@@ -4,21 +4,27 @@ define(['backbone',
 
     var Popup = Backbone.View.extend({
 
-        el: '.leftView',
+        el: '#popup',
 
         events: {
-            'click #uploadButton': 'uploadFile',
+            'click #upload-quit': 'closePopup'
         },
 
         initialize: function() {
-            //console.log('new: Editor is created.');
-            var self = this;
-            this.$upload_button = this.$('#uploadButton');
-            //this.parent = options.parent;
+            console.log('new: Pop is created.');
+
+            this.show('UploadFile');
         },
 
-        showPopup: function(popup_type) {
+        closePopup: function() {
+            $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
+            $('#popup').toggleClass('hidden');
+            $('#upload').fileupload('destroy');
+        },
+
+        show: function(popup_type) {
             var self = this;
+
             $.fn.alignCenter = function() {
                 //get margin left
                 var marginLeft = -$(this).outerWidth() / 2 + 'px';
@@ -31,57 +37,57 @@ define(['backbone',
                 });
             };
 
-            $('#opaco').height($(document).height()).toggleClass('hidden').fadeTo('slow', 0.7)
+            $('#opaco')
+                .height($(document).height())
+                .toggleClass('hidden')
+                .fadeTo('slow', 0.7)
                 .click(function() {
                     self.closePopup();
                 });
-            $('#popup').html($('#popup' + popup_type).html()).toggleClass('hidden').alignCenter();
-            console.log("Upload Button");
-            $('#upload-quit').on('click', function() {
+            $('#popup')
+                .html($('#popup' + popup_type).html())
+                .toggleClass('hidden')
+                .alignCenter();
 
-                self.closePopup();
-            });
+            self.initFileupload();
         },
 
-        closePopup: function() {
-            $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
-            $('#popup').toggleClass('hidden');
-            $('#upload').fileupload('destroy');
-        },
-
-        uploadFile: function() {
+        initFileupload: function() {
             var self = this;
-            self.showPopup('UploadFile');
+
             $('#upload').fileupload({
                 dataType: 'json',
                 context: $('#upload')[0],
+
                 add: function(e, data) {
-                    console.log("File added");
+                    console.log("File added.");
+
                     if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
-                        console.log("nope");
                         alert('Неверный формат файла.');
                     } else {
                         var jqXHR = data.submit();
+
                         jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                             if (errorThrown === 'abort') {
                                 alert('Загрузка прервана!');
                             }
                         });
+
                         jqXHR.success(function(result, textStatus, jqXHR) {
-                            Backbone.trigger('upload-event', result.files[0]);
+                            Backbone.trigger('uploadTextFile', result.files[0]);
                         });
+
                         $('#upload-cancel').click(function(e) {
                             jqXHR.abort();
                         });
                     }
                 },
+
                 done: function(e, data) {
-                    console.log("File uploaded");
+                    console.log("File uploaded.");
                     self.closePopup();
                 }
             });
-
-            console.log("File upload button pressed");
         },
 
 
