@@ -18,7 +18,7 @@ class Home(generic.View):
 def index(request):
     """Redirect to Home page"""
 
-    return HttpResponseRedirect(reverse('website:home'))
+    return HttpResponseRedirect(reverse('textedit:main'))
 
 
 class SignIn(generic.View):
