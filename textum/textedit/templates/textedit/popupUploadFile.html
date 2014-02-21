@@ -1,5 +1,5 @@
 <div id="popupUploadFile" class="hidden">
-    <form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
+    <form id="uploadFile" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
         {% csrf_token %}
         <!--<p>Загружаемый файл должен быть в одном из следующих форматов: .txt, .doc, .docx, .odt, .rtf</p>-->
         <div class="row" id="popupButtons">
@@ -11,13 +11,13 @@
                 </span>
             </div>
             <div class="col-xs-6">
-                <span class="btn btn-warning fileinput-button" id="upload-cancel">
+                <span class="btn btn-warning fileinput-button" id="uploadFile-cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Отменить загрузку</span>
                 </span>
             </div>
         </div>
-        <span class="btn btn-warning fileinput-button" id="upload-quit">
+        <span class="btn btn-warning fileinput-button" id="uploadFile-quit">
             <i class="glyphicon glyphicon-remove"></i>
             <span>Отмена</span>
         </span>

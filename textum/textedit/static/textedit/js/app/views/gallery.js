@@ -1,6 +1,6 @@
 define(['backbone',
     'collections/timages',
-    'views/popup',
+    'views/popup-img',
     'jScrollPane' // Init scroll 
 ], function(Backbone, TImages, Popup) {
 
@@ -27,7 +27,7 @@ define(['backbone',
         addTImage: function() {
             console.log("New TImage!");
             if (this.popup == undefined) {
-                this.popup = new Popup({type:'UploadImg'});
+                this.popup = new Popup;
             } else {
                 this.popup.show('UploadImg');
             }

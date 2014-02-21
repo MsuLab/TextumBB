@@ -1,5 +1,5 @@
 <div id="popupUploadImg" class="hidden">
-    <form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload_image' %}">
+    <form id="uploadImg" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload_image' %}">
         {% csrf_token %}
         <div class="row" id="popupButtons">
             <div class="col-xs-6">
@@ -10,7 +10,7 @@
                 </span>
             </div>
             <div class="col-xs-6">
-                <span class="btn btn-warning fileinput-button" id="upload-cancel">
+                <span class="btn btn-warning fileinput-button" id="uploadImg-cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Отменить загрузку</span>
                 </span>
@@ -19,7 +19,7 @@
         <ul style="list-style-type: none;">
             
         </ul>
-        <span class="btn btn-warning fileinput-button" id="upload-quit">
+        <span class="btn btn-warning fileinput-button" id="uploadImg-quit">
             <i class="glyphicon glyphicon-remove"></i>
             <span>Отмена</span>
         </span>
