@@ -1,5 +1,9 @@
 .DS_Store
 
+bower_components
+*.db
+media
+
 # vagrant
 .vagrant
 

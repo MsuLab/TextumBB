@@ -16,6 +16,9 @@ Django==1.5.1
 
 ### Befor server start
 
+Run from root directory
+	$ bower install
+
 I. Update all submodules(host)
 
 	$ git submodule init
