@@ -25,9 +25,7 @@ define([
 
         setDefault: function() {
             console.log('--> Welcome to Textum.');
-
-            new AppView;
-            
+            new AppView();
         },
 
         getPost: function(id) {

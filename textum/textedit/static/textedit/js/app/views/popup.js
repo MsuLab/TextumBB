@@ -1,6 +1,4 @@
 define(['backbone',
-    'jquery.ui.widget',
-    'jquery.iframe-transport',
     'fileupload'
 ], function(Backbone) {
 
@@ -32,7 +30,7 @@ define(['backbone',
                     'margin-top': marginTop
                 });
             };
-            
+
             $('#opaco').height($(document).height()).toggleClass('hidden').fadeTo('slow', 0.7)
                 .click(function() {
                     self.closePopup();
@@ -40,7 +38,7 @@ define(['backbone',
             $('#popup').html($('#popup' + popup_type).html()).toggleClass('hidden').alignCenter();
             console.log("Upload Button");
             $('#upload-quit').on('click', function() {
-                
+
                 self.closePopup();
             });
         },
@@ -57,23 +55,22 @@ define(['backbone',
             $('#upload').fileupload({
                 dataType: 'json',
                 context: $('#upload')[0],
-                add: function (e, data) {
+                add: function(e, data) {
                     console.log("File added");
                     if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
                         console.log("nope");
                         alert('Неверный формат файла.');
-                    } 
-                    else {
+                    } else {
                         var jqXHR = data.submit();
                         jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                             if (errorThrown === 'abort') {
                                 alert('Загрузка прервана!');
                             }
                         });
-                        jqXHR.success(function (result, textStatus, jqXHR) {
+                        jqXHR.success(function(result, textStatus, jqXHR) {
                             Backbone.trigger('upload-event', result.files[0]);
                         });
-                        $('#upload-cancel').click(function (e) {
+                        $('#upload-cancel').click(function(e) {
                             jqXHR.abort();
                         });
                     }
@@ -83,7 +80,7 @@ define(['backbone',
                     self.closePopup();
                 }
             });
-            
+
             console.log("File upload button pressed");
         },
 

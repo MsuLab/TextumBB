@@ -1,10 +1,10 @@
 define(['backbone',
     'views/popup',
-    'editor', // Init wysihtml5 editor
-    'webodf',  // Init webodf editor
-    'jquery.ui.widget',
-    'jquery.iframe-transport',
-    'fileupload'
+    // 'editor', // Init wysihtml5 editor
+    'webodf', // Init webodf editor
+    // 'jquery.ui.widget',
+    // 'jquery.iframe-transport',
+    // 'fileupload'
 ], function(Backbone, Popup) {
 
     var Editor = Backbone.View.extend({
@@ -21,7 +21,7 @@ define(['backbone',
                 console.log('Loading wysihtml5 ...');
                 this.$text_area.wysihtml5();
 
-            } else if(this.$webodf_element.length) {
+            } else if (this.$webodf_element.length) {
                 console.log('Loading webodf ...');
                 this.$odfcanvas = new odf.OdfCanvas(this.$webodf_element[0]);
                 this.$odfcanvas.load("/static/textedit/docs/testdoc.odt");
@@ -31,10 +31,10 @@ define(['backbone',
             }
 
             this.$upload_button = this.$('#uploadButton');
-            this.listenTo(Backbone, 'upload-event', function (data) {
-            	this.updateTextFile(data);
+            this.listenTo(Backbone, 'upload-event', function(data) {
+                this.updateTextFile(data);
             }, this);
-            this.popup = new Popup;
+            this.popup = new Popup();
         },
 
         updateTextFile: function(file_data) {

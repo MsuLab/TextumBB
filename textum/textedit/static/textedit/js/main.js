@@ -25,13 +25,11 @@ require.config({
     },
     // Shim declaration
     'shim': {
-
         // jScrollPane
         'jScrollPane': {
             'deps': ['jquery', 'mousewheel'],
             'exports': 'jScrollPane'
         },
-
         // bootstrap3-wysihtml5
         'handlebars': {
             'exports': 'Handlebars'
@@ -43,19 +41,23 @@ require.config({
         'wysihtml5': {
             'exports': 'wysihtml5'
         },
-        'editor': {
+        'wysi_editor': {
             'deps': ['wysihtml5', 'handlebars', 'jquery', 'bootstrap'],
-            'exports': 'editor'
+            'exports': 'wysi_editor'
         },
         'webodf': {
             'exports': 'webodf'
+        },
+        'fileupload': {
+            'deps': ['jquery.ui.widget', 'jquery.iframe-transport'],
+            'exports': 'fileupload'
         }
     }
 });
 
 
 require(['backbone', 'routers/router'],
-    function(Backbone, Controller) {
-        new Controller;
+    function(Backbone, Router) {
+        new Router();
         Backbone.history.start();
     });

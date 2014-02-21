@@ -1,4 +1,5 @@
-define(['backbone', 'collections/timages',
+define(['backbone',
+    'collections/timages',
     'jScrollPane' // Init scroll 
 ], function(Backbone, TImages) {
 
@@ -7,7 +8,7 @@ define(['backbone', 'collections/timages',
         el: ".rightView",
 
         events: {
-                'click .addImage':       'addTImage',
+            'click .addImage': 'addTImage',
         },
 
         initialize: function() {
@@ -23,7 +24,7 @@ define(['backbone', 'collections/timages',
 
         },
         addTImage: function() {
-        	console.log("New TImage!")
+            console.log("New TImage!")
         }
     });
 
