@@ -61,6 +61,7 @@ define(['backbone',
                 context: $('#uploadImg')[0],
 
                 add: function(e, data) {
+                    //var jqXHR;
                     console.log("File added.");
                     data.context = $('<li><span class="btn btn-success fileinput-button" id="uploadImg-cancel">\
                                         <i class="glyphicon glyphicon-upload"></i>\
@@ -69,33 +70,29 @@ define(['backbone',
                         //.text('Upload ' + data.files[0].name)
                         .appendTo($('#uploadImg ul'))
                         .click(function() {
-                            data.context = $('<p/>').text('Uploading...').replaceAll($(this));
-                            data.submit();
+                            data.context = $('<p/>').text('Загружается...').replaceAll($(this));
+                            var jqXHR = data.submit();
+                            jqXHR.error(function(jqXHR, textStatus, errorThrown) {
+                                if (errorThrown === 'abort') {
+                                    alert('Загрузка прервана!');
+                                }
+                            });
+                            $('#uploadImg-cancel').click(function (e) {
+                                jqXHR.abort();
+                            });
+                            jqXHR.success(function(result, textStatus, jqXHR) {
+                                //Backbone.trigger('uploadTextFile', result.files[0]);
+                                data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
+                            });
                         });
-                    /*if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
-                        alert('Неверный формат файла.');
-                    } else {*/
-                        /*var jqXHR = data.submit();
-
-                        jqXHR.error(function(jqXHR, textStatus, errorThrown) {
-                            if (errorThrown === 'abort') {
-                                alert('Загрузка прервана!');
-                            }
-                        });*/
-
                         //jqXHR.success(function(result, textStatus, jqXHR) {
                             //Backbone.trigger('uploadTextFile', result.files[0]);
                         //});
-
-                        $('#uploadImg-cancel').click(function(e) {
-                            jqXHR.abort();
-                        });
-                    //}
                 },
 
                 done: function(e, data) {
                     console.log("File uploaded.");
-                    //self.closePopup();
+                    //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
                 }
             });
         }
