@@ -3,22 +3,22 @@
         {% csrf_token %}
         <!--<p>Загружаемый файл должен быть в одном из следующих форматов: .txt, .doc, .docx, .odt, .rtf</p>-->
         <div class="row" id="popupButtons">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 <span class="btn btn-success fileinput-button">
-                    <i class="glyphicon glyphicon-plus"></i>
+                    <!--<i class="glyphicon glyphicon-plus"></i>-->
                     <span>Добавить файл</span>
                     <input type="file" name="file">
                 </span>
-            </div>
-            <div class="col-xs-6">
+            <!--</div>
+            <div class="col-xs-6">-->
                 <span class="btn btn-warning fileinput-button" id="uploadFile-cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <!--<i class="glyphicon glyphicon-ban-circle"></i>-->
                     <span>Отменить загрузку</span>
                 </span>
             </div>
         </div>
         <span class="btn btn-warning fileinput-button" id="uploadFile-quit">
-            <i class="glyphicon glyphicon-remove"></i>
+            <!--<i class="glyphicon glyphicon-remove"></i>-->
             <span>Отмена</span>
         </span>
     </form>

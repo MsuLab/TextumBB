@@ -63,9 +63,8 @@ define(['backbone',
                 add: function(e, data) {
                     //var jqXHR;
                     console.log("File added.");
-                    data.context = $('<li><span class="btn btn-success fileinput-button" id="uploadImg-cancel">\
-                                        <i class="glyphicon glyphicon-upload"></i>\
-                                        <span>' + data.files[0].name + '</span>\
+                    data.context = $('<li><span class="btn btn-success fileinput-button uploadImg-uploadThis">\
+                                     <span>' + data.files[0].name + '</span>\
                                     </span></li>')
                         //.text('Upload ' + data.files[0].name)
                         .appendTo($('#uploadImg ul'))
@@ -94,6 +93,12 @@ define(['backbone',
                     console.log("File uploaded.");
                     //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
                 }
+            });
+            $('#uploadImg-uploadAll').click(function() {
+                console.log('UploadAll pressed');
+                $('.uploadImg-uploadThis').each(function(){
+                    this.click();
+                });
             });
         }
     });

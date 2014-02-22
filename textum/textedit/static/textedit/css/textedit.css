@@ -61,10 +61,6 @@
 	margin: 15px 7px 0;
 }
 
-#uploadFile-cancel, #uploadImg-cancel {
-	float: right;
-}
-
 #uploadFile-quit, #uploadImg-quit {
 	position: absolute;
 	bottom: 5%;
