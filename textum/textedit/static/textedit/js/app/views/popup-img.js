@@ -17,6 +17,7 @@ define(['backbone',
         },
 
         closePopup: function() {
+            $('#uploadImg ul li').remove();
             $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
             $('#popup').toggleClass('hidden');
             $('#uploadImg').fileupload('destroy');
@@ -61,17 +62,26 @@ define(['backbone',
 
                 add: function(e, data) {
                     console.log("File added.");
-                    data.context
+                    data.context = $('<li><span class="btn btn-success fileinput-button" id="uploadImg-cancel">\
+                                        <i class="glyphicon glyphicon-upload"></i>\
+                                        <span>' + data.files[0].name + '</span>\
+                                    </span></li>')
+                        //.text('Upload ' + data.files[0].name)
+                        .appendTo($('#uploadImg ul'))
+                        .click(function() {
+                            data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                            data.submit();
+                        });
                     /*if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
                         alert('Неверный формат файла.');
                     } else {*/
-                        var jqXHR = data.submit();
+                        /*var jqXHR = data.submit();
 
                         jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                             if (errorThrown === 'abort') {
                                 alert('Загрузка прервана!');
                             }
-                        });
+                        });*/
 
                         //jqXHR.success(function(result, textStatus, jqXHR) {
                             //Backbone.trigger('uploadTextFile', result.files[0]);
@@ -85,7 +95,7 @@ define(['backbone',
 
                 done: function(e, data) {
                     console.log("File uploaded.");
-                    self.closePopup();
+                    //self.closePopup();
                 }
             });
         }
