@@ -64,15 +64,16 @@ define(['backbone',
                         alert('Неверный формат файла.');
                     } else {
                         var jqXHR = data.submit();
-
+                        $('#uploadFile-status').text('Загружается...');
                         jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                             if (errorThrown === 'abort') {
-                                alert('Загрузка прервана!');
+                                $('#uploadFile-status').text('Загрузка прервана!');
                             }
                         });
 
                         jqXHR.success(function(result, textStatus, jqXHR) {
                             Backbone.trigger('uploadTextFile', result.files[0]);
+                            $('#uploadFile-status').text('Загрузка завершена.');
                         });
 
                         $('#uploadFile-cancel').click(function(e) {
@@ -83,7 +84,7 @@ define(['backbone',
 
                 done: function(e, data) {
                     console.log("File uploaded.");
-                    self.closePopup();
+                    setTimeout(function() {self.closePopup();}, 1000);
                 }
             });
         },
