@@ -53,6 +53,7 @@ c. Install LibreOffice
     $ sudo add-apt-repository ppa:libreoffice/libreoffice-4-1
     $ sudo apt-get update
     $ sudo apt-get install libreoffice
+    $ sudo apt-get install python-dev
 
 
 3.3 Unoconv setup
@@ -60,7 +61,7 @@ c. Install LibreOffice
 Execute all commands in Vagrant.
 
 a. Run unoconv listener
-    $ cd tmp
+    $ cd /tmp
     $ sudo apt-get install git
     $ git clone https://github.com/dagwieers/unoconv
     $ ./unoconv/unoconv --listener &
@@ -85,9 +86,7 @@ a. Install virtualenv
     $ sudo pip install virtualenv
 
 b. Setup environment
-    $ cd /vagrant
-    $ ./.bin/buildenv.sh
-    $ . ./.textumEnv/bin/activate
+    $ sudo pip install --upgrade -r /vagrant/requirements.txt
 
 c. Run development server
     $ python manage.py runserver 0.0.0.0:8000
