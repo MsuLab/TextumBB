@@ -17,7 +17,7 @@ define(['backbone',
         },
 
         closePopup: function() {
-            $('#uploadImg ul').empty();
+            $('#uploadImg table tbody').empty();
             $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
             $('#popup').toggleClass('hidden');
             $('#uploadImg').fileupload('destroy');
@@ -67,13 +67,34 @@ define(['backbone',
                     console.log("File added.");
                     data.files[0].uploadID = "uploadID" + index;
                     index = index + 1;
-                    data.context = $('<li><span class="btn btn-success fileinput-button uploadImg-uploadThis">\
+                    data.context = $(/*'<li><span class="btn btn-success fileinput-button uploadImg-uploadThis">\
                                      <span>' + data.files[0].name + '</span>\
-                                    </span></li>')
+                                    </span></li>'
+                                    <p class="size">' + data.files[0].size + '</p>\*/
+                                    '<tr>\
+                                        <td>\
+                                            <p class="name">' + data.files[0].name + '</p>\
+                                        </td>\
+                                        <td>\
+                                            <p class="size">' + data.files[0].size + '</p>\
+                                            <div class="progress progress-striped active" role="progressbar" \
+                                             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">\
+                                                <div id="progressbar' + data.files[0].uploadID + 
+                                                '" class="progress-bar progress-bar-success" style="width:0%;"></div>\
+                                            </div>\
+                                        </td>\
+                                        <td>\
+                                            <span id="uploadbutton' + data.files[0].uploadID + 
+                                            '" class="btn btn-success uploadImg-uploadThis">\
+                                                <i class="glyphicon glyphicon-upload"></i>\
+                                                <span>Загрузить файл</span>\
+                                            </span>\
+                                        </td>\
+                                    </tr>')
                         //.text('Upload ' + data.files[0].name)
-                        .appendTo($('#uploadImg ul'))
-                        .click(function() {
-                            data.context = $('<li><p>Загружается...</p></li>').replaceAll($(this));//.text('Загружается...').replaceAll($(this));
+                        .appendTo($('#uploadImg table tbody'));
+                    $('#uploadbutton' + data.files[0].uploadID).click(function() {
+                            //data.context = $('<li><p>Загружается...</p></li>').replaceAll($(this));//.text('Загружается...').replaceAll($(this));
                             var jqXHR = data.submit();
                             jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                                 if (errorThrown === 'abort') {
@@ -85,21 +106,23 @@ define(['backbone',
                             });
                             jqXHR.success(function(result, textStatus, jqXHR) {
                                 //Backbone.trigger('uploadTextFile', result.files[0]);
-                                data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
+                                //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
+                                $('<p>Загрузка завершена.</p>').replaceAll('#uploadbutton' + data.files[0].uploadID);
                             });
                                             /*setTimeout(function () {
                                             var overallProgress = $(data.context).fileupload('progress');
                                             console.log(overallProgress.loaded);}, 100);*/
-                        });
+                        //});
                         //jqXHR.success(function(result, textStatus, jqXHR) {
                             //Backbone.trigger('uploadTextFile', result.files[0]);
-                        //});
+                        });
                 },
 
                 progress: function(e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
                     console.log(progress);
                     console.log(data.files[0].uploadID);
+                    $('#progressbar' + data.files[0].uploadID).width(progress);
                 },
 
                 done: function(e, data) {

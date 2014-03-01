@@ -4,6 +4,7 @@ from django.views import generic
 from django.views.generic import CreateView, DeleteView, ListView
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+import json
 
 from .models import RTFFile, TImage
 from .core.response import JSONResponse, response_mimetype
