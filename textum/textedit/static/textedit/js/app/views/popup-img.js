@@ -67,66 +67,56 @@ define(['backbone',
                     console.log("File added.");
                     data.files[0].uploadID = "uploadID" + index;
                     index = index + 1;
-                    data.context = $(/*'<li><span class="btn btn-success fileinput-button uploadImg-uploadThis">\
-                                     <span>' + data.files[0].name + '</span>\
-                                    </span></li>'
-                                    <p class="size">' + data.files[0].size + '</p>\*/
-                                    '<tr id="row' + data.files[0].uploadID + '">\
-                                        <td style="width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">\
-                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="name">' + data.files[0].name + '</p>\
+                    data.context = $('<tr id="row' + data.files[0].uploadID + '">\
+                                        <td style="max-width: 200px; white-space: nowrap; overflow: hidden;\
+                                         text-overflow: ellipsis;">\
+                                         <p style="white-space: nowrap; overflow: hidden;\
+                                             text-overflow: ellipsis;" class="name">' + data.files[0].name + '</p>\
                                         </td>\
-                                        <td style="width: 300px;">\
-                                            <p class="size">' + data.files[0].size + '</p>\
+                                        <td style="width: 200px;">\
                                             <div id="progressbarext' + data.files[0].uploadID + '"\
                                              class="progress progress-striped active" role="progressbar" \
-                                             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">\
+                                             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"\
+                                             style="margin-top: 10px;">\
                                                 <div id="progressbar' + data.files[0].uploadID + 
                                                 '" class="progress-bar progress-bar-success" style="width:0%;"></div>\
                                             </div>\
                                         </td>\
-                                        <td style="width: 200px;">\
+                                        <td style="width: 300px;">\
                                             <span id="uploadbutton' + data.files[0].uploadID + 
                                             '" class="btn btn-success uploadImg-uploadThis">\
                                                 <i class="glyphicon glyphicon-upload"></i>\
                                                 <span>Загрузить файл</span>\
                                             </span>\
                                             <span id="cancelbutton' + data.files[0].uploadID + 
-                                            '" class="btn btn-warning uploadImg-uploadThis">\
+                                            '" class="btn btn-warning">\
                                                 <span>Отмена</span>\
                                             </span>\
                                         </td>\
                                     </tr>')
-                        //.text('Upload ' + data.files[0].name)
                         .appendTo($('#uploadImg table tbody'));
                     $('#cancelbutton' + data.files[0].uploadID).click(function() {
                         $('#row' + data.files[0].uploadID).remove();
                     });
                     $('#uploadbutton' + data.files[0].uploadID).click(function() {
-                            //data.context = $('<li><p>Загружается...</p></li>').replaceAll($(this));//.text('Загружается...').replaceAll($(this));
+                            $('#uploadbutton' + data.files[0].uploadID).remove();
                             var jqXHR = data.submit();
                             jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                                 if (errorThrown === 'abort') {
                                     alert('Загрузка прервана!');
                                 }
                             });
-                            $('#uploadImg-cancel').click(function (e) {
+                            $('#cancelbutton' + data.files[0].uploadID).click(function (e) {
                                 jqXHR.abort();
                             });
                             jqXHR.success(function(result, textStatus, jqXHR) {
                                 //Backbone.trigger('uploadTextFile', result.files[0]);
                                 //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
-                                $('<p>Загрузка завершена.</p>').replaceAll('#uploadbutton' + data.files[0].uploadID);
-                                $('#cancelbutton' + data.files[0].uploadID).remove();
+                                $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
                                 setTimeout(function() {
                                     $('#progressbarext' + data.files[0].uploadID).remove();
                                 }, 1000);
                             });
-                                            /*setTimeout(function () {
-                                            var overallProgress = $(data.context).fileupload('progress');
-                                            console.log(overallProgress.loaded);}, 100);*/
-                        //});
-                        //jqXHR.success(function(result, textStatus, jqXHR) {
-                            //Backbone.trigger('uploadTextFile', result.files[0]);
                         });
                 },
 
@@ -139,7 +129,6 @@ define(['backbone',
 
                 done: function(e, data) {
                     console.log("File uploaded.");
-                    //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
                 }
             });
             $('#uploadImg-uploadAll').click(function() {
