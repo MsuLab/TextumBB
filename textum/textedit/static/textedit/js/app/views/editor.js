@@ -22,8 +22,10 @@ define(['backbone',
                 this.$odfcanvas = new odf.OdfCanvas(this.$webodf_element[0]);
             } else {
                 console.log("No Text Editor specified.")
-            }  
-            
+            };
+            this.listenTo(Backbone, 'uploadTextFile', function(data) {
+                this.updateTextFile(data);
+            }, this);
         },
         openPopup: function() {
             if (this.popup == undefined) {
@@ -31,10 +33,6 @@ define(['backbone',
             } else {
                 this.popup.show('UploadFile');
             }
-
-            this.listenTo(Backbone, 'uploadTextFile', function(data) {
-                this.updateTextFile(data);
-            }, this);
         },
         updateTextFile: function(file_data) {
             if (this.$webodf_element.length) {

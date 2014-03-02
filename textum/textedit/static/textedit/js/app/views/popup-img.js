@@ -20,7 +20,7 @@ define(['backbone',
             $('#uploadImg table tbody').empty();
             $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
             $('#popup').toggleClass('hidden');
-            $('#uploadImg').fileupload('destroy');
+            //$('#uploadImg').fileupload('destroy');
         },
 
         show: function(popup_type) {
@@ -111,9 +111,8 @@ define(['backbone',
                                 jqXHR.abort();
                             });
                             jqXHR.success(function(result, textStatus, jqXHR) {
-                                //Backbone.trigger('uploadTextFile', result.files[0]);
-                                //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
-                                console.log(result.files[0]);
+                                Backbone.trigger('uploadImage', result.files[0]);
+                                //console.log(result.files[0]);
                                 $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
                                 setTimeout(function() {
                                     $('#progressbarext' + data.files[0].uploadID).remove();

@@ -22,7 +22,10 @@ define(['backbone',
                 hideFocus: true,
                 mouseWheelSpeed: 50
             });
-
+            this.imageCollection = new TImages();
+            this.listenTo(Backbone, 'uploadImage', function (data) {
+                this.updateGallery(data);
+            });
         },
         addTImage: function() {
             console.log("New TImage!");
@@ -31,6 +34,16 @@ define(['backbone',
             } else {
                 this.popup.show('UploadImg');
             }
+        },
+        updateGallery: function(data) {
+            this.imageCollection.create(
+                {title: data.name, url: data.url}
+            );
+            var just_added = this.imageCollection.last();
+            $('<li><span>' + just_added.attributes.page_num + 
+                '</span><img src="' + just_added.attributes.url + 
+                '" alt="' + just_added.attributes.name +'" /></li>')
+                .appendTo('.photoGrid');
         }
     });
 

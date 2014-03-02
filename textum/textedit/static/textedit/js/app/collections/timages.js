@@ -16,9 +16,9 @@ define([
 
                 // TImage are sorted by their original insertion order.
                 comparator: function (timage) {
-                        return todo.get('order');
+                        return timage.get('order');
                 }
         });
 
-        return new TodosCollection();
+        return TodosCollection;
 });
