@@ -71,28 +71,36 @@ define(['backbone',
                                      <span>' + data.files[0].name + '</span>\
                                     </span></li>'
                                     <p class="size">' + data.files[0].size + '</p>\*/
-                                    '<tr>\
-                                        <td>\
-                                            <p class="name">' + data.files[0].name + '</p>\
+                                    '<tr id="row' + data.files[0].uploadID + '">\
+                                        <td style="width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">\
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="name">' + data.files[0].name + '</p>\
                                         </td>\
-                                        <td>\
+                                        <td style="width: 300px;">\
                                             <p class="size">' + data.files[0].size + '</p>\
-                                            <div class="progress progress-striped active" role="progressbar" \
+                                            <div id="progressbarext' + data.files[0].uploadID + '"\
+                                             class="progress progress-striped active" role="progressbar" \
                                              aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">\
                                                 <div id="progressbar' + data.files[0].uploadID + 
                                                 '" class="progress-bar progress-bar-success" style="width:0%;"></div>\
                                             </div>\
                                         </td>\
-                                        <td>\
+                                        <td style="width: 200px;">\
                                             <span id="uploadbutton' + data.files[0].uploadID + 
                                             '" class="btn btn-success uploadImg-uploadThis">\
                                                 <i class="glyphicon glyphicon-upload"></i>\
                                                 <span>Загрузить файл</span>\
                                             </span>\
+                                            <span id="cancelbutton' + data.files[0].uploadID + 
+                                            '" class="btn btn-warning uploadImg-uploadThis">\
+                                                <span>Отмена</span>\
+                                            </span>\
                                         </td>\
                                     </tr>')
                         //.text('Upload ' + data.files[0].name)
                         .appendTo($('#uploadImg table tbody'));
+                    $('#cancelbutton' + data.files[0].uploadID).click(function() {
+                        $('#row' + data.files[0].uploadID).remove();
+                    });
                     $('#uploadbutton' + data.files[0].uploadID).click(function() {
                             //data.context = $('<li><p>Загружается...</p></li>').replaceAll($(this));//.text('Загружается...').replaceAll($(this));
                             var jqXHR = data.submit();
@@ -108,6 +116,10 @@ define(['backbone',
                                 //Backbone.trigger('uploadTextFile', result.files[0]);
                                 //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
                                 $('<p>Загрузка завершена.</p>').replaceAll('#uploadbutton' + data.files[0].uploadID);
+                                $('#cancelbutton' + data.files[0].uploadID).remove();
+                                setTimeout(function() {
+                                    $('#progressbarext' + data.files[0].uploadID).remove();
+                                }, 1000);
                             });
                                             /*setTimeout(function () {
                                             var overallProgress = $(data.context).fileupload('progress');
@@ -122,7 +134,7 @@ define(['backbone',
                     var progress = parseInt(data.loaded / data.total * 100, 10);
                     console.log(progress);
                     console.log(data.files[0].uploadID);
-                    $('#progressbar' + data.files[0].uploadID).width(progress);
+                    $('#progressbar' + data.files[0].uploadID).width(progress + '%');
                 },
 
                 done: function(e, data) {
