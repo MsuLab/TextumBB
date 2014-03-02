@@ -82,7 +82,7 @@ define(['backbone',
                                                 '" class="progress-bar progress-bar-success" style="width:0%;"></div>\
                                             </div>\
                                         </td>\
-                                        <td style="width: 300px;">\
+                                        <td style="width: 250px;">\
                                             <span id="uploadbutton' + data.files[0].uploadID + 
                                             '" class="btn btn-success uploadImg-uploadThis">\
                                                 <i class="glyphicon glyphicon-upload"></i>\
@@ -100,6 +100,7 @@ define(['backbone',
                     });
                     $('#uploadbutton' + data.files[0].uploadID).click(function() {
                             $('#uploadbutton' + data.files[0].uploadID).remove();
+                            $('#cancelbutton' + data.files[0].uploadID).text('Прервать загрузку');
                             var jqXHR = data.submit();
                             jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                                 if (errorThrown === 'abort') {
@@ -112,6 +113,7 @@ define(['backbone',
                             jqXHR.success(function(result, textStatus, jqXHR) {
                                 //Backbone.trigger('uploadTextFile', result.files[0]);
                                 //data.context = $('<p/>').text('Загрузка завершена.').replaceAll($(this));
+                                console.log(result.files[0]);
                                 $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
                                 setTimeout(function() {
                                     $('#progressbarext' + data.files[0].uploadID).remove();
@@ -122,8 +124,6 @@ define(['backbone',
 
                 progress: function(e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
-                    console.log(progress);
-                    console.log(data.files[0].uploadID);
                     $('#progressbar' + data.files[0].uploadID).width(progress + '%');
                 },
 
