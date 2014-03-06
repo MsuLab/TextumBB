@@ -1,8 +1,9 @@
 define(['backbone',
     'collections/timages',
+    'views/imgview',
     'views/popup-img',
     'jScrollPane' // Init scroll 
-], function(Backbone, TImages, Popup) {
+], function(Backbone, TImages, TImageView, Popup) {
 
     var Gallery = Backbone.View.extend({
 
@@ -23,6 +24,7 @@ define(['backbone',
                 mouseWheelSpeed: 50
             });
             this.imageCollection = new TImages();
+            this.viewsArray = [];
             this.listenTo(Backbone, 'uploadImage', function (data) {
                 this.updateGallery(data);
             });
@@ -36,14 +38,22 @@ define(['backbone',
             }
         },
         updateGallery: function(data) {
-            this.imageCollection.create(
-                {title: data.name, url: data.url}
-            );
+            this.imageCollection.create({
+                //title: data.name, 
+                url: data.url
+            });
             var just_added = this.imageCollection.last();
-            $('<li><span>' + just_added.attributes.page_num + 
+            this.viewsArray[this.viewsArray.length] = new TImageView({
+                model: just_added,
+                id: 'image' + just_added.attributes.id
+            });
+            this.viewsArray[this.viewsArray.length - 1]
+                .$el.appendTo('.photoGrid');
+            just_added.set('title', data.name); // I do it after view is inserted on the page so that "change" event would happen
+            /*$('<li><span>' + just_added.attributes.page_num + 
                 '</span><img src="' + just_added.attributes.url + 
                 '" alt="' + just_added.attributes.name +'" /></li>')
-                .appendTo('.photoGrid');
+                .appendTo('.photoGrid');*/
         }
     });
 
