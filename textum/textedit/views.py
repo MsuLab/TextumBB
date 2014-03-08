@@ -47,7 +47,7 @@ class TImageCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         files = [serialize(self.object)]
-        data = {'files': files}
+        data = {'files': files, 'id': self.object.id}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response

@@ -59,6 +59,7 @@ define(['backbone',
             var self = this;
             var index = 0;
             $('#uploadImg').fileupload({
+                url: '/api/images/timage/',
                 dataType: 'json',
                 context: $('#uploadImg'),
 
@@ -110,14 +111,15 @@ define(['backbone',
                             $('#cancelbutton' + data.files[0].uploadID).click(function (e) {
                                 jqXHR.abort();
                             });
-                            jqXHR.success(function(result, textStatus, jqXHR) {
+                            /*jqXHR.success(function(result, textStatus, jqXHR) {
                                 Backbone.trigger('uploadImage', result.files[0]);
-                                //console.log(result.files[0]);
+                                console.log(result.files[0]);
+                                console.log(result.id);
                                 $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
                                 setTimeout(function() {
                                     $('#progressbarext' + data.files[0].uploadID).remove();
                                 }, 1000);
-                            });
+                            });*/
                         });
                 },
 
@@ -127,6 +129,15 @@ define(['backbone',
                 },
 
                 done: function(e, data) {
+                    var result = data.result;
+                    var textStatus = data.textStatus;
+                    var jqXHR = data.jqXHR;
+                    console.log(data);
+                                Backbone.trigger('uploadImage', result);
+                                $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
+                                setTimeout(function() {
+                                    $('#progressbarext' + data.files[0].uploadID).remove();
+                                }, 1000);
                     console.log("File uploaded.");
                 }
             });

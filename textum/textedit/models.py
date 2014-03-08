@@ -26,8 +26,9 @@ class RTFFile(models.Model):
 
 
 class TImage(models.Model):
-    file = models.ImageField(upload_to="TImages")
-    slug = models.SlugField(max_length=50, blank=True)
+    file = models.ImageField(blank = True, null=True, upload_to="TImages")
+    title = models.SlugField(max_length=50, blank=True)
+    page_num = models.IntegerField()
 
     def __unicode__(self):
         return self.file.name
@@ -38,10 +39,11 @@ class TImage(models.Model):
         return ('upload-new', )
 
     def save(self, *args, **kwargs):
+        print "save"
         self.slug = self.file.name
         super(TImage, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         """delete -- Remove to leave file."""
-        self.file.delete(False)
+        #self.file.delete(False)
         super(TImage, self).delete(*args, **kwargs)

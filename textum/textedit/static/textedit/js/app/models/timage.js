@@ -8,8 +8,8 @@ define([
     var TImage = Backbone.Model.extend({
         defaults: {
             title: '',
-            url: '',
-            page_num: ''
+            file: '',
+            page_num: '',
         }
     });
 
