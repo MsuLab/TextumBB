@@ -1,5 +1,5 @@
 define(['backbone',
-    'views/popup',
+    'views/popup_upload_file',
     'webodf', // Init webodf viewer
 ], function(Backbone, Popup) {
 

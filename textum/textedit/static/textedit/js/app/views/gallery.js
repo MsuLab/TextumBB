@@ -1,7 +1,7 @@
 define(['backbone',
     'collections/timages',
     'views/imgview',
-    'views/popup-img',
+    'views/popup_upload_image',
     'jScrollPane' // Init scroll 
 ], function(Backbone, TImages, TImageView, Popup) {
 
