@@ -1,14 +1,9 @@
 define(['backbone',
-    'fileupload'
+    'fileupload',
+    'bootstrap-modal'
 ], function(Backbone) {
 
     var Popup = Backbone.View.extend({
-
-        el: '#popup',
-
-        events: {
-            'click #uploadFile-quit': 'closePopup'
-        },
 
         initialize: function() {
             console.log('new: Pop is created.');
@@ -16,43 +11,26 @@ define(['backbone',
         },
 
         closePopup: function() {
-            $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
-            $('#popup').toggleClass('hidden');
-            $('#uploadFile').fileupload('destroy');
+            $('#uploadFile-status').empty();
+            $('#popupUploadFile').modal('hide');
         },
 
         show: function(popup_type) {
             var self = this;
 
-            $.fn.alignCenter = function() {
-                //get margin left
-                var marginLeft = -$(this).outerWidth() / 2 + 'px';
-                //get margin top
-                var marginTop = -$(this).outerHeight() / 2 + 'px';
-                //return updated element
-                return $(this).css({
-                    'margin-left': marginLeft,
-                    'margin-top': marginTop
-                });
-            };
+            $('#popupUploadFile').modal('show');
+            $('#uploadFile-quit').click(function () {
+                self.closePopup();
+            });
 
-            $('#opaco')
-                .height($(document).height())
-                .toggleClass('hidden')
-                .fadeTo('slow', 0.7)
-                .click(function() {
-                    self.closePopup();
-                });
-            $('#popup')
-                .html($('#popup' + popup_type).html())
-                .toggleClass('hidden')
-                .alignCenter();
+            $('#progressbar-ext').attr("aria-valuenow", 0);
+            $('#progressbar').width('0');
+
             self.initFileupload();
         },
 
         initFileupload: function() {
             var self = this;
-            console.log($('#popupUploadFile form').attr('action'));
             $('#uploadFile').fileupload({
                 dataType: 'json',
                 context: $('#uploadFile')[0],
@@ -64,16 +42,13 @@ define(['backbone',
                         alert('Неверный формат файла.');
                     } else {
                         var jqXHR = data.submit();
-                        $('#uploadFile-status').text('Загружается...');
                         jqXHR.error(function(jqXHR, textStatus, errorThrown) {
                             if (errorThrown === 'abort') {
-                                $('#uploadFile-status').text('Загрузка прервана!');
+                                $('<p>Загрузка прервана!</p>').replaceAll('#progressbar-ext');
                             }
                         });
 
                         jqXHR.success(function(result, textStatus, jqXHR) {
-                            Backbone.trigger('uploadTextFile', result.files[0]);
-                            $('#uploadFile-status').text('Загрузка завершена.');
                         });
 
                         $('#uploadFile-cancel').click(function(e) {
@@ -82,7 +57,15 @@ define(['backbone',
                     }
                 },
 
+                progress: function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progressbar-ext').attr("aria-valuenow", progress);
+                    $('#progressbar').width(progress + '%');
+                },
+
                 done: function(e, data) {
+                    var result = data.result;
+                    Backbone.trigger('uploadTextFile', result.files[0]);
                     console.log("File uploaded.");
                     setTimeout(function() {self.closePopup();}, 1000);
                 }

@@ -31,8 +31,7 @@ class TImageResource(MultipartResource, ModelResource):
         authorization = Authorization()
 
     def obj_create(self, bundle, **kwargs): 
-        print "create"
-        bundle.data["page_num"] = 0
+        bundle.data["page_num"] = None
         return super(TImageResource, self).obj_create(bundle, **kwargs)
 
     def alter_list_data_to_serialize(self, request, data):

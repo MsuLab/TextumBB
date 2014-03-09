@@ -1,14 +1,11 @@
 define(['backbone',
-    'fileupload'
+    'fileupload',
+    'bootstrap-modal'
 ], function(Backbone) {
 
     var Popup = Backbone.View.extend({
 
         el: '#popup',
-
-        events: {
-            'click #uploadImg-quit': 'closePopup'
-        },
 
         initialize: function() {
             console.log('new: Pop is created.');
@@ -18,38 +15,15 @@ define(['backbone',
 
         closePopup: function() {
             $('#uploadImg table tbody').empty();
-            $('#opaco').toggleClass('hidden').removeAttr('style').unbind('click');
-            $('#popup').toggleClass('hidden');
-            //$('#uploadImg').fileupload('destroy');
+            $('#popupUploadImg').modal('hide');
         },
 
         show: function(popup_type) {
             var self = this;
-
-            $.fn.alignCenter = function() {
-                //get margin left
-                var marginLeft = -$(this).outerWidth() / 2 + 'px';
-                //get margin top
-                var marginTop = -$(this).outerHeight() / 2 + 'px';
-                //return updated element
-                return $(this).css({
-                    'margin-left': marginLeft,
-                    'margin-top': marginTop
-                });
-            };
-
-            $('#opaco')
-                .height($(document).height())
-                .toggleClass('hidden')
-                .fadeTo('slow', 0.7)
-                .click(function() {
-                    self.closePopup();
-                });
-            $('#popup')
-                .html($('#popup' + popup_type).html())
-                .toggleClass('hidden')
-                .alignCenter();
-
+            $('#popupUploadImg').modal('show');
+            $('#uploadImg-quit').click(function () {
+                self.closePopup();
+            });
             self.initImgupload();
 
         },
@@ -75,7 +49,7 @@ define(['backbone',
                                              text-overflow: ellipsis;" class="name">' + data.files[0].name + '</p>\
                                         </td>\
                                         <td style="width: 200px;">\
-                                            <div id="progressbarext' + data.files[0].uploadID + '"\
+                                            <div id="progressbar-ext' + data.files[0].uploadID + '"\
                                              class="progress progress-striped active" role="progressbar" \
                                              aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"\
                                              style="margin-top: 10px;">\
@@ -111,20 +85,12 @@ define(['backbone',
                             $('#cancelbutton' + data.files[0].uploadID).click(function (e) {
                                 jqXHR.abort();
                             });
-                            /*jqXHR.success(function(result, textStatus, jqXHR) {
-                                Backbone.trigger('uploadImage', result.files[0]);
-                                console.log(result.files[0]);
-                                console.log(result.id);
-                                $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
-                                setTimeout(function() {
-                                    $('#progressbarext' + data.files[0].uploadID).remove();
-                                }, 1000);
-                            });*/
                         });
                 },
 
                 progress: function(e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progressbar-ext' + data.files[0].uploadID).attr("aria-valuenow", progress);
                     $('#progressbar' + data.files[0].uploadID).width(progress + '%');
                 },
 
@@ -136,7 +102,7 @@ define(['backbone',
                                 Backbone.trigger('uploadImage', result);
                                 $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
                                 setTimeout(function() {
-                                    $('#progressbarext' + data.files[0].uploadID).remove();
+                                    $('#progressbar-ext' + data.files[0].uploadID).remove();
                                 }, 1000);
                     console.log("File uploaded.");
                 }

@@ -1,33 +1,32 @@
-<div id="popupUploadImg" class="hidden">
-    <form id="uploadImg" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload_image' %}">
-        {% csrf_token %}
-        <div class="row" id="popupButtons">
-            <div class="col-xs-12">
-                <span class="btn btn-success fileinput-button">
-                    <span>Добавить изображение</span>
-                    <input type="file" name="file" multiple>
-                </span>
-            <!--</div>
-            <div class="col-xs-4">-->
-                <span class="btn btn-success fileinput-button" id="uploadImg-uploadAll">
-                    <span>Загрузить все</span>
-                </span>
-            <!--</div>
-            <div class="col-xs-4">-->
-                <!--<span class="btn btn-warning fileinput-button" id="uploadImg-cancel">
-                    <span>Отменить загрузку</span>
-                </span>-->
+<div class="modal fade" id="popupUploadImg" tabindex="-1" role="dialog" aria-labelledby="popupUploadImgLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px;"> <!-- modal-lg не заработал -->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="uploadImg" method="post" enctype="multipart/form-data"> <!-- action="{% url 'textedit:upload_image' %}"-->
+                    {% csrf_token %}
+                    <div class="row" id="popupButtons">
+                        <div class="col-xs-12">
+                            <span class="btn btn-success fileinput-button">
+                                <span>Добавить изображение</span>
+                                <input type="file" name="file" multiple>
+                            </span>
+                            <span class="btn btn-success fileinput-button" id="uploadImg-uploadAll">
+                                <span>Загрузить все</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="max-height: 200px; overflow: auto; width: 700px; margin-bottom: 50px;">
+                        <table role="presentation" style="width: 650px; margin-left:30px;">
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <span class="btn btn-warning fileinput-button" id="uploadImg-quit">
+                        <span>Закрыть</span>
+                    </span>
+                </form>
             </div>
         </div>
-        <div style="max-height: 200px; overflow: auto; width: 700px; margin-bottom: 50px;">
-            <table role="presentation" style="width: 650px; margin-left:30px;">
-                <tbody>
-                    
-                </tbody>
-            </table>
-        </div>
-        <span class="btn btn-warning fileinput-button" id="uploadImg-quit">
-            <span>Отмена</span>
-        </span>
-    </form>
+    </div>
 </div>
