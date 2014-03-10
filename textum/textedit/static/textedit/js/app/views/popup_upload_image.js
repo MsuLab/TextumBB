@@ -24,15 +24,13 @@ define(['backbone',
             $('#uploadImg-quit').click(function () {
                 self.closePopup();
             });
-            self.initImgupload();
+            this.initImgupload();
 
         },
 
         initImgupload: function () {
             console.log('Image pop-up!');
-            var self = this;
             var index = 0;
-            //var RowTemplate = $(Template);
             $('#uploadImg').fileupload({
                 url: '/api/images/timage/',
                 dataType: 'json',
@@ -54,18 +52,28 @@ define(['backbone',
                         $('#row' + data.files[0].uploadID).remove();
                     });
                     $('#uploadbutton' + data.files[0].uploadID).click(function() {
-                            $('#uploadbutton' + data.files[0].uploadID).remove();
-                            $('#cancelbutton' + data.files[0].uploadID).text('Прервать загрузку');
-                            var jqXHR = data.submit();
-                            jqXHR.error(function(jqXHR, textStatus, errorThrown) {
-                                if (errorThrown === 'abort') {
-                                    alert('Загрузка прервана!');
-                                }
-                            });
-                            $('#cancelbutton' + data.files[0].uploadID).click(function (e) {
-                                jqXHR.abort();
-                            });
+                        $('#uploadbutton' + data.files[0].uploadID).remove();
+                        $('#cancelbutton' + data.files[0].uploadID).text('Прервать загрузку');
+                        var jqXHR = data.submit();
+                        $('#cancelbutton' + data.files[0].uploadID).click(function (e) {
+                            jqXHR.abort();
                         });
+                    });
+                },
+
+                done: function(e, data) {
+                    Backbone.trigger('uploadImage', data.result);
+                    $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
+                    setTimeout(function() {
+                        $('#progressbar-ext' + data.files[0].uploadID).remove();
+                    }, 1000);
+                    console.log("File uploaded.");
+                },
+
+                fail: function(e, data) {
+                    if (data.errorThrown === 'abort') {
+                        alert('Загрузка прервана!');
+                    }
                 },
 
                 progress: function(e, data) {
@@ -73,19 +81,6 @@ define(['backbone',
                     $('#progressbar-ext' + data.files[0].uploadID).attr("aria-valuenow", progress);
                     $('#progressbar' + data.files[0].uploadID).width(progress + '%');
                 },
-
-                done: function(e, data) {
-                    var result = data.result;
-                    var textStatus = data.textStatus;
-                    var jqXHR = data.jqXHR;
-                    console.log(data);
-                                Backbone.trigger('uploadImage', result);
-                                $('<p>Загрузка завершена.</p>').replaceAll('#cancelbutton' + data.files[0].uploadID);
-                                setTimeout(function() {
-                                    $('#progressbar-ext' + data.files[0].uploadID).remove();
-                                }, 1000);
-                    console.log("File uploaded.");
-                }
             });
             $('#uploadImg-uploadAll').click(function() {
                 console.log('UploadAll pressed');

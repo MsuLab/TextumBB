@@ -1,23 +1,19 @@
-<tr> <!--id="row' + data.files[0].uploadID + '"-->
-    <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-        <p class="name"></p> <!-- + data.files[0].name + -->
+<tr>
+    <td style="max-width: 200px;">
+        <p class="name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
     </td>
     <td style="width: 200px;">
         <div class="progress progress-striped active" role="progressbar" 
         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="margin-top: 10px;">
-        <!--id="progressbar-ext' + data.files[0].uploadID + '"-->
             <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-            <!--id="progressbar' + data.files[0].uploadID + '"-->
         </div>
     </td>
     <td style="width: 250px;">
         <span class="btn btn-success uploadImg-uploadThis">
-        <!--id="uploadbutton' + data.files[0].uploadID + '"-->
             <i class="glyphicon glyphicon-upload"></i>
             <span>Загрузить файл</span>
         </span>
         <span class="btn btn-warning">
-        <!--id="cancelbutton' + data.files[0].uploadID + '"-->
             <span>Отмена</span>
         </span>
     </td>

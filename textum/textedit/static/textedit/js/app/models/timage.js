@@ -2,7 +2,7 @@
 define([
     'underscore',
     'backbone'
-], function(_, Backbone) {
+], function (_, Backbone) {
     'use strict';
 
     var TImage = Backbone.Model.extend({
