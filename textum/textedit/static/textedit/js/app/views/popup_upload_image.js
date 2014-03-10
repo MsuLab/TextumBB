@@ -1,7 +1,8 @@
 define(['backbone',
+    'text!templates/popup_upload_image_table_row_template.html',
     'fileupload',
-    'bootstrap-modal'
-], function(Backbone) {
+    'bootstrap-modal',
+], function(Backbone, Template) {
 
     var Popup = Backbone.View.extend({
 
@@ -9,7 +10,6 @@ define(['backbone',
 
         initialize: function() {
             console.log('new: Pop is created.');
-
             this.show('UploadImg');
         },
 
@@ -32,44 +32,24 @@ define(['backbone',
             console.log('Image pop-up!');
             var self = this;
             var index = 0;
+            //var RowTemplate = $(Template);
             $('#uploadImg').fileupload({
                 url: '/api/images/timage/',
                 dataType: 'json',
                 context: $('#uploadImg'),
 
                 add: function(e, data) {
-                    //var jqXHR;
                     console.log("File added.");
                     data.files[0].uploadID = "uploadID" + index;
                     index = index + 1;
-                    data.context = $('<tr id="row' + data.files[0].uploadID + '">\
-                                        <td style="max-width: 200px; white-space: nowrap; overflow: hidden;\
-                                         text-overflow: ellipsis;">\
-                                         <p style="white-space: nowrap; overflow: hidden;\
-                                             text-overflow: ellipsis;" class="name">' + data.files[0].name + '</p>\
-                                        </td>\
-                                        <td style="width: 200px;">\
-                                            <div id="progressbar-ext' + data.files[0].uploadID + '"\
-                                             class="progress progress-striped active" role="progressbar" \
-                                             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"\
-                                             style="margin-top: 10px;">\
-                                                <div id="progressbar' + data.files[0].uploadID + 
-                                                '" class="progress-bar progress-bar-success" style="width:0%;"></div>\
-                                            </div>\
-                                        </td>\
-                                        <td style="width: 250px;">\
-                                            <span id="uploadbutton' + data.files[0].uploadID + 
-                                            '" class="btn btn-success uploadImg-uploadThis">\
-                                                <i class="glyphicon glyphicon-upload"></i>\
-                                                <span>Загрузить файл</span>\
-                                            </span>\
-                                            <span id="cancelbutton' + data.files[0].uploadID + 
-                                            '" class="btn btn-warning">\
-                                                <span>Отмена</span>\
-                                            </span>\
-                                        </td>\
-                                    </tr>')
-                        .appendTo($('#uploadImg table tbody'));
+                    var row = $(Template).clone();
+                    row.attr("id", "row" + data.files[0].uploadID);
+                    row.find('p.name').text(data.files[0].name);
+                    row.find('div.progress').attr('id', 'progressbar-ext' + data.files[0].uploadID);
+                    row.find('div.progress-bar').attr('id', 'progressbar' + data.files[0].uploadID);
+                    row.find('span.btn-success').attr('id', 'uploadbutton' + data.files[0].uploadID);
+                    row.find('span.btn-warning').attr('id', 'cancelbutton' + data.files[0].uploadID);
+					data.context = row.appendTo($('#uploadImg table tbody'));
                     $('#cancelbutton' + data.files[0].uploadID).click(function() {
                         $('#row' + data.files[0].uploadID).remove();
                     });

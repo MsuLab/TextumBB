@@ -22,7 +22,10 @@ require.config({
         'webodf': '../tmp/webodf',
         'jquery.ui.widget': '../bower_components/jquery-file-upload/js/vendor/jquery.ui.widget',
         'jquery.iframe-transport': '../bower_components/jquery-file-upload/js/jquery.iframe-transport',
-        'fileupload': '../bower_components/jquery-file-upload/js/jquery.fileupload'
+        'fileupload': '../bower_components/jquery-file-upload/js/jquery.fileupload',
+
+        //templates
+        'templates': '../../templates'
     },
     // Shim declaration
     'shim': {

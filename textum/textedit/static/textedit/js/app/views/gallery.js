@@ -24,6 +24,8 @@ define(['backbone',
                 mouseWheelSpeed: 50
             });
             this.imageCollection = new TImages();
+            //this.imageCollection.fetch();
+            //console.log(this.imageCollection);
             this.viewsArray = [];
             this.listenTo(Backbone, 'uploadImage', function (data) {
                 this.addToGallery(data);
@@ -41,10 +43,6 @@ define(['backbone',
 
         addToGallery: function(data) {
             console.log(data);
-            /*this.imageCollection.create({
-                id: data.id,
-                img_url: data.files[0].url
-            });*/
             this.imageCollection.create({
                 id: data.id,
                 file: data.file,

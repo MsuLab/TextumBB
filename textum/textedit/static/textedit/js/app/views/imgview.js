@@ -1,11 +1,11 @@
 define(['backbone',
-	'models/timage'
-], function(Backbone, TImage) {
+	'models/timage',
+	'text!templates/imgview_image_template.html',
+], function(Backbone, TImage, Template) {
 	var TImageView = Backbone.View.extend({
 		tagName: 'li',
 		className: 'image',
-		template: _.template('<span><%= page_num %></span>\
-			<img src="<%= file %>" alt="<%= title %>" />'),
+		template: _.template(Template),
 		events: {
 			'click': 'deleteImg',
 		},
