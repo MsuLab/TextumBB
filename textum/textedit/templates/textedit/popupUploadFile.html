@@ -1,0 +1,30 @@
+<div class="modal fade" id="popupUploadFile" tabindex="-1" role="dialog" aria-labelledby="popupUploadFileLabel" aria-hidden="true">
+    <div class="modal-dialog"> <!-- modal-lg не заработал style="width: 800px;" -->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="uploadFile" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
+                    {% csrf_token %}
+                    <!--<p>Загружаемый файл должен быть в одном из следующих форматов: .txt, .doc, .docx, .odt, .rtf</p>-->
+                    <div class="row" id="popupButtons">
+                        <div class="col-xs-12">
+                            <span class="btn btn-success fileinput-button">
+                                <span>Добавить файл</span>
+                                <input type="file" name="file">
+                            </span>
+                            <span class="btn btn-warning fileinput-button" id="uploadFile-cancel" style="display: none;">
+                                <span>Отменить загрузку</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="progressbar-ext" class="progress progress-striped active" role="progressbar" 
+                        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="margin-top: 10px; margin-bottom: 30px;">
+                        <div id="progressbar" class="progress-bar progress-bar-success" style="width:0%;"></div>
+                    </div>
+                    <span class="btn btn-warning fileinput-button" id="uploadFile-quit">
+                        <span>Отмена</span>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,8 @@
 {% block css_block %}
     <!-- bootstrap3-wysihtml5-bower -->
     <link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css' %}">
+    <!-- bootstrap - for file uploading -->
+    <link rel="stylesheet" href="{% static 'textedit/js/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
 
     <!-- jquery-file-upload -->
     <link rel="stylesheet" href="{% static 'textedit/js/bower_components/jquery-file-upload/css/jquery.fileupload.css' %}">
@@ -29,34 +31,8 @@
 {# Content Block #}
 {% block content_block %}
 
-    <div id="popup" class="hidden"></div>
-    <div id="opaco" class="hidden"></div>
-
-    <div id="popupUploadFile" class="hidden">
-        <form id="upload" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
-            {% csrf_token %}
-            <!--<p>Загружаемый файл должен быть в одном из следующих форматов: .txt, .doc, .docx, .odt, .rtf</p>-->
-            <div class="row" id="popupButtons">
-                <div class="col-xs-6">
-                    <span class="btn btn-success fileinput-button">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        <span>Добавить файл</span>
-                        <input type="file" name="file">
-                    </span>
-                </div>
-                <div class="col-xs-6">
-                    <span class="btn btn-warning fileinput-button" id="upload-cancel">
-                        <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span>Отменить загрузку</span>
-                    </span>
-                </div>
-            </div>
-            <span class="btn btn-warning fileinput-button" id="upload-quit">
-                <i class="glyphicon glyphicon-remove"></i>
-                <span>Отмена</span>
-            </span>
-        </form>
-    </div>
+    {% include 'textedit/popupUploadFile.html' %}
+    {% include 'textedit/popupUploadImage.html' %}
 
     <div class="row mainView">
         <div class="col-lg-6 leftView">
@@ -113,6 +89,7 @@
                 </nav> <!-- galleryMenu end -->
                 <div class="photoGallery">
                     <ul class="photoGrid">
+                            <!--<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
                             <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
                             <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
                             <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
@@ -147,12 +124,11 @@
                             <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
                             <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
                             <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
+                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>-->
                             
                     </ul>
                 </div> <!-- photoGallery end -->
-                <div class="pages">
+                <!--<div class="pages">
                     <ul class="pagination">
                         <li><a href="#">&laquo;</a></li>
                         <li><a href="#">1</a></li>
@@ -162,7 +138,7 @@
                         <li><a href="#">5</a></li>
                         <li><a href="#">&raquo;</a></li>
                     </ul>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

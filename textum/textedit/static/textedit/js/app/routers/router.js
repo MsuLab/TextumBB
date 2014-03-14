@@ -2,7 +2,7 @@
 define([
     'jquery', 'backbone', 'views/app',
     'bootstrap' // Init Bootstrap js lib
-], function($, Backbone, AppView) {
+], function ($, Backbone, AppView) {
     'use strict';
 
 
@@ -19,24 +19,24 @@ define([
             ":route/:action": "loadView",
             // <a href="http://example.com/#/dashboard/graph">Load Route/Action View</a>
         },
-        initialize: function(options) {
+        initialize: function (options) {
             console.log('Controller is created!');
         },
 
-        setDefault: function() {
+        setDefault: function () {
             console.log('--> Welcome to Textum.');
             new AppView();
         },
 
-        getPost: function(id) {
+        getPost: function (id) {
             console.log(id);
         },
 
-        downloadFile: function(path) {
+        downloadFile: function (path) {
             console.log(path);
         },
 
-        loadView: function(route, action) {
+        loadView: function (route, action) {
             console.log(route + "_" + action);
         },
 

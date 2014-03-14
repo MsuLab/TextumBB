@@ -1,7 +1,8 @@
 define(['backbone',
-    'collections/timages',
-    'jScrollPane' // Init scroll 
-], function(Backbone, TImages) {
+    'views/popup_images_loader',
+    'views/image_collection_view',
+    'jScrollPane', // Init scroll 
+], function (Backbone, Popup, TImagesView) {
 
     var Gallery = Backbone.View.extend({
 
@@ -11,7 +12,7 @@ define(['backbone',
             'click .addImage': 'addTImage',
         },
 
-        initialize: function() {
+        initialize: function () {
             console.log('new: Gallery is created.');
 
             // Init scroll
@@ -21,11 +22,26 @@ define(['backbone',
                 hideFocus: true,
                 mouseWheelSpeed: 50
             });
-
+            
+            this.imageCollection = new TImagesView();
+            this.listenTo(Backbone, 'uploadImage', function (data) {
+                this.imageCollection.collection.create({
+                    id: data.id,
+                    file: data.file,
+                    page_num: data.page_num,
+                    title: data.title,
+                });
+            });
         },
-        addTImage: function() {
-            console.log("New TImage!")
-        }
+
+        addTImage: function () {
+            if (this.popup == undefined) {
+                this.popup = new Popup;
+            } else {
+                this.popup.show('UploadImg');
+            }
+        },
+
     });
 
     return Gallery;

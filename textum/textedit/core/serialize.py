@@ -30,6 +30,5 @@ def serialize(instance, file_attr='odt_file'):
         'url': obj.url,
         'name': order_name(obj.name),
         'type': mimetypes.guess_type(obj.path)[0] or 'application/rtf',
-        'thumbnailUrl': obj.url,
         'size': obj.size,
     }
