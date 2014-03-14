@@ -34,38 +34,43 @@ define(['backbone',
             
             $('#uploadFile').fileupload({
                 dataType: 'json',
-                context: $('#uploadFile')[0]
-            })
-            .bind('fileuploadadd', function (e, data) {
-                console.log("File added.");
+                context: $('#uploadFile')[0],
 
-                if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
-                    alert('Неверный формат файла.');
-                } else {
-                    var jqXHR = data.submit();
-                    $('#uploadFile-cancel').click(function (e) {
-                        jqXHR.abort();
-                    });
+                add: function(e, data) {
+                    console.log("File added.");
+
+                    if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
+                        alert('Неверный формат файла.');
+                    } else {
+                        var jqXHR = data.submit();
+                        jqXHR.error(function(jqXHR, textStatus, errorThrown) {
+                            if (errorThrown === 'abort') {
+                                $('<p>Загрузка прервана!</p>').replaceAll('#progressbar-ext');
+                            }
+                        });
+
+                        jqXHR.success(function(result, textStatus, jqXHR) {
+                        });
+
+                        $('#uploadFile-cancel').click(function(e) {
+                            jqXHR.abort();
+                        });
+                    }
+                },
+
+                progress: function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progressbar-ext').attr("aria-valuenow", progress);
+                    $('#progressbar').width(progress + '%');
+                },
+
+                done: function(e, data) {
+                    var result = data.result;
+                    Backbone.trigger('uploadTextFile', result.files[0]);
+                    console.log("File uploaded.");
+                    setTimeout(function() {self.closePopup();}, 1000);
                 }
-            })
-            .bind('fileuploaddone', function (e, data) {
-                console.log("Done!");
-                var result = data.result;
-
-                Backbone.trigger('uploadTextFile', result.files[0]);
-
-                setTimeout(function () {self.closePopup();}, 1000);
-            })
-            .bind('fileuploadfail', function (e, data) {
-                if (errorThrown === 'abort') {
-                    $('<p>Загрузка прервана!</p>').replaceAll('#progressbar-ext');
-                }
-            })
-            .bind('fileuploadprogress', function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progressbar-ext').attr("aria-valuenow", progress);
-                $('#progressbar').width(progress + '%');
-            })
+            });
         },
 
     });
