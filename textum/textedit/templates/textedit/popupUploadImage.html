@@ -2,7 +2,7 @@
     <div class="modal-dialog" style="width: 800px;"> <!-- modal-lg не заработал -->
         <div class="modal-content">
             <div class="modal-body">
-                <form id="uploadImg" method="post" enctype="multipart/form-data"> <!-- action="{% url 'textedit:upload_image' %}"-->
+                <form id="uploadImg" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row" id="popupButtons">
                         <div class="col-xs-12">

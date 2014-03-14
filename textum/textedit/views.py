@@ -41,22 +41,6 @@ class RTFCreateView(CreateView):
         return HttpResponse(content=data, status=400, content_type='application/json')
         
 
-class TImageCreateView(CreateView):
-    model = TImage
-
-    def form_valid(self, form):
-        self.object = form.save()
-        files = [serialize(self.object)]
-        data = {'files': files, 'id': self.object.id}
-        response = JSONResponse(data, mimetype=response_mimetype(self.request))
-        response['Content-Disposition'] = 'inline; filename=files.json'
-        return response
-
-    def form_invalid(self, form):
-        data = json.dumps(form.errors)
-        return HttpResponse(content=data, status=400, content_type='application/json')
-
-
 def fullView(request):
     return render_to_response('textedit/fullView.html', locals(), RequestContext(request))
   

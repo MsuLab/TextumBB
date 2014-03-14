@@ -1,12 +1,8 @@
-# myapp/api.py
 from tastypie.resources import ModelResource
 from tastypie.authorization import Authorization
 from tastypie import fields
 
 from textum.textedit.models import TImage
-
-
-# https://stackoverflow.com/questions/15263964/django-tasypie-image-upload-example-with-jquery
 
 
 class MultipartResource(object):
@@ -23,8 +19,8 @@ class MultipartResource(object):
 
 
 class TImageResource(MultipartResource, ModelResource):
-
     file = fields.FileField(attribute="file", null=True, blank=True)
+
     class Meta:
         always_return_data=True
         queryset = TImage.objects.all()

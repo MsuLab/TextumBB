@@ -1,17 +1,17 @@
 define(['backbone',
-    'views/popup_upload_file',
+    'views/popup_file_loader',
     'webodf', // Init webodf viewer
-], function(Backbone, Popup) {
+], function (Backbone, Popup) {
 
     var Editor = Backbone.View.extend({
 
         el: '.leftView',
 
         events: {
-            'click #uploadButton': 'openPopup',
+            'click #uploadButton': 'openFileLoader',
         },
 
-        initialize: function() {
+        initialize: function () {
             console.log('new: Editor is created.');
 
             this.$webodf_element = this.$('#webodf-textarea');
@@ -23,18 +23,20 @@ define(['backbone',
             } else {
                 console.log("No Text Editor specified.")
             };
-            this.listenTo(Backbone, 'uploadTextFile', function(data) {
+            this.listenTo(Backbone, 'uploadTextFile', function (data) {
                 this.updateTextFile(data);
             }, this);
         },
-        openPopup: function() {
+
+        openFileLoader: function () {
             if (this.popup == undefined) {
                 this.popup = new Popup({type:'UploadFile'});
             } else {
                 this.popup.show('UploadFile');
             }
         },
-        updateTextFile: function(file_data) {
+
+        updateTextFile: function (file_data) {
             if (this.$webodf_element.length) {
                 this.$odfcanvas.load(file_data.url);
             }

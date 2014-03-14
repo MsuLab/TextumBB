@@ -1,5 +1,5 @@
 define(['backbone',
-    'views/popup_upload_image',
+    'views/popup_images_loader',
     'views/image_collection_view',
     'jScrollPane', // Init scroll 
 ], function (Backbone, Popup, TImagesView) {
@@ -12,7 +12,7 @@ define(['backbone',
             'click .addImage': 'addTImage',
         },
 
-        initialize: function() {
+        initialize: function () {
             console.log('new: Gallery is created.');
 
             // Init scroll
@@ -22,6 +22,7 @@ define(['backbone',
                 hideFocus: true,
                 mouseWheelSpeed: 50
             });
+            
             this.imageCollection = new TImagesView();
             this.listenTo(Backbone, 'uploadImage', function (data) {
                 this.imageCollection.collection.create({
@@ -33,7 +34,7 @@ define(['backbone',
             });
         },
 
-        addTImage: function() {
+        addTImage: function () {
             if (this.popup == undefined) {
                 this.popup = new Popup;
             } else {

@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class RTFFile(models.Model):
     file = models.FileField(upload_to="RTF")
@@ -41,7 +40,3 @@ class TImage(models.Model):
         self.title = self.file.name
         super(TImage, self).save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
-        """delete -- Remove to leave file."""
-        #self.file.delete(save = False)
-        super(TImage, self).delete(*args, **kwargs)

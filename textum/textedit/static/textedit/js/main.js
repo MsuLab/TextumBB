@@ -25,7 +25,7 @@ require.config({
         'fileupload': '../bower_components/jquery-file-upload/js/jquery.fileupload',
 
         //templates
-        'templates': '../../templates'
+        'templates': 'templates'
     },
     // Shim declaration
     'shim': {
