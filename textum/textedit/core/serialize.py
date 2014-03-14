@@ -18,7 +18,7 @@ def order_name(name):
     return name[:10] + "..." + name[-7:]
 
 
-def serialize(instance, file_attr='file'):
+def serialize(instance, file_attr='odt_file'):
     """serialize -- Serialize a Picture instance into a dict.
 
     instance -- Picture instance

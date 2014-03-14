@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from .models import RTFFile, TImage
 from .core.response import JSONResponse, response_mimetype
 from .core.serialize import serialize
-
+from .core.converter.engine import convert_to_odt
 
 
 class TextEdit(generic.View):
@@ -29,7 +29,10 @@ class RTFCreateView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
+        self.object.odt_file = convert_to_odt(self.object.file)
+        self.object.save()
         files = [serialize(self.object)]
+
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'

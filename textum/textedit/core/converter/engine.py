@@ -3,10 +3,18 @@
 
 import os
 import codecs
+import sys
+
+from django.core.files import File
 from bs4 import BeautifulSoup
 
-
 import unoconv.unoconv as unoconv
+
+
+def convert_to_odt(file):
+
+    odt_file_name = convert("odt", file.path)
+    return File(open(odt_file_name, 'r'))
 
 
 def convert(typ, filename):
@@ -16,7 +24,7 @@ def convert(typ, filename):
     Returns converted file name.
     """
 
-    converted_file = "%s.%s" % (os.path.splitext(filename)[0],typ) # ToDo(kopbob): Bad way
+    converted_file = "%s.%s" % (os.path.splitext(filename)[0], typ) # ToDo(kopbob): Bad way
 
     try:
         with open(converted_file):
@@ -62,4 +70,4 @@ def get_html(filename):
 
     return prepare_html(converted_file)
 
-print get_html("testdoc.odt")
+# print get_html("testdoc.odt")

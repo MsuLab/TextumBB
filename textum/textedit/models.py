@@ -1,9 +1,8 @@
 from django.db import models
 
-# Create your models here.
-
 class RTFFile(models.Model):
     file = models.FileField(upload_to="RTF")
+    odt_file = models.FileField(upload_to="ODT", blank=True, null=True)
     slug = models.SlugField(max_length=50, blank=True)
 
     def __unicode__(self):
@@ -11,8 +10,8 @@ class RTFFile(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        print self
         return ('upload-new', )
+
 
     def save(self, *args, **kwargs):
         self.slug = self.file.name
@@ -34,7 +33,6 @@ class TImage(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        print self
         return ('upload-new', )
 
     def save(self, *args, **kwargs):
