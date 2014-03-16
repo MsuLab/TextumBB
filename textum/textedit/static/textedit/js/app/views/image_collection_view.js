@@ -15,14 +15,25 @@ define(['underscore',
 			this.render();
 
             this.collection.on("add", this.renderImage, this);
-            //this.collection.on("remove", this.removeImage, this);
             this.collection.on("reset", this.render, this);
             this.collection.on("change", this.change, this);
             var self = this;
-            /*$('').click(function (){
-                $('#' + self.selected).css('border-color', 'black');
+            this.selected = undefined;
+            this.selectedModel = undefined;
+            $('html').click(function (){
+                $('#' + self.selected).removeClass('image-selected');
                 self.selected = undefined;
-            });*/
+                self.selectedModel = undefined;
+            });
+            $('.full-view-switch').click(function () {
+                Backbone.trigger('full-view');
+                $('#' + self.selected).removeClass('image-selected');
+                self.selected = undefined;
+                self.$el.empty();
+                self.renderImage(self.collection.get(self.selectedModel));
+                self.selectedModel = undefined;
+                $('.image').addClass('fullImage').removeClass('image');
+            });
 		},
 
         render: function () {
@@ -31,12 +42,15 @@ define(['underscore',
             this.collection.each(function (image) {
             	self.renderImage(image);
             });
-            /*$('.image').click(function () {
-                $('#' + self.selected).css('border-color', 'black');
+            $('.image').click(function (event) {
+                $('#' + self.selected).removeClass('image-selected');
                 self.selected = this.id;
-                console.log($('#' + self.selected));
-                $('#' + self.selected).css('border-color', 'blue');
-            });*/
+                var tmp = this.id;
+                self.selectedModel = tmp.replace('image', '');
+                //console.log(self.selectedModel);
+                $('#' + self.selected).addClass('image-selected');
+                event.stopPropagation();
+            });
         },
 
         renderImage: function (image) {
@@ -81,7 +95,6 @@ define(['underscore',
                 });
             });
         },
-
 	});
 	return imageCollection;
 });

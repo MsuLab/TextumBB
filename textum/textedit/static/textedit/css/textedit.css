@@ -105,11 +105,6 @@
 
 /* Full */
 
-.fullImage {
-    max-width:100%;
-
-}
-
 /* Grid */
 .photoGrid{
     width: 93%;
@@ -125,14 +120,27 @@
 
 .photoGrid li {
     display: inline;
-    width: 195px;
-    height: 140px;
+    /*width: 195px;
+    height: 140px;*/
     float: left;
     border: 1px solid #000;
     margin: 5px;
     list-style: none;
     position: relative;
     text-align: center;
+
+}
+
+.photoGrid .image {
+    /*display: inline;*/
+    width: 195px;
+    height: 140px;
+    /*float: left;
+    border: 1px solid #000;
+    margin: 5px;
+    list-style: none;
+    position: relative;
+    text-align: center;*/
 
 }
 
@@ -166,8 +174,22 @@
     width: 50px;
 }
 
-.photoGrid li:hover {
+.photoGrid .image:hover {
     border: 3px solid #000;
+}
+
+.photoGrid .image-selected {
+    border: 3px solid blue;
+}
+
+.photoGrid .image-selected:hover {
+    border: 3px solid blue;
+}
+
+.photoGrid .fullImage {
+    max-width: 95%;
+    
+    /*width: 100%;*/
 }
 
 .galleryMenu {

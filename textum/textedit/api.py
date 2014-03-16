@@ -31,7 +31,6 @@ class TImageResource(MultipartResource, ModelResource):
         return super(TImageResource, self).obj_create(bundle, **kwargs)
 
     def obj_update(self, bundle, **kwargs):
-        print bundle.data
         if bundle.data["page_num"] == '?':
             bundle.data["page_num"] = None
         return super(TImageResource, self).obj_update(bundle, **kwargs)

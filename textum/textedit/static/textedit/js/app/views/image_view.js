@@ -6,12 +6,10 @@ define(['backbone',
 		tagName: 'li',
 		className: 'image',
 		template: _.template(Template),
-		/*events: {
-			'click': 'deleteImg',
-		},*/
+
 		initialize: function() {
 			this.listenTo(this.model, "change", this.render);
-			//$('#pageNumInput' + this.model.id).off();
+			this.listenTo(Backbone, 'full-view', this.remove); // only one image should be shown in full view mode
 		},
 		render: function () {
 			this.$el.html(this.template(this.model.attributes)).attr('id', 'image' + this.model.id);
