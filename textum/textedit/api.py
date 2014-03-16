@@ -31,4 +31,7 @@ class TImageResource(MultipartResource, ModelResource):
         return super(TImageResource, self).obj_create(bundle, **kwargs)
 
     def alter_list_data_to_serialize(self, request, data):
+        for bundle in data["objects"]:
+            if bundle.data["page_num"] is None:
+                bundle.data["page_num"] = '?';
         return data["objects"]

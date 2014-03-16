@@ -28,7 +28,7 @@ class RTFFile(models.Model):
 class TImage(models.Model):
     file = models.ImageField(upload_to="TImages")
     title = models.SlugField(max_length=50, blank=True)
-    page_num = models.IntegerField(max_length=10, null=True) # 10 characters for page number?
+    page_num = models.IntegerField(null=True)
 
     def __unicode__(self):
         return self.file.name

@@ -87,10 +87,10 @@ a. Install virtualenv
 
 b. Setup environment
     $ sudo pip install --upgrade -r /vagrant/requirements.txt
-
-c. Run development server
     $ git submodule init
     $ git submodule update
+
+c. Run development server
     $ python manage.py runserver 0.0.0.0:8000
 
 

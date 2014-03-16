@@ -14,7 +14,7 @@ define(['backbone',
 			//$('#pageNumInput' + this.model.id).off();
 		},
 		render: function () {
-			this.$el.html(this.template(this.model.attributes));
+			this.$el.html(this.template(this.model.attributes)).attr('id', 'image' + this.model.id);
 			return this;
 		},
 		deleteImg: function () {

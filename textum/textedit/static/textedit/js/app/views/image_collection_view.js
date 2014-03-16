@@ -18,6 +18,10 @@ define(['underscore',
             //this.collection.on("remove", this.removeImage, this);
             this.collection.on("reset", this.render, this);
             this.collection.on("change", this.change, this);
+            /*var self = this;
+            $('html').click(function (){
+                self.$selected = undefined;
+            });*/
 		},
 
         render: function () {
@@ -47,6 +51,7 @@ define(['underscore',
                 }
                 return false;
             }); /* Something that looks very promising */
+
         },
 
         change: function () {
