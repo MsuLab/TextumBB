@@ -22,6 +22,7 @@ define(['underscore',
 
         render: function () {
             var self = this;
+            this.$el.empty();
             this.collection.each(function (image) {
             	self.renderImage(image);
             });
@@ -35,8 +36,15 @@ define(['underscore',
             var inputForm = $('#pageNumInput' + image.id);
             inputForm.submit(function (e) {
                 var inputField = $(inputForm).find('input');
-                image.save('page_num', $(inputField).val());
-                $(inputField).val('').blur();
+                var page_num = $(inputField).val();
+                var n = ~~Number(page_num);
+                if (String(n) === page_num && n > 0) {
+                    image.save('page_num', n);
+                    $(inputField).val('').blur();
+                }
+                else {
+                    $(inputField).val('');
+                }
                 return false;
             }); /* Something that looks very promising */
         },
@@ -48,8 +56,15 @@ define(['underscore',
                 $(inputForm).off();
                 $(inputForm).submit(function (e) {
                     var inputField = $(inputForm).find('input');
-                    image.save('page_num', $(inputField).val());
-                    $(inputField).val('').blur();
+                    var page_num = $(inputField).val();
+                    var n = ~~Number(page_num);
+                    if (String(n) === page_num && n > 0) {
+                        image.save('page_num', n);
+                        $(inputField).val('').blur();
+                    }
+                    else {
+                        $(inputField).val('');
+                    }
                     return false;
                 });
             });
