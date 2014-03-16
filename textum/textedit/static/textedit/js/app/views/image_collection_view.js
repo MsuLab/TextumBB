@@ -18,9 +18,10 @@ define(['underscore',
             //this.collection.on("remove", this.removeImage, this);
             this.collection.on("reset", this.render, this);
             this.collection.on("change", this.change, this);
-            /*var self = this;
-            $('html').click(function (){
-                self.$selected = undefined;
+            var self = this;
+            /*$('').click(function (){
+                $('#' + self.selected).css('border-color', 'black');
+                self.selected = undefined;
             });*/
 		},
 
@@ -30,6 +31,12 @@ define(['underscore',
             this.collection.each(function (image) {
             	self.renderImage(image);
             });
+            /*$('.image').click(function () {
+                $('#' + self.selected).css('border-color', 'black');
+                self.selected = this.id;
+                console.log($('#' + self.selected));
+                $('#' + self.selected).css('border-color', 'blue');
+            });*/
         },
 
         renderImage: function (image) {

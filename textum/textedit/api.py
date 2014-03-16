@@ -30,8 +30,19 @@ class TImageResource(MultipartResource, ModelResource):
         bundle.data["page_num"] = None
         return super(TImageResource, self).obj_create(bundle, **kwargs)
 
+    def obj_update(self, bundle, **kwargs):
+        print bundle.data
+        if bundle.data["page_num"] == '?':
+            bundle.data["page_num"] = None
+        return super(TImageResource, self).obj_update(bundle, **kwargs)
+
+    def alter_detail_data_to_serialize(self, request, data):
+        if data.data["page_num"] is None:
+            data.data["page_num"] = '?'
+        return data
+
     def alter_list_data_to_serialize(self, request, data):
         for bundle in data["objects"]:
             if bundle.data["page_num"] is None:
-                bundle.data["page_num"] = '?';
+                bundle.data["page_num"] = '?'
         return data["objects"]
