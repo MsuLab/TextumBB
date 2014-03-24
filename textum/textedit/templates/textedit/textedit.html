@@ -66,10 +66,10 @@
                 <h3>Рукопись</h3>
                 <hr />
                 <nav class="galleryMenu">
-                    <!--<ul>
+                    <ul id="normal">
                         <li>
                             <span class="btn btn-sm btn-info full-view-switch" title="Режим просмотра изображения">
-                                <span class="glyphicon glyphicon-th-large"></span>
+                                <span class="glyphicon glyphicon-th-large"></span><!--href="{% url 'textedit:fullView' %}"-->
                             </span>
                         </li>
                         <li>
@@ -83,7 +83,30 @@
                                 <span class="glyphicon glyphicon-plus glyphicon-white"></span>
                             </span>
                         </li>
-                    </ul> -->
+                    </ul>
+
+                    <ul id="full-view" class="hidden">
+                        <li>
+                            <span class="btn btn-sm btn-info full-view-switch" title="Вернуться в режим галлереи">
+                                <span class="glyphicon glyphicon-stop"></span>
+                            </span>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-warning">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </a>
+                        </li>
+                        <!--<li>
+                            <a href="#" class="btn btn-sm btn-success">
+                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            </a>
+                        </li>--> <!-- Do we need an image adding button in fullview mode? -->
+                    </ul>
 
                 </nav> <!-- galleryMenu end -->
                 <div class="photoGallery">

@@ -10,7 +10,9 @@ define(['backbone',
 		initialize: function() {
 			this.listenTo(this.model, "change", this.render);
 			this.listenTo(Backbone, 'full-view', this.remove); // only one image should be shown in full view mode
+			this.listenTo(Backbone, 'normal', this.remove);
 		},
+
 		render: function () {
 			this.$el.html(this.template(this.model.attributes)).attr('id', 'image' + this.model.id);
             var inputForm = this.$el.find('form');
