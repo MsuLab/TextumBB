@@ -66,7 +66,7 @@
                 <h3>Рукопись</h3>
                 <hr />
                 <nav class="galleryMenu">
-                    <ul id="normal">
+                    <ul id="normal-view-menu">
                         <li>
                             <span class="btn btn-sm btn-info full-view-switch" title="Режим просмотра изображения">
                                 <span class="glyphicon glyphicon-th-large"></span><!--href="{% url 'textedit:fullView' %}"-->
@@ -85,9 +85,9 @@
                         </li>
                     </ul>
 
-                    <ul id="full-view" class="hidden">
+                    <ul id="full-view-menu" class="hidden">
                         <li>
-                            <span class="btn btn-sm btn-info full-view-switch" title="Вернуться в режим галлереи">
+                            <span class="btn btn-sm btn-info normal-view-switch" title="Вернуться в режим галлереи">
                                 <span class="glyphicon glyphicon-stop"></span>
                             </span>
                         </li>
@@ -161,6 +161,12 @@
                         <li><a href="#">&raquo;</a></li>
                     </ul>
                 </div>-->
+                <form id="search-page">
+                    <input type="text" placeholder="Номер страницы&hellip;"/>
+                    <span class="btn btn-small btn-primary" title="Найти и отобразить страницу">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                </form>
             </div>
         </div>
     </div>
