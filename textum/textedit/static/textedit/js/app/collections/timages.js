@@ -15,6 +15,7 @@ define([
 
                 comparator: function (timage) {
                         return timage.get('order');
+                        //return timage.get('page_num');
                 }
         });
 

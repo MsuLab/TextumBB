@@ -14,25 +14,30 @@ define(['backbone',
 		},
 
 		render: function () {
+            if (this.model.attributes.page_num == 0) {
+            	this.model.attributes.show_pg = '?'
+            }
+            else if (this.model.attributes.page_num % 1 === 0) {
+            	this.model.attributes.show_pg = this.model.attributes.page_num.toString();
+            }
+            else {
+            	var z = this.model.attributes.page_num - 0.5;
+            	this.model.attributes.show_pg = z.toString() + ' об';
+            }
 			this.$el.html(this.template(this.model.attributes)).attr('id', 'image' + this.model.id);
             var inputForm = this.$el.find('form');
             inputForm.off();
             var self = this;
             inputForm.submit(function (e) {
                 var inputField = $(inputForm).find('input');
-                var page_num = $(inputField).val();
-                var n = ~~Number(page_num);
-                if (String(n) === page_num && n > 0) {
-                    self.model.save('page_num', n);
-                    $(inputField).val('').blur();
-                }
-                else {
-                    $(inputField).val('');
-                }
+                var pg_num = $(inputField).val();
+                self.model.save('page_num', pg_num.replace('об', 'turn').replace(/[а-я, А-Я]/g, ''));
+                $(inputField).val('').blur();                
                 return false;
             });
 			return this;
 		},
+
 		deleteImg: function () {
 			this.model.destroy();
 			this.remove();

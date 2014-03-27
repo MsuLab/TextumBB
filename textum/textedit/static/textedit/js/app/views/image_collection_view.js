@@ -36,13 +36,7 @@ define(['underscore',
             pageSearchForm.submit(function (e) {
                 var page = $(inputField).val();
                 $(inputField).val('').blur();
-                var n = ~~Number(page);
-                if (String(n) === page && n > 0) {
-                    self.selectedModel = self.collection.findWhere({page_num: n});
-                }
-                else {
-                    self.selectedModel = self.collection.findWhere({page_num: page});
-                }
+                self.selectedModel = self.collection.findWhere({show_pg: page});
                 if (self.selectedModel != undefined) {
                     self.selectedModel = self.selectedModel.id;
                     self.selected = '#image' + self.selectedModel;
@@ -51,6 +45,7 @@ define(['underscore',
                     self.selectedModel = undefined;
                     self.selected = undefined;
                 }
+
                 self.switch2Full();
                 return false;
             });
