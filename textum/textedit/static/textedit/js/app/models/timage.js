@@ -10,7 +10,7 @@ define([
             title: '',
             file: '',
             page_num: '',
-            show_pg: '',
+            //show_pg: '',
         }
     });
 

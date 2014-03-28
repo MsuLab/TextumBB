@@ -1,7 +1,8 @@
 define(['backbone',
 	'models/timage',
 	'text!templates/imgview_image_template.html',
-], function (Backbone, TImage, Template) {
+	'views/page_decoder',
+], function (Backbone, TImage, Template, code) {
 	var TImageView = Backbone.View.extend({
 		tagName: 'li',
 		className: 'image',
@@ -14,24 +15,15 @@ define(['backbone',
 		},
 
 		render: function () {
-            if (this.model.attributes.page_num == 0) {
-            	this.model.attributes.show_pg = '?'
-            }
-            else if (this.model.attributes.page_num % 1 === 0) {
-            	this.model.attributes.show_pg = this.model.attributes.page_num.toString();
-            }
-            else {
-            	var z = this.model.attributes.page_num - 0.5;
-            	this.model.attributes.show_pg = z.toString() + ' об';
-            }
-			this.$el.html(this.template(this.model.attributes)).attr('id', 'image' + this.model.id);
+			this.$el.html(this.template([this.model.attributes, code])).attr('id', 'image' + this.model.id);
             var inputForm = this.$el.find('form');
             inputForm.off();
             var self = this;
-            inputForm.submit(function (e) {
+			inputForm.submit(function (e) {
                 var inputField = $(inputForm).find('input');
                 var pg_num = $(inputField).val();
-                self.model.save('page_num', pg_num.replace('об', 'turn').replace(/[а-я, А-Я]/g, ''));
+                console.log(code.decode(pg_num));
+                self.model.save({page_num: code.decode(pg_num)}, {wait: true});
                 $(inputField).val('').blur();                
                 return false;
             });

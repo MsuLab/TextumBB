@@ -32,49 +32,19 @@ class TImageResource(MultipartResource, ModelResource):
     def obj_create(self, bundle, **kwargs):
         print bundle.data
         if not hasattr(bundle.data, "page_num"):
-            bundle.data["page_num"] = None
-        re_page = re.compile("^[1-9]\d*$")
-        re_page_turn = re.compile("^[1-9]\d* ?turn$")
-        re_page_unknown = re.compile("^\?$")
-        s = str(bundle.data["page_num"])
-        if re_page.match(s):
-            bundle.data["page_num"] = int(s);
-        else:
-            if re_page_turn.match(s):
-                p = re.search('^[1-9]\d*', s)
-                bundle.data["page_num"] = int(p.group()) + 0.5
-            else:
-                if re_page_unknown.match(s):
-                    bundle.data["page_num"] = 0
-                else:
-                    bundle.data["page_num"] = None
+            bundle.data["page_num"] = 0
+        if bundle.data["page_num"] == None:
+            bundle.data["page_num"] = 0;
         return super(TImageResource, self).obj_create(bundle, **kwargs)
 
     def obj_update(self, bundle, **kwargs):
-        re_page = re.compile("^[1-9]\d*$")
-        re_page_turn = re.compile("^[1-9]\d* ?turn$")
-        re_page_unknown = re.compile("^\?$")
-        s = str(bundle.data["page_num"])
-        if re_page.match(s):
-            bundle.data["page_num"] = int(s);
-        else:
-            if re_page_turn.match(s):
-                p = re.search('^[1-9]\d*', s)
-                bundle.data["page_num"] = int(p.group()) + 0.5
-            else:
-                if re_page_unknown.match(s):
-                    bundle.data["page_num"] = 0
-                else:
-                    del bundle.data["page_num"]
+        print bundle.data
+        if bundle.data["page_num"] == None:
+            del bundle.data["page_num"]
         return super(TImageResource, self).obj_update(bundle, **kwargs)
 
     def alter_detail_data_to_serialize(self, request, data):
-        if data.data["page_num"] is None:
-            data.data["page_num"] = '?'
         return data
 
     def alter_list_data_to_serialize(self, request, data):
-        for bundle in data["objects"]:
-            if bundle.data["page_num"] is None:
-                bundle.data["page_num"] = '?'
         return data["objects"]

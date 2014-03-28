@@ -3,7 +3,8 @@ define(['underscore',
     'models/timage',
     'collections/timages',
     'views/image_view',
-], function (_, Backbone, TImage, TImages, TImageView) {
+    'views/page_decoder',
+], function (_, Backbone, TImage, TImages, TImageView, code) {
 	var imageCollection = Backbone.View.extend({
 		el: '.photoGrid',
 
@@ -36,7 +37,7 @@ define(['underscore',
             pageSearchForm.submit(function (e) {
                 var page = $(inputField).val();
                 $(inputField).val('').blur();
-                self.selectedModel = self.collection.findWhere({show_pg: page});
+                self.selectedModel = self.collection.findWhere({page_num: code.decode(page)});
                 if (self.selectedModel != undefined) {
                     self.selectedModel = self.selectedModel.id;
                     self.selected = '#image' + self.selectedModel;
