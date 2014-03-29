@@ -169,3 +169,5 @@ LOGGING = {
         },
     }
 }
+
+TASTYPIE_ALLOW_MISSING_SLASH = True

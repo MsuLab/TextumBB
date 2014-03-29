@@ -9,9 +9,10 @@ define(['backbone',
 		template: _.template(Template),
 
 		initialize: function() {
-			this.listenTo(this.model, "change", this.render);
+			//this.listenTo(this.model, "change", this.render);
 			this.listenTo(Backbone, 'full-view', this.remove); // only one image should be shown in full view mode
 			this.listenTo(Backbone, 'normal', this.remove);
+			this.listenTo(Backbone, 'collection-render', this.remove);
 		},
 
 		render: function () {
@@ -22,7 +23,6 @@ define(['backbone',
 			inputForm.submit(function (e) {
                 var inputField = $(inputForm).find('input');
                 var pg_num = $(inputField).val();
-                console.log(code.decode(pg_num));
                 self.model.save({page_num: code.decode(pg_num)}, {wait: true});
                 $(inputField).val('').blur();                
                 return false;

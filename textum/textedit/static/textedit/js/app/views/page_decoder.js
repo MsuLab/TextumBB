@@ -1,7 +1,7 @@
 define(function () {
 		function decode (page_num) {
 			'use strict';
-			var page = /^\s*[1-9]\d*\s*$/g, page_turn = /^\s*[1-9]\d*\s*об\s*$/g, page_unknown = /^\s*\?\s*$/g,
+			var page = /^\s*[1-9]\d*\s*$/g, page_turn = /^\s*[1-9]\d*\s*об\s*$/g, page_unknown = /^\s*\?|0\s*$/g,
 				is_page = page_num.match(page), is_page_turn = page_num.match(page_turn), is_page_unknown = page_num.match(page_unknown);
 			if (is_page !== null) {
 				return parseInt(page_num.replace(/\D/g, ''), 10);

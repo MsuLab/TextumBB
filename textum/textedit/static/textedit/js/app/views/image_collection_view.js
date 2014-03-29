@@ -9,14 +9,26 @@ define(['underscore',
 		el: '.photoGrid',
 
 		initialize: function () {
+            var self = this;
 			this.collection = new TImages();
 			this.collection.fetch({
 				reset: true,
 			});
 			this.render();
-            this.collection.on("add", this.renderImage, this);
-            this.collection.on("reset", this.render, this);
-            var self = this;
+            //this.collection.on("add", this.renderImage, this);
+            this.collection.on("add", function () {
+                Backbone.trigger('collection-render');
+                this.render();
+            }, this);
+            this.collection.on("change", /*this.render*/ function () {
+                Backbone.trigger('collection-render');
+                this.collection.sort();
+                this.render();
+            }, this);
+            this.collection.on("reset", function () {
+                Backbone.trigger('collection-render');
+                this.render();
+            }, this);
             this.selected = undefined;
             this.selectedModel = undefined;
             $('body').click(function () {
@@ -77,9 +89,10 @@ define(['underscore',
                 $(self.selected).addClass('image-selected');
                 event.stopPropagation();
             });
-            $('#image' + image.id).dblclick(function () {
+            $('#image' + image.id).off('dblclick').dblclick(function () {
                 self.switch2Full();
             });
+            return imageView;
         },
 
         switch2Full: function() {
@@ -89,12 +102,16 @@ define(['underscore',
                 $(self.selected).removeClass('image-selected');
                 self.selected = undefined;
                 self.$el.empty();
-                self.renderImage(self.collection.get(self.selectedModel));
+                var imageView = self.renderImage(self.collection.get(self.selectedModel));
+                imageView.model.on('change', imageView.render, imageView);
                 self.selectedModel = undefined;
-                $('.image').addClass('fullImage').removeClass('image').off('click').off('dblclick');
+                $('.image').addClass('fullImage').removeClass('image').off('click').off('dblclick').dblclick(function () {
+                    self.switch2Normal();
+                });
                 $('#normal-view-menu').addClass('hidden');
                 $('#full-view-menu').removeClass('hidden');
                 $('#search-page').addClass('hidden');
+                self.collection.off('change');
             }
         },
 
@@ -103,10 +120,15 @@ define(['underscore',
             $(this.selected).removeClass('image-selected');
             this.selected = undefined;
             this.selectedModel = undefined;
+            this.collection.sort();
             this.render();
             $('#normal-view-menu').removeClass('hidden');
             $('#full-view-menu').addClass('hidden');
             $('#search-page').removeClass('hidden');
+            this.collection.on("change", /*this.render*/ function () {
+                this.collection.sort();
+                this.render();
+            }, this);
         },
 
 	});

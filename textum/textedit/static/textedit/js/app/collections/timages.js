@@ -14,8 +14,7 @@ define([
                 url: '/api/images/timage/',
 
                 comparator: function (timage) {
-                        return timage.get('order');
-                        //return timage.get('page_num');
+                        return timage.get('page_num');
                 }
         });
 
