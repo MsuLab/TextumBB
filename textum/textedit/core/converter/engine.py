@@ -8,7 +8,11 @@ import sys
 from django.core.files import File
 from bs4 import BeautifulSoup
 
-import unoconv.unoconv as unoconv
+try:
+    import unoconv.unoconv as unoconv
+    is_unoconv_work = True
+except Exception:
+    is_unoconv_work = False
 
 
 def convert_to_odt(file):
@@ -23,7 +27,8 @@ def convert(typ, filename):
     unoconv github: http://dag.wiee.rs/home-made/unoconv/
     Returns converted file name.
     """
-
+    if not is_unoconv_work:
+        return filename
     converted_file = "%s.%s" % (os.path.splitext(filename)[0], typ) # ToDo(kopbob): Bad way
 
     try:

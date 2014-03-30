@@ -12,8 +12,10 @@ images_api.register(TImageResource())
 
 urlpatterns = patterns('',
     
+	url(r'^',       include('textum.textedit.urls',  namespace="textedit")),
+
     # Website urls:
-    url(r'^',       include('textum.website.urls',   namespace="website")),
+	url(r'^home/',       include('textum.website.urls',   namespace="website")),
 
     # Pagination detection urls:
     url(r'^paginator/', include('textum.paginator.urls', namespace="paginator")),

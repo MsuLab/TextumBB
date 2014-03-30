@@ -24,9 +24,21 @@
 
     <!-- textedit -->
     <link rel="stylesheet" href="{% static 'textedit/css/textedit.css' %}">
+
+    <style>
+    
+    </style>
 {% endblock %}
 
-
+{% block navbar_block %}
+<style>
+    body {
+        padding-top: 20px;
+        padding-bottom: 0px;
+        /*overflow: hidden;*/ /* Disable elastic effect */
+    }
+</style>
+{% endblock %}
 
 {# Content Block #}
 {% block content_block %}
@@ -89,43 +101,6 @@
                 </nav> <!-- galleryMenu end -->
                 <div class="photoGallery">
                     <ul class="photoGrid">
-                            <!--<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>
-                            <li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>-->
-                            
                     </ul>
                 </div> <!-- photoGallery end -->
                 <!--<div class="pages">
