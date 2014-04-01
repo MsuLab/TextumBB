@@ -42,6 +42,12 @@ define(['underscore',
             $('.normal-view-switch').click(function () {
                 self.switch2Normal();
             });
+            $('.clear-gallery').click(function () {
+                self.selectedModel = undefined;
+                self.selected = undefined;
+                console.log('Clear gallery');
+                Backbone.trigger('clear-gallery');
+            });
 
             var pageSearchForm = $('#search-page');
             pageSearchForm.off();

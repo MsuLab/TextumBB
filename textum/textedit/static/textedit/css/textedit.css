@@ -144,7 +144,7 @@
 
 }
 
-.photoGrid li>span {
+.photoGrid li>.page-num {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -172,6 +172,16 @@
 
 .photoGrid li>form>input {
     width: 50px;
+}
+
+.photoGrid .image>.btn {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+.photoGrid .fullImage>.btn {
+    display: none;
 }
 
 .photoGrid .image:hover {
