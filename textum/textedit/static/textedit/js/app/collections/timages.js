@@ -9,13 +9,13 @@ define([
 
         var TodosCollection = Backbone.Collection.extend({
 
-                model: TImage,
+            model: TImage,
 
-                url: '/api/images/timage/',
+            url: '/api/images/timage/',
 
-                comparator: function (timage) {
-                        return timage.get('order');
-                }
+            comparator: function (timage) {
+                return timage.get('page_num');
+            }
         });
 
         return TodosCollection;

@@ -78,29 +78,59 @@
                 <h3>Рукопись</h3>
                 <hr />
                 <nav class="galleryMenu">
-                    <ul>
+                    <ul id="normal-view-menu">
+                        <li>
+                            <span class="btn btn-sm btn-success addImage" title="Добавить страницы в галерею">
+                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="btn btn-sm btn-info full-view-switch" title="Режим просмотра изображения">
+                                <span class="glyphicon glyphicon-th-large"></span><!--href="{% url 'textedit:fullView' %}"-->
+                            </span>
+                        </li>
                         
                         <li>
-                            <a href="{% url 'textedit:fullView' %}" class="btn btn-sm btn-info">
-                                <span class="glyphicon glyphicon-th-large"></span>
+                            <a href="#" class="btn btn-sm btn-info">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
                             </a>
+                        </li>
+
+                        <li>
+                            <span class="btn btn-sm btn-danger clear-gallery" title="Очистить галерею">
+                                <span class="glyphicon glyphicon-trash glyphicon-white"></span>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <ul id="full-view-menu" class="hidden">
+                        <li>
+                            <span class="btn btn-sm btn-info normal-view-switch" title="Вернуться в режим галлереи">
+                                <span class="glyphicon glyphicon-stop"></span>
+                            </span>
                         </li>
                         <li>
                             <a href="#" class="btn btn-sm btn-info">
                                 <span class="glyphicon glyphicon-fullscreen"></span>
                             </a>
                         </li>
-                        
                         <li>
-                            <a href="#" class="btn btn-sm btn-success addImage">
-                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            <a href="#" class="btn btn-sm btn-warning">
+                                <span class="glyphicon glyphicon-search"></span>
                             </a>
                         </li>
-                    </ul> 
+                        <!--<li>
+                            <a href="#" class="btn btn-sm btn-success">
+                                <span class="glyphicon glyphicon-plus glyphicon-white"></span>
+                            </a>
+                        </li>--> <!-- Do we need an image adding button in fullview mode? -->
+                    </ul>
 
                 </nav> <!-- galleryMenu end -->
                 <div class="photoGallery">
                     <ul class="photoGrid">
+                            <!--<li><span>56</span><img src="{% static 'textedit/img/test.JPG' %}" alt="Рукопись"></li>-->
                     </ul>
                 </div> <!-- photoGallery end -->
                 <!--<div class="pages">
@@ -114,6 +144,12 @@
                         <li><a href="#">&raquo;</a></li>
                     </ul>
                 </div>-->
+                <form id="search-page">
+                    <input type="text" placeholder="Перейти к&hellip;"/>
+                    <span class="btn btn-small btn-primary" title="Найти и отобразить страницу">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                </form>
             </div>
         </div>
     </div>

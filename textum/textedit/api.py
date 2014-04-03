@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+import re
+
 from tastypie.resources import ModelResource
 from tastypie.authorization import Authorization
 from tastypie import fields
@@ -27,8 +31,19 @@ class TImageResource(MultipartResource, ModelResource):
         authorization = Authorization()
 
     def obj_create(self, bundle, **kwargs):
-        bundle.data["page_num"] = None
+        if not hasattr(bundle.data, "page_num"):
+            bundle.data["page_num"] = 0
+        if bundle.data["page_num"] == None:
+            bundle.data["page_num"] = 0;
         return super(TImageResource, self).obj_create(bundle, **kwargs)
+
+    def obj_update(self, bundle, **kwargs):
+        if bundle.data["page_num"] == None:
+            del bundle.data["page_num"]
+        return super(TImageResource, self).obj_update(bundle, **kwargs)
+
+    def alter_detail_data_to_serialize(self, request, data):
+        return data
 
     def alter_list_data_to_serialize(self, request, data):
         return data["objects"]

@@ -87,9 +87,12 @@ a. Install virtualenv
 
 b. Setup environment
     $ sudo pip install --upgrade -r /vagrant/requirements.txt
+    $ git submodule init
+    $ git submodule update
 
 c. Run development server
     $ python manage.py runserver 0.0.0.0:8000
+
 
 On host you can view project by http://127.0.0.1:8080/ url. 
 
