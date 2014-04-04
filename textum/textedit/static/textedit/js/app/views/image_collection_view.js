@@ -22,6 +22,7 @@ define(['underscore',
             }, this);
             this.collection.on("change", /*this.render*/ function () {
                 Backbone.trigger('collection-render');
+                console.log('collection changed');
                 this.collection.sort();
                 this.render();
             }, this);

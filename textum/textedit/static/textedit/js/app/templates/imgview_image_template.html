@@ -1,5 +1,5 @@
 <span class="page-num"><% var z = obj[1].encode(obj[0].page_num); %><%= z %></span>
-<img src="<%= obj[0].file %>" alt="<%= obj[0].title %>" />
+<img src="<%= decodeURIComponent(obj[0].file) %>" alt="<%= obj[0].title %>" />
 <form id="pageNumInput<%= obj[0].id %>">
 	<input type="text" />
 </form>

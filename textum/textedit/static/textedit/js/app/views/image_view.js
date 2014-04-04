@@ -24,6 +24,7 @@ define(['backbone',
             inputForm.click(function (e) {
                 e.stopPropagation();
             });
+            //this.model.file = decodeURIComponent();
             inputForm.submit(function (e) {
                 var inputField = $(inputForm).find('input');
                 var pg_num = $(inputField).val();

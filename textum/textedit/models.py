@@ -31,7 +31,7 @@ class TImage(models.Model):
     page_num = models.FloatField(null=True)
 
     def __unicode__(self):
-        return self.file.name
+        return self.file.name.decode('utf-8')
 
     @models.permalink
     def get_absolute_url(self):
