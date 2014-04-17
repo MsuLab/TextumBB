@@ -43,7 +43,10 @@ class TImageResource(MultipartResource, ModelResource):
         return super(TImageResource, self).obj_update(bundle, **kwargs)
 
     def alter_detail_data_to_serialize(self, request, data):
+        data.data['file'] = data.data['file'].replace('%25', '%') # костыль
         return data
 
     def alter_list_data_to_serialize(self, request, data):
+        for bundle in data["objects"]:
+            bundle.data["file"] = bundle.data['file'].replace('%25', '%') # ещё костыль
         return data["objects"]
