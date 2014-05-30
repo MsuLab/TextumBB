@@ -132,6 +132,10 @@ define(['underscore',
             $('#normal-view-menu').removeClass('hidden');
             $('#full-view-menu').addClass('hidden');
             $('#search-page').removeClass('hidden');
+            $('.jspPane').css({
+                top: 0,
+                left: 0,
+            });
             this.collection.on("change", /*this.render*/ function () {
                 this.collection.sort();
                 this.render();

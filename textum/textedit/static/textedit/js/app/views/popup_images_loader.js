@@ -6,25 +6,26 @@ define(['backbone',
 
     var Popup = Backbone.View.extend({
 
-        el: '#popup',
+        //el: '#popup',
 
         initialize: function () {
             console.log('new: Pop is created.');
-            this.show('UploadImg');
+            this.show();
         },
 
         closePopup: function () {
             $('#uploadImg table tbody').empty();
+            Backbone.trigger('uploadFinished', ! $('.paginationFail').is(':checked'));
             $('#popupUploadImg').modal('hide');
         },
 
-        show: function (popup_type) {
+        show: function () {
             var self = this;
             $('#popupUploadImg').modal('show');
             $('#uploadImg-quit').click(function () {
                 self.closePopup();
             });
-
+            $('.paginationFail').prop('checked', false);
             this.initImageLoader();
         },
 
@@ -32,7 +33,7 @@ define(['backbone',
             console.log('Image pop-up!');
 
             var index = 0;
-
+            
             $('#uploadImg').fileupload({
                 url: '/api/images/timage/',
                 dataType: 'json',

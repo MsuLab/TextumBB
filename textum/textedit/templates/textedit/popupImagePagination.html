@@ -1,0 +1,26 @@
+<div class="modal fade" id="popupImgPage" tabindex="-1" role="dialog" aria-labelledby="popupImgPageLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;"> <!-- modal-lg не заработал -->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="imgPage" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>Пожалуйста, введите номера страниц для файлов:</p>
+                    <div style="max-height: 200px; overflow: auto; width: 500px; margin-bottom: 50px;">
+                        <table role="presentation" style="width: 450px; margin-left:30px;">
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <span class="btn btn-success fileinput-button" id="imgPage-ok">
+                        <span>Применить</span>
+                    </span>
+                    <span class="btn btn-warning fileinput-button" id="imgPage-quit">
+                        <span>Отмена</span>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

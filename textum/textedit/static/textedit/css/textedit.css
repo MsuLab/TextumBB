@@ -36,35 +36,20 @@
 	display: none;
 }
 
-#opaco {
-   background-color: #000000;
-   left: 0;
-   opacity: 0;  /* general CSS3 */
-   position: absolute;
-   top: 0;
-   width: 100%;
-   z-index: 10000; /* затемнить кнопки и панель Bootstrap */
-}
-
-#popup {
-   background-color: #FFFFFF;
-   position: fixed;
-   top: 50%;
-   left: 50%;
-   min-height: 200px;
-   min-width: 300px;
-   z-index: 10001;
-   border: 10px solid #6EBD6E;
-}
-
 #popupButtons {
 	margin: 15px 7px 0;
 }
 
-#uploadFile-quit, #uploadImg-quit {
+#uploadFile-quit, #uploadImg-quit, #imgPage-quit {
 	position: absolute;
 	bottom: 5%;
 	right: 5%;
+}
+
+#imgPage-ok {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
 }
 
 #some-textarea {
@@ -197,8 +182,7 @@
 }
 
 .photoGrid .fullImage {
-    max-width: 95%;
-    /*width: 100%;*/
+    margin-bottom: 20px;
 }
 
 .galleryMenu {
@@ -206,7 +190,6 @@
     right: 30px;
     position: absolute;
     z-index: 10;
-
 }
 .galleryMenu ul {
     padding: 0px;
@@ -226,5 +209,4 @@
 
 .pagination{
     margin-top: 10px;
-    
 }
