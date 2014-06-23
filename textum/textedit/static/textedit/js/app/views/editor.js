@@ -14,6 +14,7 @@ define(['backbone',
         initialize: function () {
             console.log('new: Editor is created.');
 
+            this.$webodf_wrapper = this.$('#webodf-wrapper');
             this.$webodf_element = this.$('#webodf-textarea');
 
             if (this.$webodf_element.length) {
@@ -23,8 +24,13 @@ define(['backbone',
             } else {
                 console.log("No Text Editor specified.")
             };
-            this.listenTo(Backbone, 'uploadTextFile', function (data) {
-                this.updateTextFile(data);
+
+            this.listenTo(Backbone, 'Editor::uploadTextFile', function (odf_file_url) {
+                this.updateTextFile(odf_file_url);
+            }, this);
+
+            this.listenTo(Backbone, 'Editor::showPage', function (pageNumber) {
+                this.showPage(pageNumber);
             }, this);
         },
 
@@ -36,10 +42,16 @@ define(['backbone',
             }
         },
 
-        updateTextFile: function (file_data) {
-            if (this.$webodf_element.length) {
-                this.$odfcanvas.load(file_data.url);
+        updateTextFile: function (odf_file_url) {
+            self = this;
+            if (self.$webodf_element.length) {
+                self.$odfcanvas.load(odf_file_url);
+                setTimeout(function() {self.$odfcanvas.fitToWidth(650);}, 1000);
             }
+        },
+
+        showPage: function(pageNumber) {
+            this.$webodf_wrapper.scrollTop((pageNumber - 1) * 1480);
         }
     });
 

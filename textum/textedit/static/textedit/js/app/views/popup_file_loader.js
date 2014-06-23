@@ -66,7 +66,7 @@ define(['backbone',
 
                 done: function(e, data) {
                     var result = data.result;
-                    Backbone.trigger('uploadTextFile', result.files[0]);
+                    Backbone.trigger('Editor::uploadTextFile', result.files[0].url);
                     console.log("File uploaded.");
                     setTimeout(function() {self.closePopup();}, 1000);
                 }

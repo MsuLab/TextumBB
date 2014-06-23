@@ -98,18 +98,25 @@ define(['underscore',
             });
             $('#image' + image.id).off('dblclick').dblclick(function () {
                 self.switch2Full();
+                Backbone.trigger('Editor::showPage', image.attributes.page_num);
             });
+
+
             return imageView;
         },
 
         switch2Full: function() {
             var self = this;
             if (self.selectedModel != undefined) {
+
+                model = self.collection.get(self.selectedModel);
+
                 Backbone.trigger('full-view');
                 $(self.selected).removeClass('image-selected');
                 self.selected = undefined;
                 self.$el.empty();
-                var imageView = self.renderImage(self.collection.get(self.selectedModel));
+                var imageView = self.renderImage(model);
+
                 imageView.model.on('change', imageView.render, imageView);
                 self.selectedModel = undefined;
                 $('.image').addClass('fullImage').removeClass('image').off('click').off('dblclick').dblclick(function () {
