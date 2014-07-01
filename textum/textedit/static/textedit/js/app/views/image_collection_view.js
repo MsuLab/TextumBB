@@ -72,6 +72,9 @@ define(['underscore',
             $(pageSearchForm).find('.btn').click(function () {
                 pageSearchForm.submit();
             });
+            this.listenTo(Backbone, 'Image::showImage', function (pageNumber) {
+                this.switch2Full(pageNumber);
+            }, this);
 		},
 
         render: function () {
@@ -105,12 +108,13 @@ define(['underscore',
             return imageView;
         },
 
-        switch2Full: function() {
+        switch2Full: function(pageNumber) {
             var self = this;
-            if (self.selectedModel != undefined) {
+            if (self.selectedModel != undefined || pageNumber != undefined) {
+                if (pageNumber != undefined)
+                    self.selectedModel = this.collection.models[pageNumber];
 
                 model = self.collection.get(self.selectedModel);
-
                 Backbone.trigger('full-view');
                 $(self.selected).removeClass('image-selected');
                 self.selected = undefined;
