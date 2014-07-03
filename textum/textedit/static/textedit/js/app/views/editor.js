@@ -4,6 +4,7 @@ define(['backbone',
 ], function (Backbone, Popup) {
 
     var Editor = Backbone.View.extend({
+        pageHeight: 900,
 
         el: '.leftView',
 
@@ -42,16 +43,19 @@ define(['backbone',
             }
         },
 
+        showPage: function(pageNumber) {
+            this.$webodf_wrapper.scrollTop(pageNumber * this.pageHeight);
+        },
+
         pageScroller: function() {
-            console.log("pageScroller");
-            _this = this;
+            self = this;
             _current_page = 0;
 
             this.$webodf_wrapper.scroll(function() {
-                p = (_this.$webodf_wrapper.scrollTop() / 450) >> 0;
-                _number_of_pages = (($("#webodf-textarea").height() / 500) >> 0) - 1
+                p = (self.$webodf_wrapper.scrollTop() / (self.pageHeight - 100)) >> 0;
+                _number_of_pages = Math.ceil($("#webodf-textarea").height() / self.pageHeight)
 
-                if (_current_page < p && _current_page < _number_of_pages) {
+                if (_current_page < p && _current_page < _number_of_pages - 1 ) {
                     _current_page = p;
                     Backbone.trigger('Image::showImage', _current_page);
                 };
@@ -70,10 +74,6 @@ define(['backbone',
                 setTimeout(function() {self.$odfcanvas.fitToWidth(650);}, 1000);
                 self.pageScroller();
             }
-        },
-
-        showPage: function(pageNumber) {
-            this.$webodf_wrapper.scrollTop((pageNumber - 1) * 1200);
         }
     });
 

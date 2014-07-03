@@ -101,7 +101,7 @@ define(['underscore',
             });
             $('#image' + image.id).off('dblclick').dblclick(function () {
                 self.switch2Full();
-                Backbone.trigger('Editor::showPage', image.attributes.page_num);
+                Backbone.trigger('Editor::showPage', image.attributes.page_num * 2 - 1);
             });
 
 
