@@ -21,5 +21,6 @@ pip-log.txt
 *.sqlite
 *.log
 *.pot
-local_settings.py
 .idea
+
+textum/local_dev.py
