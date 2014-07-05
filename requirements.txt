@@ -6,3 +6,4 @@ pillow
 python-mimeparse
 python-dateutil
 django-tastypie
+pytils>=0.3,<0.4

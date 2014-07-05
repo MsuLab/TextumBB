@@ -1,9 +1,22 @@
+import os
+
+from pytils import translit
+
 from django.db import models
 
 
+def photo_file_path(instance, filename):
+    """
+    Path is <kind>/<media_id/digits>/file_name
+    """
+    name, ext = os.path.splitext(filename)
+    kind, media_id = instance.get_path_parts()
+    return os.path.join(kind, os.path.join(*list(str(media_id))), translit.slugify(name)) + ext
+
+
 class RTFFile(models.Model):
-    file = models.FileField(upload_to="RTF")
-    odt_file = models.FileField(upload_to="ODT", blank=True, null=True)
+    file = models.FileField(upload_to=photo_file_path)
+    odt_file = models.FileField(upload_to=photo_file_path, blank=True, null=True)
     slug = models.SlugField(max_length=50, blank=True)
 
     def __unicode__(self):
@@ -13,30 +26,45 @@ class RTFFile(models.Model):
     def get_absolute_url(self):
         return ('upload-new', )
 
-
     def save(self, *args, **kwargs):
         self.slug = self.file.name
         super(RTFFile, self).save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
-        """delete -- Remove to leave file."""
-        self.file.delete(False)
+    def get_path_parts(self):
+        return 'text_file', self.id
+
+    def delete(self):
+        self.delete_file()
         super(RTFFile, self).delete(*args, **kwargs)
+
+    def delete_file(self):
+        if self.file:
+            self.file.delete(False)
+        if self.odt_file:
+            self.odt_file.delete(False)
 
 
 
 class TImage(models.Model):
-    file = models.ImageField(upload_to="TImages")
+    file = models.ImageField(upload_to=photo_file_path)
     title = models.SlugField(max_length=50, blank=True)
     page_num = models.FloatField(null=True)
 
-    def __unicode__(self):
-        return self.file.name.decode('utf-8')
+    # def __unicode__(self):
+    #     return self.file.name
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ('upload-new', )
+    def get_path_parts(self):
+        return 'photo', self.id
 
     def save(self, *args, **kwargs):
         self.title = self.file.name
         super(TImage, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.delete_photo()
+        super(TImage, self).delete(*args, **kwargs)
+
+    def delete_photo(self):
+        if self.file:
+            self.file.name = self.file.name[7:]
+            self.file.delete(False)
