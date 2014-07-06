@@ -5,6 +5,7 @@ define(['backbone',
 
     var Editor = Backbone.View.extend({
         pageHeight: 900,
+        _current_page: 0,
 
         el: '.leftView',
 
@@ -44,26 +45,27 @@ define(['backbone',
         },
 
         showPage: function(pageNumber) {
+            self._current_page = pageNumber;
             this.$webodf_wrapper.scrollTop(pageNumber * this.pageHeight);
         },
 
         pageScroller: function() {
             self = this;
-            _current_page = 0;
 
             this.$webodf_wrapper.scroll(function() {
                 p = (self.$webodf_wrapper.scrollTop() / (self.pageHeight - 100)) >> 0;
                 _number_of_pages = Math.ceil($("#webodf-textarea").height() / self.pageHeight)
 
-                if (_current_page < p && _current_page < _number_of_pages - 1 ) {
-                    _current_page = p;
-                    Backbone.trigger('Image::showImage', _current_page);
+                if (self._current_page < p && self._current_page < _number_of_pages - 1 ) {
+                    self._current_page = p;
+                    Backbone.trigger('Image::showImage', self._current_page);
                 };
 
-                if (_current_page > p) {
-                    _current_page = p;
-                    Backbone.trigger('Image::showImage', _current_page);
+                if (self._current_page > p) {
+                    self._current_page = p;
+                    Backbone.trigger('Image::showImage', self._current_page, p);
                 };
+
             });
         },
 

@@ -101,7 +101,7 @@ define(['underscore',
             });
             $('#image' + image.id).off('dblclick').dblclick(function () {
                 self.switch2Full();
-                Backbone.trigger('Editor::showPage', image.attributes.page_num * 2 - 1);
+                Backbone.trigger('Editor::showPage', image.attributes.page_num * 2 - 1 - 1);
             });
 
 
@@ -111,8 +111,9 @@ define(['underscore',
         switch2Full: function(pageNumber) {
             var self = this;
             if (self.selectedModel != undefined || pageNumber != undefined) {
-                if (pageNumber != undefined)
+                if (pageNumber != undefined) {
                     self.selectedModel = this.collection.models[pageNumber];
+                }
 
                 model = self.collection.get(self.selectedModel);
                 Backbone.trigger('full-view');
