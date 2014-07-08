@@ -4,7 +4,7 @@ define(['backbone',
 ], function (Backbone, Popup) {
 
     var Editor = Backbone.View.extend({
-        pageHeight: 900,
+        pageHeight: 865,
         _current_page: 0,
 
         el: '.leftView',
