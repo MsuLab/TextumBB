@@ -6,6 +6,7 @@ define(['underscore',
     'views/page_decoder',
 ], function (_, Backbone, TImage, TImages, TImageView, code) {
 	var imageCollection = Backbone.View.extend({
+        isReversePagination: true,
 		el: '.photoGrid',
 
 		initialize: function () {
@@ -48,6 +49,10 @@ define(['underscore',
                 self.selected = undefined;
                 console.log('Clear gallery');
                 Backbone.trigger('clear-gallery');
+            });
+
+            $( "#isReversePagination" ).change(function() {
+                self.isReversePagination = $(this).is(":checked");
             });
 
             var pageSearchForm = $('#search-page');
@@ -101,7 +106,15 @@ define(['underscore',
             });
             $('#image' + image.id).off('dblclick').dblclick(function () {
                 self.switch2Full();
-                Backbone.trigger('Editor::showPage', image.attributes.page_num * 2 - 1 - 1);
+
+                var pageNumber = image.attributes.page_num;
+                if (self.isReversePagination) {
+                    pageNumber = pageNumber * 2 - 1 - 1;
+                } else {
+                    pageNumber = pageNumber - 1;
+                }
+
+                Backbone.trigger('Editor::showPage', pageNumber);
             });
 
 
@@ -112,7 +125,18 @@ define(['underscore',
             var self = this;
             if (self.selectedModel != undefined || pageNumber != undefined) {
                 if (pageNumber != undefined) {
-                    self.selectedModel = this.collection.models[pageNumber];
+                    if (self.isReversePagination) {
+                        pageNumber = 0.5 * pageNumber + 1;
+                    } else {
+                        pageNumber = pageNumber + 1;
+                    }
+                    var pages = this.collection.where({page_num: pageNumber});
+
+                    if (pages.length == 0) {
+                        self.switch2Normal();
+                        return;
+                    }
+                    self.selectedModel = pages[0];
                 }
 
                 model = self.collection.get(self.selectedModel);
