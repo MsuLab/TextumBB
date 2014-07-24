@@ -46,6 +46,7 @@
     {% include 'textedit/popupUploadFile.html' %}
     {% include 'textedit/popupUploadImage.html' %}
     {% include 'textedit/popupImagePagination.html' %}
+    {% load media %}
 
     <div class="row mainView">
         <div class="col-lg-6 leftView">
@@ -146,12 +147,20 @@
                         <li><a href="#">&raquo;</a></li>
                     </ul>
                 </div>-->
-                <form id="search-page">
-                    <input type="text" placeholder="Перейти к&hellip;"/>
-                    <span class="btn btn-small btn-primary" title="Найти и отобразить страницу">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </span>
-                </form>
+                <div class="row">
+                	<div class="col-lg-6">
+		                <form id="search-page">
+		                    <input type="text" placeholder="Перейти к&hellip;"/>
+		                    <span class="btn btn-small btn-primary" title="Найти и отобразить страницу">
+		                        <span class="glyphicon glyphicon-search"></span>
+		                    </span>
+		                </form>
+		            </div>
+		            <div class="col-lg-6">
+						<a href="{% media 'userguide/userguide.pdf' %}" class="btn btn-primary btn-large" 
+						id="guide-download" download>Скачать руководство пользователя</a>
+		            </div>
+                </div>
             </div>
         </div>
     </div>
