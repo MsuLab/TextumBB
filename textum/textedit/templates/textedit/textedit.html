@@ -46,6 +46,7 @@
     {% include 'textedit/popupUploadFile.html' %}
     {% include 'textedit/popupUploadImage.html' %}
     {% include 'textedit/popupImagePagination.html' %}
+    {% load media %}
 
     <div class="row mainView">
         <div class="col-lg-6 leftView">
@@ -155,7 +156,7 @@
 		                </form>
 		            </div>
 		            <div class="col-lg-6">
-						<a href="media/userguide/userguide.pdf" class="btn btn-primary btn-large" 
+						<a href="{% media 'userguide/userguide.pdf' %}" class="btn btn-primary btn-large" 
 						id="guide-download" download>Скачать руководство пользователя</a>
 		            </div>
                 </div>
