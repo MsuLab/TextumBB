@@ -1,4 +1,5 @@
 require.config({
+    'urlArgs': (new Date()).getTime(),
     'baseUrl': "/static/textedit/js/app",
     'paths': {
 
