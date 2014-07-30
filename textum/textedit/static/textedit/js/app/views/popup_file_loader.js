@@ -39,7 +39,8 @@ define(['backbone',
                 add: function(e, data) {
                     console.log("File added.");
 
-                    if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
+                    // if (!(/\.(odt|doc|docx|rtf|txt)$/i).test(data.files[0].name)) {
+                    if (!(/\.(txt)$/i).test(data.files[0].name)) {
                         alert('Неверный формат файла.');
                     } else {
                         var jqXHR = data.submit();
@@ -66,7 +67,8 @@ define(['backbone',
 
                 done: function(e, data) {
                     var result = data.result;
-                    Backbone.trigger('Editor::uploadTextFile', result.files[0].url);
+                    // Backbone.trigger('Editor::uploadTextFile', result.files[0].url);
+                    Backbone.trigger('Editor::uploadTextFile', result);
                     console.log("File uploaded.");
                     setTimeout(function() {self.closePopup();}, 1000);
                 }

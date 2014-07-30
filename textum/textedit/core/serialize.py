@@ -32,3 +32,12 @@ def serialize(instance, file_attr='odt_file'):
         'type': mimetypes.guess_type(obj.path)[0] or 'application/rtf',
         'size': obj.size,
     }
+
+
+def TextFileSerializer(obj):
+    return {
+        'pk': obj.pk,
+        'name': order_name(obj.file.name),
+        'text': obj.file.read(),
+        'url': obj.file.url,
+    }

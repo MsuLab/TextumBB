@@ -2,7 +2,7 @@
     <div class="modal-dialog"> <!-- modal-lg не заработал style="width: 800px;" -->
         <div class="modal-content">
             <div class="modal-body">
-                <form id="uploadFile" method="post" enctype="multipart/form-data" action="{% url 'textedit:upload' %}">
+                <form id="uploadFile" method="post" enctype="multipart/form-data" action="{% url 'textedit:txtfiles' %}">
                     {% csrf_token %}
                     <!--<p>Загружаемый файл должен быть в одном из следующих форматов: .txt, .doc, .docx, .odt, .rtf</p>-->
                     <div class="row" id="popupButtons">

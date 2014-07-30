@@ -43,11 +43,12 @@ require.config({
             'exports': 'bootstrap'
         },
         'wysihtml5': {
+            'deps': ['handlebars', 'jquery'],
             'exports': 'wysihtml5'
         },
-        'wysi_editor': {
+        'editor': {
             'deps': ['wysihtml5', 'handlebars', 'jquery', 'bootstrap'],
-            'exports': 'wysi_editor'
+            'exports': 'editor'
         },
         'webodf': {
             'exports': 'webodf'

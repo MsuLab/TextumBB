@@ -5,7 +5,7 @@ from pytils import translit
 from django.db import models
 
 
-def photo_file_path(instance, filename):
+def file_storage_path(instance, filename):
     """
     Path is <kind>/<media_id/digits>/file_name
     """
@@ -15,8 +15,8 @@ def photo_file_path(instance, filename):
 
 
 class RTFFile(models.Model):
-    file = models.FileField(upload_to=photo_file_path)
-    odt_file = models.FileField(upload_to=photo_file_path, blank=True, null=True)
+    file = models.FileField(upload_to=file_storage_path)
+    odt_file = models.FileField(upload_to=file_storage_path, blank=True, null=True)
     slug = models.SlugField(max_length=50, blank=True)
 
     def __unicode__(self):
@@ -46,7 +46,7 @@ class RTFFile(models.Model):
 
 
 class TImage(models.Model):
-    file = models.ImageField(upload_to=photo_file_path)
+    file = models.ImageField(upload_to=file_storage_path)
     title = models.SlugField(max_length=50, blank=True)
     page_num = models.FloatField(null=True)
 
@@ -67,4 +67,20 @@ class TImage(models.Model):
     def delete_photo(self):
         if self.file:
             self.file.name = self.file.name[7:]
+            self.file.delete(False)
+
+
+
+class TxtFile(models.Model):
+    file = models.FileField(upload_to=file_storage_path)
+
+    def get_path_parts(self):
+        return 'text_file', self.id
+
+    def delete(self, *args, **kwargs):
+        self.delete_file()
+        super(TxtFile, self).delete(*args, **kwargs)
+
+    def delete_file(self):
+        if self.file:
             self.file.delete(False)

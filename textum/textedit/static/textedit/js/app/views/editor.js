@@ -1,23 +1,39 @@
 define(['backbone',
-    'views/popup_file_loader',
-    'webodf', // Init webodf viewer
-], function (Backbone, Popup) {
+    'views/popup_file_loader', 'underscore',
+    'webodf' // Init webodf viewer
+], function (Backbone, Popup, _) {
 
     var Editor = Backbone.View.extend({
-        pageHeight: 865,
+        pageHeight: 875,
         _current_page: 0,
 
         el: '.leftView',
 
         events: {
             'click #uploadButton': 'openFileLoader',
+            'click #saveButton': 'saveFile',
+            'click #downloadButton': 'downloadFile',
         },
+        txt_file: undefined,
 
         initialize: function () {
             console.log('new: Editor is created.');
 
             this.$webodf_wrapper = this.$('#webodf-wrapper');
             this.$webodf_element = this.$('#webodf-textarea');
+            this.$wysihtml5 = this.$('#wysihtml5-textarea');
+
+            
+
+            // if (this.$wysihtml5.length) {
+            //     console.log("Here!")
+            //     // this.$wysihtml5.wysihtml5();
+
+            //     var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
+            //     });
+
+            //     console.log(editor.getValue())
+            // }
 
             if (this.$webodf_element.length) {
                 console.log('Loading webodf ...');
@@ -27,8 +43,13 @@ define(['backbone',
                 console.log("No Text Editor specified.")
             };
 
-            this.listenTo(Backbone, 'Editor::uploadTextFile', function (odf_file_url) {
-                this.updateTextFile(odf_file_url);
+            this.listenTo(Backbone, 'Editor::uploadTextFile', function (data) {
+                if (_.isObject(data)) {
+                    this.txt_file = data;
+                    this.$wysihtml5.val(this.txt_file.text)
+                } else {
+                    this.updateTextFile(odf_file_url);
+                }
             }, this);
 
             this.listenTo(Backbone, 'Editor::showPage', function (pageNumber) {
@@ -76,6 +97,32 @@ define(['backbone',
                 setTimeout(function() {self.$odfcanvas.fitToWidth(650);}, 1000);
                 self.pageScroller();
             }
+        },
+
+        saveFile: function() {
+            self = this;
+            if (this.txt_file) {
+                var data = this.$wysihtml5.val();
+                var request = $.ajax({
+                    url: "txtfiles/" + this.txt_file.pk + '/',
+                    type: "PATCH",
+                    data: {
+                        text: this.$wysihtml5.val(),
+                    }
+                }).done(function(data) {
+                    self.txt_file = data;
+                }).fail(function( jqXHR, textStatus ) {
+                    console.log(jqXHR, textStatus);
+                });
+            }
+        },
+
+        downloadFile: function() {
+            function OpenInNewTab(url) {
+              var win = window.open(url, '_blank');
+              win.focus();
+            }
+            OpenInNewTab(window.location.origin + this.txt_file.url)
         }
     });
 
