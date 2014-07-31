@@ -102,9 +102,14 @@ define(['backbone',
         saveFile: function() {
             self = this;
 
-            function OpenInNewTab(url) {
-              var win = window.open(url, '_blank');
-              win.focus();
+            function downloadFileByUrl(url) {
+                var element = document.createElement('a');
+                element.href = window.location.origin + url;
+                element.target = "_blank";
+
+                document.body.appendChild(element)
+
+                element.click()
             }
 
             if (this.txt_file) {
@@ -117,7 +122,7 @@ define(['backbone',
                     }
                 }).done(function(data) {
                     self.txt_file = data;
-                    OpenInNewTab(window.location.origin + self.txt_file.url)
+                    downloadFileByUrl(self.txt_file.url);
                 }).fail(function( jqXHR, textStatus ) {
                     console.log(jqXHR, textStatus);
                 });

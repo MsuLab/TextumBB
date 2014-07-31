@@ -38,6 +38,6 @@ def TextFileSerializer(obj):
     return {
         'pk': obj.pk,
         'name': order_name(obj.file.name),
-        'text': obj.file.read(),
+        'text': obj.file.read().decode('utf-8'),
         'url': obj.file.url,
     }
