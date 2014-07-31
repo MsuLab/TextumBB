@@ -101,6 +101,12 @@ define(['backbone',
 
         saveFile: function() {
             self = this;
+
+            function OpenInNewTab(url) {
+              var win = window.open(url, '_blank');
+              win.focus();
+            }
+
             if (this.txt_file) {
                 var data = this.$wysihtml5.val();
                 var request = $.ajax({
@@ -111,6 +117,7 @@ define(['backbone',
                     }
                 }).done(function(data) {
                     self.txt_file = data;
+                    OpenInNewTab(window.location.origin + self.txt_file.url)
                 }).fail(function( jqXHR, textStatus ) {
                     console.log(jqXHR, textStatus);
                 });
