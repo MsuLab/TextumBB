@@ -210,7 +210,7 @@ class TxtView(ApiView):
         form = TxtFileForm(request.POST)
         if form.is_valid():
             filename = os.path.basename(txt_file.file.name)
-            txt_file.file.save(filename, ContentFile(form.cleaned_data['text']))
+            txt_file.file.save(filename, ContentFile(form.cleaned_data['text'].encode('cp1251')))
             return self.get(request, pk)
         else:
            return self.render_json_response(dict(errors=form.errors), 400)
